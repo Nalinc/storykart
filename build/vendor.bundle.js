@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"app/app"}[chunkId]||chunkId) + ".bundle.js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "../build/" + ({"0":"app/main"}[chunkId]||chunkId) + ".bundle.js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -75731,4 +75731,4 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=app/vendor.map
+//# sourceMappingURL=../vendor.map
