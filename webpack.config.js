@@ -1,12 +1,13 @@
 var webpack = require("webpack");
 module.exports = {
   entry: {
-    "vendor": "./src/app/vendor",
-    "app": "./src/app/boot"
+    "app/vendor": "./src/app/vendor",
+    "app/app": "./src/app/boot"
   },
   output: {
-    path: __dirname,
-    filename: "./dist/[name].bundle.js"
+    path: __dirname + '/build',
+    filename: "[name].bundle.js",
+    sourceMapFilename: '[name].map'
   },
   resolve: {
     extensions: ['', '.js', '.ts']
@@ -22,6 +23,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* = */"./dist/vendor.bundle.js")
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"app/vendor", /* = */"./vendor.bundle.js")
   ]
 }

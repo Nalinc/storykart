@@ -42,7 +42,7 @@ if (!isProduction) {
 	app.use(webpackHotMiddleware(compiler, {}))
 } else {
     // Accessing the static assets from the dist in production environment
-    app.use(express.static(path.resolve(__dirname, './../dist')));
+    app.use(express.static(path.resolve(__dirname, './../build')));
 }
 
 app.listen(port, function () {
