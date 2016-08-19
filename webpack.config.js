@@ -1,6 +1,5 @@
 var webpack = require("webpack");
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-var CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -45,15 +44,8 @@ module.exports = {
       // TODO(mastertinner): enable mangling as soon as angular2 beta.4 is out
       // mangle: { screw_ie8 : true },//prod
       mangle: false,
-      compress : { screw_ie8 : true},//prod
+      compress : { screw_ie8 : true, warnings: false},//prod
       comments: false//prod
-    }),
-    
-    // GZIP Compression
-    new CompressionPlugin({
-      algorithm: gzipMaxLevel,
-      regExp: /\.css$|\.html$|\.js$|\.map$/,
-      threshold: 2 * 1024
     })
   ]
 }
