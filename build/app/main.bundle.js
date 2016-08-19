@@ -44,4 +44,4 @@ webpackJsonp([0],{
 /***/ }
 
 });
-//# sourceMappingURL=../../app/main.map
+//# sourceMappingURL=main.map
