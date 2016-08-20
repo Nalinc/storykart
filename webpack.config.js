@@ -3,8 +3,8 @@ var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = {
   entry: {
-    "vendor": "./src/app/vendor",
-    "app/main": "./src/app/boot"
+    "vendor": "./src/vendor",
+    "main": "./src/main"
   },
   output: {
     path: __dirname,
@@ -12,7 +12,10 @@ module.exports = {
     sourceMapFilename: './build/[name].map'
   },
   resolve: {
-    extensions: ['', '.js', '.ts']
+    //ToDo
+    cache: false,
+    // Webpack will process these file extensions
+    extensions: ['','.ts','.js','.json','.css','.html']
   },
   devtool: 'source-map',
   module: {
@@ -21,7 +24,21 @@ module.exports = {
         test: /\.ts/,
         loaders: ['ts-loader'],
         exclude: /node_modules/
-      }
+      },
+      // Handles JSON files.
+      { test: /\.json$/,  loader: 'json-loader' },
+
+      // Support for CSS as raw text
+      { test: /\.css$/,   loader: 'raw-loader' },
+
+      // Support for .html as raw text
+      { test: /\.html$/,  loader: 'raw-loader'},
+      
+      // Compiles SCSS to CSS
+      { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader'] },
+
+      // Handles imaage files. Uses data urls if file size is less than 10KB, else loads files using file loader
+      { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000&name=[name].[ext]' }
     ]
   },
   plugins: [
