@@ -1,12 +1,10 @@
-/// <reference path="../../../typings/index.d.ts" />
-
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'my-app',
+    selector: 'app-header',
     template: require('./header.html')
 })
 
-export class LayoutComponent {
+export class Header {
 		names:string = "";
 }
