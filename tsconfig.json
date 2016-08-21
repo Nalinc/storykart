@@ -15,5 +15,11 @@
     "typings/main.d.ts"
   ],
   "compileOnSave": false,
-  "buildOnSave": false
+  "buildOnSave": false,
+  "files": [
+      "typings/index.d.ts",
+      "./src/main.ts",
+      "./src/app/app.ts"
+  ]
+
 }

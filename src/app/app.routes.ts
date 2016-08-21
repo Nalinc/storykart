@@ -1,16 +1,23 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 import {App} from './app';
-import {LoginPage} from './login/login';
+import {Home} from './home/home';
+import {Dashboard} from './dashboard/dashboard';
 
 const routes: RouterConfig = [
-  { path: 'app', component: App},
-  { path: 'login', component: LoginPage},
+  {
+    path: 'app',
+    component: App,
+    children: [
+      { path: 'dashboard', component: Dashboard},
+      { path: 'home', component: Home}
+    ]
+  },
   {
     path: '',
-    redirectTo: './app.html',
+    redirectTo: '/app/home',
     pathMatch: 'full'
   },
-  { path: '**', redirectTo: './app.html' },
+  { path: '**', redirectTo: '/app/home' },
 ];
 
 
