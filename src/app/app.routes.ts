@@ -1,23 +1,18 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 import {App} from './app';
-import {Home} from './home/home';
-import {Dashboard} from './dashboard/dashboard';
+import {CoreRoutes} from './core/core.routes';
 
 const routes: RouterConfig = [
-  {
-    path: 'app',
-    component: App,
-    children: [
-      { path: 'dashboard', component: Dashboard},
-      { path: 'home', component: Home}
-    ]
-  },
-  {
-    path: '',
-    redirectTo: '/app/home',
-    pathMatch: 'full'
-  },
-  { path: '**', redirectTo: '/app/home' },
+	...CoreRoutes,
+	{
+		path: '',
+		redirectTo: '/app/home',
+		pathMatch: 'full'
+	},
+	{
+		path: '**', 
+		redirectTo: '/app/home' 
+	}
 ];
 
 
