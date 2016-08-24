@@ -12,6 +12,8 @@ var port = process.env.PORT || 8080;
 // Express App 
 var app = require('./app');
 
+process.env.NODE_ENV = 'production';
+
 var isProduction = process.env.NODE_ENV === 'production';
 if (!isProduction) {
 	compiler = webpack(config)
