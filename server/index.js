@@ -46,5 +46,5 @@ if (!isProduction) {
 }
 
 app.listen(port, function () {
-  console.log('Express server running on port ' + port);
+  console.log('Express server running in '+ process.env.NODE_ENV +' mode on port ' + port);
 });
