@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var HtmlWebpackPlugin  = require('html-webpack-plugin');
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = {
@@ -29,10 +30,10 @@ module.exports = {
       { test: /\.json$/,  loader: 'json-loader' },
 
       // Support for CSS as raw text
-      { test: /\.css$/,   loader: 'css' },
+      { test: /\.css$/,   loader: 'raw-loader' },
 
       // Support for .html as raw text
-      { test: /\.html$/,  loader: 'html'},
+      { test: /\.html$/,  loader: 'raw-loader'},
       
       // Compiles SCSS to CSS
       { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader'] },
@@ -43,6 +44,9 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* = */"./build/vendor.bundle.js"),
+
+    // Compile index.html with metadata
+    new HtmlWebpackPlugin({ template: 'server/views/index.hbs' }),
 
     //Uglify JS files
     new UglifyJsPlugin({
