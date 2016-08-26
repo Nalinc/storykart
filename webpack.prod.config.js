@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var DefinePlugin = require('webpack/lib/DefinePlugin');
+var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 //Set environment to production
@@ -62,7 +63,13 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* = */"./build/vendor.bundle.js"),
-
+    // Copy assets to dist folder
+    new CopyWebpackPlugin([
+      {
+        from: 'src/assets',
+        to: 'build/assets'
+      }
+    ]),
     // Setup Global Javascript Variables
     new webpack.DefinePlugin({
       'process.env': {
@@ -70,11 +77,9 @@ module.exports = {
         'NODE_ENV': JSON.stringify(metadata.ENV)
       }
     }),
-    
     //Uglify JS files
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
-
       // beautify: true,//debug
       // mangle: false,//debug
       // dead_code: false,//debug

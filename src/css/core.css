@@ -2,6 +2,11 @@
 	margin: 0;
 }
 
+@font-face {
+  font-family: 'Harry Potter';
+  src: url('./build/assets/fonts/hp.ttf');
+}
+
 html, body{
 	background-color: #eee;
 	color: #000;
@@ -17,6 +22,7 @@ header{
 
 header .header-text{
 	font-size: 80px;
+	font-family: 'Harry Potter';
 	text-align: center;
 	line-height: normal;
 	position: relative;

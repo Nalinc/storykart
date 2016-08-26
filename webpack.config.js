@@ -1,6 +1,6 @@
 var webpack = require("webpack");
 var DefinePlugin = require('webpack/lib/DefinePlugin');
-var HtmlWebpackPlugin  = require('html-webpack-plugin');
+var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 //Set environment to development
@@ -63,10 +63,13 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* = */"./build/vendor.bundle.js"),
-
-    // Compile index.html with metadata
-    new HtmlWebpackPlugin({ template: 'server/views/index.hbs' }),
-
+    // Copy assets to build folder
+    new CopyWebpackPlugin([
+      {
+        from: 'src/assets',
+        to: 'build/assets'
+      }
+    ]),
     // Setup Global Javascript Variables
     new webpack.DefinePlugin({
       'process.env': {
@@ -77,7 +80,6 @@ module.exports = {
     //Uglify JS files
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
-
       // beautify: true,//debug
       // mangle: false,//debug
       // dead_code: false,//debug
