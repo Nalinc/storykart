@@ -1,6 +1,25 @@
 var webpack = require("webpack");
+var DefinePlugin = require('webpack/lib/DefinePlugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+
+//Set environment to development
+var ENV = process.env.NODE_ENV = process.env.ENV = 'development';
+
+//Get host from environment variable. If not found, set to localhost
+var HOST = process.env.HOST || 'localhost';
+
+//Get port from environment variable. If not found, set to 8080
+var PORT = process.env.PORT || 8080;
+
+//Setup metadata (to be used by index.html)
+var metadata = {
+  title: 'Storykart',
+  baseUrl: '/',
+  host: HOST,
+  port: PORT,
+  ENV: ENV
+};
 
 module.exports = {
   entry: {
@@ -48,6 +67,13 @@ module.exports = {
     // Compile index.html with metadata
     new HtmlWebpackPlugin({ template: 'server/views/index.hbs' }),
 
+    // Setup Global Javascript Variables
+    new webpack.DefinePlugin({
+      'process.env': {
+        'ENV': JSON.stringify(metadata.ENV),
+        'NODE_ENV': JSON.stringify(metadata.ENV)
+      }
+    }),
     //Uglify JS files
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines

@@ -63,6 +63,14 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* = */"./build/vendor.bundle.js"),
 
+    // Setup Global Javascript Variables
+    new webpack.DefinePlugin({
+      'process.env': {
+        'ENV': JSON.stringify(metadata.ENV),
+        'NODE_ENV': JSON.stringify(metadata.ENV)
+      }
+    }),
+    
     //Uglify JS files
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
