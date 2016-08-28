@@ -2,6 +2,7 @@ var webpack = require("webpack");
 var DefinePlugin = require('webpack/lib/DefinePlugin');
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 
 //Set environment to development
 var ENV = process.env.NODE_ENV = process.env.ENV = 'development';
@@ -63,6 +64,12 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* = */"./build/vendor.bundle.js"),
+    // Makes a module available as variable in every module.
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
+    }),
     // Copy assets to build folder
     new CopyWebpackPlugin([
       {
