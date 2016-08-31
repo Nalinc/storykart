@@ -160,10 +160,11 @@ header.smaller nav a {
 }
 
 footer {
-	background-color: #3c3c3c;
+	background-color: #4b0082;
 	text-align: center;
-	min-height:5em;
-	color: #bababa;
+	min-height: 50px;
+	line-height: 50px;
+	color: #32cd32;
 }
 
 footer  a {
