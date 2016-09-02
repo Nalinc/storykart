@@ -9,14 +9,16 @@ declare var jQuery: any;
 })
 
 export class Header {
-	names:string = "";
+	mode:string = "maximized";
 	@HostListener('window:scroll', ['$event']) 
 	shrinkHeader(event) {
 		if(jQuery(document).scrollTop() > 50){
 			jQuery('header').addClass('smaller')
+			this.mode = "minified";
 		}
 		else{
 			jQuery('header').removeClass('smaller')
+			this.mode = "maximized";
 		}
 	}
 }

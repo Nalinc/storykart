@@ -1,8 +1,16 @@
   <header>
-      <div class="container clearfix">
+      <div class="wrapper clearfix">
           <h1 id="logo">storykart</h1>
-<!--           <nav>
+          <h3 *ngIf="mode=='maximized'">
+          	Put your stories on the web
+          </h3>
+          <div *ngIf="mode=='maximized'">
+      		<button>
+      			Start	
+      		</button>
+          </div>
+          <nav *ngIf="mode=='minified'">
               <a href="#login">Login</a>
-          </nav> -->
+          </nav>
       </div>
   </header>
