@@ -7,7 +7,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
   ],
   selector: '[dashboard]',
   host: {
-    class: 'dashboard-page app'
+    class: 'dashboard-page'
   },
   template: require('./dashboard.html')
 })

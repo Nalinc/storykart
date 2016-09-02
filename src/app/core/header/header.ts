@@ -10,14 +10,22 @@ declare var jQuery: any;
 
 export class Header {
 	mode:string = "maximized";
+	maxScrollAmt:any = jQuery(document).height() - jQuery(window).height();
+
 	@HostListener('window:scroll', ['$event']) 
 	shrinkHeader(event) {
-		if(jQuery(document).scrollTop() > 50){
-			jQuery('header').addClass('smaller')
+		var scrollAmt:any = jQuery(document).scrollTop();
+		var	maxScrollAmt:any = jQuery(document).height() - jQuery(window).height();
+		if(scrollAmt > 50 && scrollAmt < maxScrollAmt){
+			jQuery('header, .page-wrap, footer').addClass('scrolled')
+			this.mode = "minified";
+		}
+		else if(scrollAmt == maxScrollAmt){
+			jQuery('footer').removeClass('scrolled')
 			this.mode = "minified";
 		}
 		else{
-			jQuery('header').removeClass('smaller')
+			jQuery('header, .page-wrap, footer').removeClass('scrolled')
 			this.mode = "maximized";
 		}
 	}
