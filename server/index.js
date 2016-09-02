@@ -6,15 +6,13 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
-var config = require('./../webpack.config');
+var config = require('./config');
 var port = process.env.PORT || 8080;
 
 // Express App 
 var app = require('./app');
 
 app.use(compression());
-
-process.env.NODE_ENV = 'production';
 
 var isProduction = process.env.NODE_ENV === 'production';
 if (!isProduction) {
