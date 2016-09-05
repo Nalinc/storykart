@@ -85,6 +85,14 @@ a:hover {
 	padding: 0 30px;
 }
 
+.container .story{
+    border: 1px solid;
+    height: 150px;
+    width: 30%;	
+    display: inline-block;
+    margin: 1%;
+}
+
 section {
 	padding: 60px 0;
 }
