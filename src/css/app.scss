@@ -11,6 +11,7 @@
   font-family: 'Harry Potter';
   src: url('./build/assets/fonts/hp.ttf');
 }
+
 html, body {
 	height: 100%;
 	color: #505050;
@@ -32,49 +33,62 @@ html, body {
 			color: #3c3c3c;
 		}
 	}
+	.clearfix:after {
+		visibility: hidden;
+		display: block;
+		content: "";
+		clear: both;
+		height: 0;
+	}	
 }
 
 header{
-	width: 100%;
-	height: 25em;
-	overflow: hidden;
-	position: fixed;
 	top: 0;
 	left: 0;
+	width: 100%;
+	height: 25em;
 	z-index: 999;
+	position: fixed;
+	overflow: hidden;
 	text-align: center;
-	border-bottom:solid 0.5em #f4f4f4;
 	background-color: #4b0082;
-	-webkit-transition: height 0.3s;
-	-moz-transition: height 0.3s;
-	-ms-transition: height 0.3s;
-	-o-transition: height 0.3s;
 	transition: height 0.3s;
+	-o-transition: height 0.3s;
+	-ms-transition: height 0.3s;
+	-moz-transition: height 0.3s;
+	-webkit-transition: height 0.3s;
+	border-bottom:solid 0.5em #f4f4f4;
 	.wrapper{
+	    top: 50%;
 		width: 100%;
 		margin: 0 auto;
-	    width: 100%;
 	    position: absolute;
-	    top: 50%;
 	    transform: translateY(-50%);
 	    -o-transform: translateY(-50%);
 	    -ms-transform: translateY(-50%);
 	    -moz-transform: translateY(-50%);
 	    -webkit-transform: translateY(-50%);
 		h1#logo {
-			display: inline-block;
 			margin: 0;
 		    padding: 25px;
-			font-family: 'Harry Potter';
-			font-size: 60px;
-			color: #32cd32;
-			font-weight: 400;
-			-webkit-transition: all 0.3s;
-			-moz-transition: all 0.3s;
-			-ms-transition: all 0.3s;
-			-o-transition: all 0.3s;
-			transition: all 0.3s;
 			line-height: 1;
+			color: #32cd32;
+			font-size: 60px;
+			font-weight: 400;
+			display: inline-block;
+			font-family: 'Harry Potter';
+			transition: all 0.3s;
+			-o-transition: all 0.3s;
+			-ms-transition: all 0.3s;
+			-moz-transition: all 0.3s;
+			-webkit-transition: all 0.3s;
+			@media all and (max-width: 760px) {
+				display: block;
+				float: none;
+				margin: 0 auto;
+				height: 100px;
+				text-align: center;			
+			}
 		}
 		h3.tagline{
 			line-height: 1;
@@ -99,6 +113,17 @@ header{
 				    border-radius: 10px;
 				    border: 1px solid #fff;				
 				}
+				@media all and (max-width: 760px) {
+					line-height: 50px;
+					margin: 0 10px;
+				}
+			}
+			@media all and (max-width: 760px) {
+				display: block;
+				float: none;
+				height: 50px;
+				text-align: center;
+				margin: 0 auto;			
 			}
 		}
 		button{
@@ -115,7 +140,7 @@ header{
 			font-weight: bold;
 		    font-family: 'Harry potter';
 			background-color: #4b0082;
-			&:hover{
+			&:hover {
 				color: #fff;		
 			}
 		}
@@ -127,23 +152,24 @@ header{
 			h1#logo{
 				width: 150px;
 				height: 75px;
-				margin: 0;
 				font-size: 30px;
 			}
 			nav {
-				position: absolute;
 				right: 0;
 				top: 50%;
+				position: absolute;
 			    transform: translateY(-50%);
 			    -o-transform: translateY(-50%);
 			    -ms-transform: translateY(-50%);
 			    -moz-transform: translateY(-50%);
 			    -webkit-transform: translateY(-50%);
-			    padding: 0 20px;			
+			    padding: 0 20px;
 				a{
 					font-family: 'Harry Potter';
-					line-height: 75px;
-					letter-spacing: 2px;	
+					letter-spacing: 2px;
+					@media all and (max-width: 760px) {
+						line-height: 35px;
+					}
 				}
 			}
 		}		
@@ -158,42 +184,25 @@ header{
   	&.scrolled{
 		padding-top: 10em;
   	}
+  	#main{
+  		#content{
+  			section{
+  				padding: 60px 0;
+  				.container{
+					margin: 0 auto;
+					padding: 0 30px;
+  					.story{
+						border: 1px solid;
+						height: 150px;
+						width: 30%;	
+						display: inline-block;
+						margin: 1%;
+  					}
+  				}
+  			}
+  		}
+  	}
 }
-
-.container {
-	margin: 0 auto;
-	padding: 0 30px;
-}
-
-.container .story{
-    border: 1px solid;
-    height: 150px;
-    width: 30%;	
-    display: inline-block;
-    margin: 1%;
-}
-
-section {
-	padding: 60px 0;
-}
-
-section h1 {
-	font-weight: 700;
-	margin-bottom: 10px;
-}
-
-section p {
-	margin-bottom: 30px;
-}
-
-section p:last-child {
-	margin-bottom: 0;
-}
-
-section.color {
-	background-color: #f4f4f4;
-}
-
 
 footer {
 	position: fixed;
@@ -205,105 +214,20 @@ footer {
 	min-height: 50px;
 	line-height: 50px;
 	color: #32cd32;
-	&.scrolled{
-		display: none;
-	}
-	div#copy {
-		padding:0;
-	    word-spacing: 1px;
-	    letter-spacing: 1px;
-	    a{
-			display: inline-block;
-			margin: 0;
-			text-decoration: none;
-			color: #77C7AC;
-			color: #bababa;
-			letter-spacing: 1px;
-			&:hover:{
-				color: #fff;
-			}
-	    }
+	.wrapper{
+		position:relative;
+		div#copy {
+			padding:0;
+		    word-spacing: 1px;
+		    letter-spacing: 1px;
+		    a{
+				display: inline-block;
+				margin: 0;
+				text-decoration: none;
+				&:hover {
+					color: #fff;
+				}
+		    }
+		}	
 	}
 }
-footer div.container {
-	position:relative;  
-}
-footer ul{
-	list-style:none;
-	margin-top:2em;
-	padding:0;
-}
-footer ul li {
-	text-align:left;
-	margin:0;
-	padding:0;
-}
-
-.clearfix:after {
-	visibility: hidden;
-	display: block;
-	content: "";
-	clear: both;
-	height: 0;
-}
-
-@media all and (max-width: 760px) {
-	header h1#logo {
-		display: block;
-		float: none;
-		margin: 0 auto;
-		height: 100px;     
-		text-align: center;
-	}
-
-	header nav {
-		display: block;
-		float: none;
-		height: 50px;
-		text-align: center;
-		margin: 0 auto;
-	}
-
-	header nav a {
-		line-height: 50px;
-		margin: 0 10px;
-	}
-
-	header.scrolled {
-		height: 75px;
-	}
-
-	header.scrolled h1#logo {
-		font-size: 30px;
-	}
-
-	header.scrolled nav {
-		height: 35px;
-	}
-
-	header.scrolled nav a {
-		line-height: 35px;
-	}
-  footer div.col {
-    width:100%;
-    display:inline-block;
-    vertical-align: top;
-  }
-  footer ul li {
-    display:inline-block;
-    margin:0 0.5em;
-    float:left;
-  }
-
-}
-
-@media all and (max-width: 600px) {
-	.container {
-		width: 100%;
-	}
-
-	footer a {
-		display: inline-block;
-	}
-}
-
