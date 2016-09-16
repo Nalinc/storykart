@@ -7,7 +7,7 @@ import {Footer} from './core/footer/footer';
   selector: 'body',
   directives: [Header, Footer, ROUTER_DIRECTIVES],
   template: require('./app.html'),
-  styles: [require('../css/app.scss')],
+  styles: [require('../styles/app.scss')],
   encapsulation: ViewEncapsulation.None
 })
 export class App {
