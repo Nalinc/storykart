@@ -1,9 +1,10 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import {Core} from './core';
 import {Home} from '../home/home';
 import {Dashboard} from '../dashboard/dashboard';
 
-export const CoreRoutes: RouterConfig = [
+const coreRoutes: Routes = [
   {
     path: 'app',
     component: Core,
@@ -13,3 +14,5 @@ export const CoreRoutes: RouterConfig = [
     ]
   }
 ];
+
+export const CoreRoutes: ModuleWithProviders = RouterModule.forChild(coreRoutes);

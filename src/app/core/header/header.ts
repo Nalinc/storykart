@@ -1,10 +1,8 @@
 import {Component, HostListener} from '@angular/core';
-import { RouterLink } from '@angular/router';
 declare var jQuery: any;
 
 @Component({
     selector: 'app-header',
-    directives: [RouterLink],
     template: require('./header.html')
 })
 
