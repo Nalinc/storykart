@@ -5,11 +5,11 @@
           	Put your stories on the web
           </h3>
           <div *ngIf="mode=='maximized'">
-      		<button>
+      		<button routerLink="/dashboard">
       			Start	
       		</button>
           </div>
-          <nav *ngIf="mode=='minified'">
+          <nav *ngIf="mode!='maximized'">
               <a href="#login">Login</a>
           </nav>
       </div>

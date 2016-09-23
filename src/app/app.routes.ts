@@ -6,18 +6,17 @@ import {Dashboard} from './dashboard/dashboard';
 
 const appRoutes: Routes = [
   {
-    path: 'app',
-    component: Core,
-    children: [
-      { path: 'dashboard', component: Dashboard},
-      { path: 'home', component: Home}
-    ]
-  },
-  {
-    path: 'app/home',
+    path: 'home',
     component: Home,
     data: {
       title: 'Home page'
+    }
+  },
+  {
+    path: 'dashboard',
+    component: Dashboard,
+    data: {
+      title: 'Dashboard'
     }
   },
   { 
