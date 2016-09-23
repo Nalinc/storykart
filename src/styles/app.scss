@@ -197,6 +197,35 @@ header{
 						width: 30%;	
 						display: inline-block;
 						margin: 1%;
+						.story-preview{
+							height: 150px;
+						}
+						.story-footer{
+							height: 50px;
+							background-color:#428b42;
+							.stars{
+								float: right;
+								line-height: 50px;
+								padding: 0 20px;
+								span{
+									vertical-align: top;
+									font-weight: bold;
+									display: inline-block;
+									padding-top: 3px;
+									margin-left: -5px;
+									color: #fff;
+									&.count{
+										margin:0;
+									}
+								}
+								i{
+									font-style: normal;
+									font-size: 30px;
+									color: #FFD700;
+								}								
+							}
+						}
+
   					}
   				}
   			}
