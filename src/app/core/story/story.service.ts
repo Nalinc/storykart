@@ -12,7 +12,7 @@ export class StoryService {
      // Resolve HTTP using the constructor
      constructor (private http: Http) {}
      // private instance variable to hold base url
-     private storiesUrl = 'http://localhost:8080/stories'; 
+     private storiesUrl = '/stories'; 
 
 
 	getStories() : Observable<Story[]> {
