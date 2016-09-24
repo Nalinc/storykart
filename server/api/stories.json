@@ -1,27 +1,27 @@
 [
 	{
-		"user": "NLN",
-		"title": "Destiny is already written",
-		"kudos": "10"
+		"author": "NLN",
+		"title": "Destiny has already been written",
+		"stars": "10"
 	},{
-		"user": "Chris",
+		"author": "Chris",
 		"title": "There's always another way",
-		"kudos": "6"
+		"stars": "6"
 	},{
-		"user": "Jon",
+		"author": "Jon",
 		"title": "Where there's a will..there's a way",
-		"kudos": "8"
+		"stars": "8"
 	},{
-		"user": "Anuraag",
+		"author": "Anuraag",
 		"title": "Who cares",
-		"kudos": "3"
+		"stars": "3"
 	},{
-		"user": "Alisha",
+		"author": "Alisha",
 		"title": "Learn to say No",
-		"kudos": "2"
+		"stars": "2"
 	},{
-		"user": "Samarth",
+		"author": "Samarth",
 		"title": "Wait, WHAT?",
-		"kudos": "4"
+		"stars": "4"
 	}
 ]

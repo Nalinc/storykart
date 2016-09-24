@@ -2,142 +2,23 @@
   <div id="content">
     <section>
       <div class="container">
-      <div class="story">
+      <div class="story" *ngFor="let story of stories" >
       	<div class="story-header"></div>
-      	<div class="story-preview"></div>
+      	<div class="story-preview">
+         {{story.title}} 
+        </div>
       	  <div class="story-footer">
                 <div class="user">
                   <img src="images/user-default.png">
-                  <span>John Doe</span>
+                  <span>{{story.author}}</span>
                 </div>
                 <span class="stars">
-                  <span class="count">10</span>
+                  <span class="count">{{story.stars}}</span>
                   <i>&#9733;</i>
                   <span>'s</span>
                 </span>
               </div>
       </div>
-      <div class="story">
-      	<div class="story-header"></div>
-      	<div class="story-preview"></div>
-      	  <div class="story-footer">
-                <div class="user">
-                  <img src="images/user-default.png">
-                  <span>John Doe</span>
-                </div>
-                <span class="stars">
-                  <span class="count">10</span>
-                  <i>&#9733;</i>
-                  <span>'s</span>
-                </span>
-              </div>
-      </div>
-      <div class="story">
-      	<div class="story-header"></div>
-      	<div class="story-preview"></div>
-      	  <div class="story-footer">
-                <div class="user">
-                  <img src="images/user-default.png">
-                  <span>John Doe</span>
-                </div>
-                <span class="stars">
-                  <span class="count">10</span>
-                  <i>&#9733;</i>
-                  <span>'s</span>
-                </span>
-              </div>
-      </div>
-      <div class="story">
-      	<div class="story-header"></div>
-      	<div class="story-preview"></div>
-      	  <div class="story-footer">
-                <div class="user">
-                  <img src="images/user-default.png">
-                  <span>John Doe</span>
-                </div>
-                <span class="stars">
-                  <span class="count">10</span>
-                  <i>&#9733;</i>
-                  <span>'s</span>
-                </span>
-              </div>
-      </div>
-      <div class="story">
-      	<div class="story-header"></div>
-      	<div class="story-preview"></div>
-      	  <div class="story-footer">
-                <div class="user">
-                  <img src="images/user-default.png">
-                  <span>John Doe</span>
-                </div>
-                <span class="stars">
-                  <span class="count">10</span>
-                  <i>&#9733;</i>
-                  <span>'s</span>
-                </span>
-              </div>
-      </div>
-      <div class="story">
-      	<div class="story-header"></div>
-      	<div class="story-preview"></div>
-      	  <div class="story-footer">
-                <div class="user">
-                  <img src="images/user-default.png">
-                  <span>John Doe</span>
-                </div>
-                <span class="stars">
-                  <span class="count">10</span>
-                  <i>&#9733;</i>
-                  <span>'s</span>
-                </span>
-              </div>
-      </div>
-      <div class="story">
-      	<div class="story-header"></div>
-      	<div class="story-preview"></div>
-      	  <div class="story-footer">
-                <div class="user">
-                  <img src="images/user-default.png">
-                  <span>John Doe</span>
-                </div>
-                <span class="stars">
-                  <span class="count">10</span>
-                  <i>&#9733;</i>
-                  <span>'s</span>
-                </span>
-              </div>
-      </div>
-      <div class="story">
-      	<div class="story-header"></div>
-      	<div class="story-preview"></div>
-      	  <div class="story-footer">
-                <div class="user">
-                  <img src="images/user-default.png">
-                  <span>John Doe</span>
-                </div>
-                <span class="stars">
-                  <span class="count">10</span>
-                  <i>&#9733;</i>
-                  <span>'s</span>
-                </span>
-              </div>
-      </div>
-      <div class="story">
-      	<div class="story-header"></div>
-      	<div class="story-preview"></div>
-      	  <div class="story-footer">
-                <div class="user">
-                  <img src="images/user-default.png">
-                  <span>John Doe</span>
-                </div>
-                <span class="stars">
-                  <span class="count">10</span>
-                  <i>&#9733;</i>
-                  <span>'s</span>
-                </span>
-              </div>
-      </div>
-
       </div>      
     </section>
   </div>

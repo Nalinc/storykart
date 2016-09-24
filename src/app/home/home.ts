@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import { Story } from '../core/story/story.model';
+import { StoryService } from '../core/story/story.service';
 
 @Component({
   selector: '[home]',
@@ -9,4 +11,24 @@ import {Component} from '@angular/core';
 })
 export class Home {
 	names:string[] = ["one", "two", "three"];
+	stories: Story[];
+	constructor(private storyService: StoryService) {
+	}
+	ngOnInit() {
+		// Load stories
+		this.loadStories()
+	}
+
+	loadStories() {
+		// Get all stories
+		this.storyService.getStories()
+		.subscribe(
+			stories => this.stories = stories, //Bind to view
+			err => {
+				// Log errors if any
+				console.log(err);
+			}
+		);
+	}
+
 }
