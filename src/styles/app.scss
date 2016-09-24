@@ -191,6 +191,7 @@ header{
   				.container{
 					margin: 0 auto;
 					padding: 0 30px;
+					text-align: center;
   					.story{
 						border: 1px solid #d6cdcd;
 						height: 200px;
@@ -248,7 +249,15 @@ header{
 								}								
 							}
 						}
-
+						@media all and (max-width: 920px) {
+							width: 48%;
+						}
+						@media all and (max-width: 740px) {
+							width: 80%;
+						}
+						@media all and (max-width: 540px) {
+							width: 100%;
+						}
   					}
   				}
   			}
