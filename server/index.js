@@ -40,11 +40,12 @@ if (!isProduction) {
 	    quiet: false, //output anything to the console.
 	    noInfo: true //suppress useless information
 	}))
-
+	app.use(express.static(path.resolve(__dirname, './../src/assets')));
 	app.use(webpackHotMiddleware(compiler, {}))
 } else {
     // Accessing the static assets from the dist in production environment
     app.use(express.static(path.resolve(__dirname, './../')));
+    app.use(express.static(path.resolve(__dirname, './../build/assets')));
 }
 
 app.listen(port, function () {

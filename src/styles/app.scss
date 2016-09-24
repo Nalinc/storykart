@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'Harry Potter';
-  src: url('./build/assets/fonts/hp.ttf');
+  src: url('fonts/hp.ttf');
 }
 
 html, body {
@@ -51,7 +51,7 @@ header{
 	position: fixed;
 	overflow: hidden;
 	text-align: center;
-	background-color: #4b0082;
+	background-color: #483d8b;
 	transition: height 0.3s;
 	-o-transition: height 0.3s;
 	-ms-transition: height 0.3s;
@@ -72,7 +72,8 @@ header{
 			margin: 0;
 		    padding: 25px;
 			line-height: 1;
-			color: #32cd32;
+			color: #ed143d;
+			cursor: pointer;
 			font-size: 60px;
 			font-weight: 400;
 			display: inline-block;
@@ -92,6 +93,7 @@ header{
 		}
 		h3.tagline{
 			line-height: 1;
+			color: #32cd32;
 		}
 		nav{
 			display: inline-block;
@@ -110,8 +112,6 @@ header{
 				transition: all 0.3s;
 				&:hover{
 					color: #fff;
-				    border-radius: 10px;
-				    border: 1px solid #fff;				
 				}
 				@media all and (max-width: 760px) {
 					line-height: 50px;
@@ -135,11 +135,11 @@ header{
 		    padding: 10px;
 		    letter-spacing: 5px;	
 			border-radius: 5px;
-			border: 2px solid #32cd32;
+			border: 1px solid #ed143d;
 			font-size: 20px;
 			font-weight: bold;
 		    font-family: 'Harry potter';
-			background-color: #4b0082;
+			background-color: #483d8b;
 			&:hover {
 				color: #fff;		
 			}
@@ -202,7 +202,25 @@ header{
 						}
 						.story-footer{
 							height: 50px;
-							background-color:#32cd32;
+							background-color: #483d8b;
+							.user{
+								float: left;
+								color: #fff;
+								img{
+								    width: 45px;
+								    border-radius: 50px;
+								    border: 1px solid #d6cdcd;
+								    margin: 2px 12px;
+								}
+								span{
+									vertical-align: top;
+									font-weight: bold;
+									display: inline-block;
+									padding-top: 15px;
+									margin-left: -5px;
+									color: #fff;								
+								}
+							}
 							.stars{
 								float: right;
 								line-height: 50px;
@@ -221,7 +239,8 @@ header{
 								i{
 									font-style: normal;
 									font-size: 30px;
-									color: #4b0082;
+									color: #ffd700;
+									cursor: pointer;
 								}								
 							}
 						}
@@ -237,7 +256,7 @@ footer {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
-	background-color: #4b0082;
+	background-color: #483d8b;
 	text-align: center;
 	font-family: 'fantasy';
 	min-height: 50px;

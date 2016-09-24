@@ -8,11 +8,15 @@ import { Dashboard }  from './dashboard/dashboard';
 import { Header } from './core/header/header';
 import { Footer } from './core/footer/footer';
 import { routing } from './app.routes'
+import {
+  LocationStrategy,
+  HashLocationStrategy
+} from '@angular/common';
 
 @NgModule({
   imports: [ BrowserModule, routing],       // module dependencies
   declarations: [ App, Core, Home, Dashboard, Header, Footer],   // components and directives
   bootstrap: [ App ],     // root component
-  providers: []                    // services
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]   // services
 })
 export class AppModule { }

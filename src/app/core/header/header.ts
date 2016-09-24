@@ -1,5 +1,5 @@
 import {Component, HostListener} from '@angular/core';
-import {Router, ActivatedRoute, NavigationStart} from '@angular/router';
+import {Router, NavigationStart} from '@angular/router';
 declare var jQuery: any;
 
 @Component({
@@ -34,7 +34,12 @@ export class Header {
 			if(event instanceof NavigationStart) {
 				if(event.url == "/dashboard"){
 					jQuery('header, .page-wrap').addClass('scrolled')
-					this.mode = "hide-header";				}
+					this.mode = "hide-header";				
+				}else if(event.url == "/"){
+					jQuery(document).scrollTop(0);
+					jQuery('header, .page-wrap').removeClass('scrolled');
+					this.mode = "maximized";
+				}
 			}
 		});	
 	}
