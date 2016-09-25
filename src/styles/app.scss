@@ -1,3 +1,4 @@
+@import 'grid';
 *,
 *:before,
 *:after {
@@ -19,16 +20,16 @@ html, body {
 	font-weight: 300;
 	font-size: 16px;
 	line-height: 1.8;
+	font-family: 'Harry Potter';
+	letter-spacing: 1px;
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 100;
 		color: #77C7AC;
-		font-family: 'Harry Potter';
 	}
 	a {
 		text-decoration: none;
 		color: #fcfcfc;
 		font-weight: 300;
-		font-family: 'Harry Potter';
 		&:hover {
 			color: #3c3c3c;
 		}
@@ -72,7 +73,7 @@ header{
 			margin: 0;
 		    padding: 25px;
 			line-height: 1;
-			color: #ed143d;
+			color: #e83c5d;
 			cursor: pointer;
 			font-size: 60px;
 			font-weight: 400;
@@ -135,7 +136,7 @@ header{
 		    padding: 10px;
 		    letter-spacing: 5px;	
 			border-radius: 5px;
-			border: 1px solid #ed143d;
+			border: 1px solid #e83c5d;
 			font-size: 20px;
 			font-weight: bold;
 		    font-family: 'Harry potter';
@@ -193,17 +194,44 @@ header{
 					padding: 0 30px;
 					text-align: center;
   					.story{
-						border: 1px solid #d6cdcd;
 						height: 200px;
-						width: 30%;	
-						display: inline-block;
-						margin: 1%;
+						margin: 15px 0;
 						.story-preview{
 							height: 150px;
-							padding: 25px;
-							background-color: crimson;
+							background-color: #e83c5d;
 							color: #fff;
 							font-weight: bold;
+							position: relative;
+							div{
+							    margin: 0 auto;
+							    position: absolute;
+							    top: 50%;
+							    width: 100%;
+							    transform: translateY(-50%);
+							}
+							.overlay {
+							    position:absolute;
+							    width:0;
+							    width:100%;
+							    height:100%;
+							    background-color:rgba(0, 0, 0, 0.8);
+							    display:none;
+								.view-preview{
+									color: #fff;
+									margin-top: 40px;
+									span{
+										border: 1px solid;
+										padding: 10px;
+										margin-top: 40px;
+										cursor: pointer;
+									}
+								}
+							}
+							&:hover{
+								.overlay{
+									display:block;
+								}
+							}
 						}
 						.story-footer{
 							height: 50px;
@@ -263,6 +291,56 @@ header{
   			}
   		}
   	}
+}
+.dashboard-page{
+	margin-top: -5em;
+	#main{
+		#content{
+			.row{
+				margin: 0;
+				width: 100%;
+				padding: 20px 50px;
+				margin-bottom: 60px;
+				.story-title{
+					margin-bottom: 20px;
+					padding-left: 30px;
+					input{
+						width: 38%;
+					    padding: 0 10px;
+					}
+				}
+				.story-actors{
+					height: 90px;
+					overflow-x: auto;
+					img{
+						width: 60px;
+						margin: 0 10px 10px 10px;
+					    border: 1px solid #a9a9a9;
+					    padding: 2px;
+					    cursor: move;
+					}
+					.add-more-actors{
+						width: 60px;
+						padding: 20px;
+						margin: 0 10px 10px 10px;
+    					border: 1px dashed #a9a9a9;
+						display: inline-block;
+						cursor: pointer;
+					}
+				}
+				textarea{
+					width:100%;
+					height:280px;
+					resize: none;
+				}
+				.story-board{
+					border: 1px solid rgb(169,169,169);
+					height: 400px;
+					width: 100%;
+				}
+			}
+		}
+	}
 }
 
 footer {

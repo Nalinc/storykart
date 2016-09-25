@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
+declare var jQuery: any;
 
 @Component({
   selector: '[dashboard]',
@@ -7,5 +8,10 @@ import {Component} from '@angular/core';
   },
   template: require('./dashboard.html')
 })
-export class Dashboard {
+export class Dashboard  implements AfterViewInit{
+	constructor(){
+	}
+	ngAfterViewInit() {
+		jQuery("textarea").attr('placeholder', 'actor_1_name: ' + 'Hi' + '\n' + 'actor_2_name: ' + 'Hello');
+	}
 }

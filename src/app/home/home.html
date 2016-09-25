@@ -1,11 +1,15 @@
 <div id="main">
   <div id="content">
     <section>
-      <div class="container">
-      <div class="story" *ngFor="let story of stories" >
-      	<div class="story-header"></div>
+      <div class="container row">
+      <div class="story col-xs-12 col-sm-6 col-md-4" *ngFor="let story of stories" >
       	<div class="story-preview">
-         {{story.title}} 
+          <div>{{story.title}}</div>
+          <div class="overlay">
+            <div class="view-preview">
+              <span>View</span>
+            </div>          
+          </div>  
         </div>
       	  <div class="story-footer">
                 <div class="user">
