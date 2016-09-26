@@ -9,7 +9,7 @@
                   <div>Actors</div>
                   <div class="story-actors">
                     <!-- http://www.flaticon.com/packs/kids-avatars -->
-                    <img src="avatars/boy-1.svg">
+                    <img src="avatars/boy-1.svg" draggable="true" (dragstart)="drag($event)">
                     <img src="avatars/girl-12.svg">
                     <img src="avatars/man-2.svg">
 
@@ -23,7 +23,7 @@
               </div>                          
               <div class="col-xs-12 col-sm-7"> 
                 <div>Story Board</div>
-                <div class="story-board">
+                <div class="story-board" (drop)="drop($event)" (dragover)="allowDrop($event)">
                   
                 </div>
               </div>
