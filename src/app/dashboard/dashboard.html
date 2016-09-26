@@ -7,11 +7,11 @@
               <div class="col-xs-12 col-sm-5"> 
                 <div class="col-xs-12">
                   <div>Actors</div>
-                  <div class="story-actors">
+                  <div class="story-actors" makeDraggable>
                     <!-- http://www.flaticon.com/packs/kids-avatars -->
-                    <img src="avatars/boy-1.svg" makeDraggable>
-                    <img src="avatars/girl-12.svg">
-                    <img src="avatars/man-2.svg">
+                    <img class="actor" src="avatars/boy-1.svg">
+                    <img class="actor" src="avatars/girl-12.svg">
+                    <img class="actor" src="avatars/man-2.svg">
 
                     <img class="add-more-actors" src="images/add.svg">
                   </div>
@@ -21,7 +21,7 @@
                   <textarea></textarea>                
                 </div>
               </div>                          
-              <div class="col-xs-12 col-sm-7"> 
+              <div class="story-board-wrapper col-xs-12 col-sm-7"> 
                 <div>Story Board</div>
                 <div class="story-board" makeDroppable (drop)="onDrop($event)" >
 

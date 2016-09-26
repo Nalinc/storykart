@@ -27,10 +27,9 @@ export class Dashboard  implements AfterViewInit{
 		     this ID to manipulate the dragged element as we wish. */
 		  /* Let's just move it through the DOM and append it here */
 		  console.log("drop")
-		  console.log(ev.target)
-		  console.log(ev.target.appendChild)
-		  console.log(jQuery(ev.target))
-		  jQuery(ev.target).append(data.replace('makedraggable=""',''))
+		  var ele = jQuery(data)
+		  ele.css({	"top": ev.offsetY,"left":ev.offsetX })
+		  jQuery(ev.target).append(ele)
 		};
 	}
 	ngAfterViewInit() {
