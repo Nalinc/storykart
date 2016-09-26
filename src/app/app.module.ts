@@ -15,10 +15,13 @@ import { Dashboard }  from './dashboard/dashboard';
 import { Header } from './core/header/header';
 import { Footer } from './core/footer/footer';
 import { StoryService } from './core/story/story.service';
+import { MakeDroppable } from './core/dragdrop/makeDroppable.directive'
+import { MakeDraggable } from './core/dragdrop/makeDraggable.directive'
+
 
 @NgModule({
   imports: [ BrowserModule, routing, HttpModule],       // module dependencies
-  declarations: [ App, Core, Home, Dashboard, Header, Footer],   // components and directives
+  declarations: [ App, Core, Home, Dashboard, Header, Footer, MakeDraggable, MakeDroppable],   // components and directives
   bootstrap: [ App ],     // root component
   providers: [StoryService, {provide: LocationStrategy, useClass: HashLocationStrategy}]   // services
 })

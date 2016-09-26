@@ -9,27 +9,12 @@ declare var jQuery: any;
   template: require('./dashboard.html')
 })
 export class Dashboard  implements AfterViewInit{
-	allowDrop:any;
-	drag: any;
-	drop: any;
+	todo: string = "NALIN"; 
+	onDrop: any;
 
 	constructor(){
-		this.allowDrop = function (ev) {
-		  /* The default handling is to not allow dropping elements. */
-		  /* Here we allow it by preventing the default behaviour. */
-		  console.log("allowdrop")
-		  ev.preventDefault();
-		};
 
-		this.drag = function (ev) {
-		  /* Here is specified what should be dragged. */
-		  /* This data will be dropped at the place where the mouse button is released */
-		  /* Here, we want to drag the element itself, so we set it's ID. */
-		  console.log("drag")
-		  ev.dataTransfer.setData("text/html", ev.target.id);
-		};
-
-		this.drop = function (ev) {
+		this.onDrop = function (ev) {
 		  /* The default handling is not to process a drop action and hand it to the next 
 		     higher html element in your DOM. */
 		  /* Here, we prevent the default behaviour in order to process the event within 
@@ -45,8 +30,7 @@ export class Dashboard  implements AfterViewInit{
 		  console.log(ev.target)
 		  console.log(ev.target.appendChild)
 		  console.log(jQuery(ev.target))
-		  ev.target.innerHTML = data;
-		  //ev.target.appendChild(data)
+		  jQuery(ev.target).append(data.replace('makedraggable=""',''))
 		};
 	}
 	ngAfterViewInit() {
