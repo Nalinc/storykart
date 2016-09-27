@@ -22,7 +22,8 @@ export class MakeDraggable {
     // payload by stringifying the object first
     el.addEventListener('dragstart', (e) => {
       console.log('Start');
-        jQuery('.story-actors, .story-board').addClass('highlight')
+      jQuery('.story-actors, .story-board').addClass('highlight');
+      jQuery('.add-more-actors').attr('src','/images/dustbin.svg').css({"border":"none"});
       el.classList.add('drag-src')
       e.dataTransfer.effectAllowed = 'move';
       console.log(e.target.name);
@@ -32,7 +33,8 @@ export class MakeDraggable {
     // Remove the drag-src class
     el.addEventListener('dragend', (e) => {
       e.preventDefault();
-      jQuery('.story-board, .story-actors').removeClass('highlight')
+      jQuery('.story-board, .story-actors').removeClass('highlight');
+      jQuery('.add-more-actors').attr('src','/images/add.svg').css({"border":"1px dashed #a9a9a9"});
       el.classList.remove('drag-src')
     });
   }

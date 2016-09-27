@@ -11,6 +11,7 @@ declare var jQuery: any;
 export class Dashboard  implements AfterViewInit{
 	todo: string = "NALIN"; 
 	onDrop: any;
+	onReset: any;
 
 	constructor(){
 
@@ -23,6 +24,16 @@ export class Dashboard  implements AfterViewInit{
 		  /* In the drag event, we set the *variable* (it is not a variable name but a 
 		     format, please check the reference!) "text/html", now we read it out */
 		  var data=ev.dataTransfer.getData("text");
+
+		  if (ev.target == jQuery(".add-more-actors")[0]){
+			jQuery('[name="'+data+'"]').remove();
+			jQuery('.story-board, .story-actors').removeClass('highlight');
+			jQuery('.add-more-actors').attr('src','/images/add.svg').css({"border":"1px dashed #a9a9a9"});			
+			return;
+		  }
+		  else if(jQuery(ev.target).hasClass('actor'))
+		  	return;
+
 		  /* As we put the ID of the source element into this variable, we can now use 
 		     this ID to manipulate the dragged element as we wish. */
 		  /* Let's just move it through the DOM and append it here */
@@ -30,6 +41,20 @@ export class Dashboard  implements AfterViewInit{
 		  ele.css({	"top": ev.offsetY,"left":ev.offsetX })
 		  jQuery(ev.target).append(ele)
 		};
+
+		this.onReset = function(){
+			jQuery('.story-board').html("");
+			jQuery('.story-actors').html("");
+			var avatars = ["boy-1","girl-12","man-2"]
+			for(var i in avatars){
+				var ele = jQuery("<img />",{
+					"src":'avatars/'+avatars[i]+'.svg',
+					"name":avatars[i]
+				})
+				jQuery('.story-actors').append(ele);
+			}
+			
+		}
 	}
 	ngAfterViewInit() {
 		jQuery("textarea").attr('placeholder', 'actor_1_name: ' + 'Hi' + '\n' + 'actor_2_name: ' + 'Hello');
