@@ -12,6 +12,8 @@ export class Dashboard  implements AfterViewInit{
 	todo: string = "NALIN"; 
 	onDrop: any;
 	onReset: any;
+	showModal: any;
+	hideModal: any;
 
 	constructor(){
 
@@ -52,8 +54,14 @@ export class Dashboard  implements AfterViewInit{
 					"name":avatars[i]
 				})
 				jQuery('.story-actors').append(ele);
-			}
-			
+			}	
+		}
+
+		this.showModal = function(){
+			jQuery("#myModal").css({"display":"block"})
+		}
+		this.hideModal = function(){
+			jQuery("#myModal").css({"display":"none"})
 		}
 	}
 	ngAfterViewInit() {

@@ -12,7 +12,7 @@
                   <div>Actors</div>
                   <div>
                     <span makeDroppable (drop)="onDrop($event)"> 
-                      <img class="add-more-actors" src="images/add.svg">
+                      <img class="add-more-actors" src="images/add.svg" (click)="showModal()">
                     </span>
                     <div class="story-actors" makeDraggable makeDroppable (drop)="onDrop($event)">
                       <!-- http://www.flaticon.com/packs/kids-avatars -->
@@ -20,6 +20,13 @@
                       <img class="actor" src="avatars/girl-12.svg" name="girl-12">
                       <img class="actor" src="avatars/man-2.svg" name="man-2">
                     </div>                    
+                  </div>
+                  <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span class="close" (click)="hideModal()">×</span>
+                      <p>Some text in the Modal..</p>
+                    </div>
                   </div>
                 </div>
                 <div class="col-xs-12">
