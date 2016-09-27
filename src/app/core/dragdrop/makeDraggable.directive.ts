@@ -12,7 +12,7 @@ export class MakeDraggable {
   
   ngOnInit() {
     // Get the current element
-    let el = this._elementRef.nativeElement.querySelector('.actor');
+    let el = this._elementRef.nativeElement;
     
     // Set the draggable attribute to the element
     el.draggable = 'true';
@@ -22,16 +22,17 @@ export class MakeDraggable {
     // payload by stringifying the object first
     el.addEventListener('dragstart', (e) => {
       console.log('Start');
-//      jQuery('.story-board').css({'background-color':'yellow'})      
+        jQuery('.story-actors, .story-board').addClass('highlight')
       el.classList.add('drag-src')
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text', JSON.stringify(this.data));
+      console.log(e.target.name);
+      e.dataTransfer.setData('text', e.target.name);
     });
     
     // Remove the drag-src class
     el.addEventListener('dragend', (e) => {
       e.preventDefault();
-//      jQuery('.story-board').css({'background-color':'inherit'})
+      jQuery('.story-board, .story-actors').removeClass('highlight')
       el.classList.remove('drag-src')
     });
   }

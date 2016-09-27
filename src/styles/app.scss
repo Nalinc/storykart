@@ -311,23 +311,26 @@ header{
 					    padding: 0 10px;
 					}
 				}
+				.add-more-actors{
+					width: 60px;
+					padding: 20px;
+					margin: 5px;
+					border: 1px dashed #a9a9a9;
+					display: inline-block;
+					cursor: pointer;
+					float: left;
+				}
 				.story-actors{
 					height: 90px;
 					overflow-x: auto;
+					overflow-y: hidden;
+					white-space: nowrap;
 					img{
 						width: 60px;
-						margin: 0 10px 10px 10px;
+						margin: 5px;
 					    border: 1px solid #a9a9a9;
 					    padding: 2px;
 					    cursor: move;
-					}
-					.add-more-actors{
-						width: 60px;
-						padding: 20px;
-						margin: 0 10px 10px 10px;
-    					border: 1px dashed #a9a9a9;
-						display: inline-block;
-						cursor: pointer;
 					}
 				}
 				textarea{
@@ -349,6 +352,9 @@ header{
 						    position: absolute;					
 						}
 					}
+				}
+				.highlight{
+					background-color: #f7f1ff;
 				}
 			}
 		}

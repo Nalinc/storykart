@@ -38,8 +38,8 @@ export class MakeDroppable implements OnInit {
       }
       
       el.classList.remove('over');
-      let data = JSON.parse(e.dataTransfer.getData('text'));
-      this.dropped.emit(data);
+      //let data = JSON.parse(e.dataTransfer.getData('text'));
+      //this.dropped.emit(data);
       return false;
     })
   }

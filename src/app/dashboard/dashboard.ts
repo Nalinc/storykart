@@ -22,12 +22,11 @@ export class Dashboard  implements AfterViewInit{
 		  ev.preventDefault();
 		  /* In the drag event, we set the *variable* (it is not a variable name but a 
 		     format, please check the reference!) "text/html", now we read it out */
-		  var data=ev.dataTransfer.getData("text/html");
+		  var data=ev.dataTransfer.getData("text");
 		  /* As we put the ID of the source element into this variable, we can now use 
 		     this ID to manipulate the dragged element as we wish. */
 		  /* Let's just move it through the DOM and append it here */
-		  console.log("drop")
-		  var ele = jQuery(data)
+		  var ele = jQuery('[name="'+data+'"]');
 		  ele.css({	"top": ev.offsetY,"left":ev.offsetX })
 		  jQuery(ev.target).append(ele)
 		};
