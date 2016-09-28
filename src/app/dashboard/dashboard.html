@@ -1,6 +1,6 @@
   <div id="main">
       <div id="content">
-            <div class="row">
+            <div class="story-box row">
               <div class="story-title col-xs-12">
                 <input type="textbox" name="title" placeholder="Title of the story">
                 <div class="btn-publish"> Publish </div>
@@ -16,27 +16,10 @@
                     </span>
                     <div class="story-actors" makeDraggable makeDroppable (drop)="onDrop($event)">
                       <!-- http://www.flaticon.com/packs/kids-avatars -->
-                      <img class="actor" src="avatars/boy-1.svg" name="boy-1">
-                      <img class="actor" src="avatars/girl-12.svg" name="girl-12">
-                      <img class="actor" src="avatars/man-2.svg" name="man-2">
+                      <img class="actor" src="sprites/boy_1.svg" name="boy_1">
+                      <img class="actor" src="sprites/girl_1.svg" name="girl_1">
+                      <img class="actor" src="sprites/man_1.svg" name="man_1">
                     </div>                    
-                  </div>
-                  <div id="myModal" class="modal">
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                      <span class="close" (click)="hideModal()">×</span>
-                      <div class="row">
-                        <div style="background-color:red" class="sprite-header col-xs-12">
-                          <div class="col-xs-6" style="border-right: 1px solid #000;">
-                            Avatars
-                          </div>
-                          <div class="col-xs-6">
-                            Objects
-                          </div>
-                        </div>
-                        
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div class="col-xs-12">
@@ -49,6 +32,43 @@
                 <div class="story-board-wrapper">
                   <div class="story-board" makeDraggable makeDroppable (drop)="onDrop($event)" >
                 </div>
+                </div>
+              </div>
+            </div>
+            <div id="myModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close" (click)="hideModal()">×</span>
+                <div class="row">
+                  <div class="sprite-header col-xs-12">
+                    <div class="col-xs-6" (click)="active='avatars'" [class.active]="active=='avatars'">
+                      Avatars
+                    </div>
+                    <div class="col-xs-6" (click)="active='objects'" [class.active]="active=='objects'">
+                      Objects
+                    </div>
+                  </div>
+                  <div class="sprite-container col-xs-12">
+                    <div class="sprites">
+                      <div *ngIf="active=='avatars'">
+                        <img  (click)="sprites.avatars[i].selected=!sprites.avatars[i].selected" 
+                              [class.highlight]="sprites.avatars[i].selected" 
+                              *ngFor="let actor of sprites.avatars, let i = index"
+                              src="sprites/{{sprites.avatars[i].name}}.svg" name="{{sprites.avatars[i].name}}" > 
+                      </div>
+                      <div *ngIf="active=='objects'">
+                        <img  (click)="sprites.objects[i].selected=!sprites.objects[i].selected" 
+                              [class.highlight]="sprites.objects[i].selected" 
+                              *ngFor="let obj of sprites.objects, let i = index"
+                              src="sprites/{{sprites.objects[i].name}}.svg" name="{{sprites.objects[i].name}}" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer col-xs-12">
+                    <span>Choose multiple sprites by clicking and click import</span>
+                    <div class="btn-import" (click)="importAvatars()"> Import </div>
+                  </div>
+
                 </div>
               </div>
             </div>
