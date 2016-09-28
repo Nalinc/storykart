@@ -40,7 +40,7 @@ export class Dashboard  implements AfterViewInit{
 		     this ID to manipulate the dragged element as we wish. */
 		  /* Let's just move it through the DOM and append it here */
 		  var ele = jQuery('[name="'+data+'"]');
-		  ele.css({	"top": ev.offsetY,"left":ev.offsetX })
+		  ele.css({	"top": ev.offsetY - 35,"left":ev.offsetX - 35});
 		  jQuery(ev.target).append(ele)
 		};
 

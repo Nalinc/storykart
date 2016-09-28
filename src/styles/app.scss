@@ -374,20 +374,28 @@ header{
 					height:280px;
 					resize: none;
 				}
-				.story-board-wrapper{
-					overflow: auto;
-					.story-board{
-						border: 1px solid #a9a9a9;
-						height: 400px;
-						width: 600px;
-						img{
-							width: 60px;
-							margin: 10px;
-						    padding: 2px;
-						    cursor: move;
-						    position: absolute;					
+				.story-board-container{
+					text-align: right;
+					.story-board-wrapper{
+						overflow: auto;
+						.story-board{
+							border: 1px solid #a9a9a9;
+							height: 400px;
+							width: 600px;
+							float: right;
+							position: relative;
+							img{
+								width: 60px;
+								margin: 10px;
+							    padding: 2px;
+							    cursor: move;
+							    position: absolute;					
+							}
+							@media all and (max-width: 1200px) {
+								float: none;
+							}
 						}
-					}
+					}				
 				}
 				.highlight{
 					background-color: #f7f1ff;
@@ -422,6 +430,18 @@ header{
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    .row{
+    	padding: 0!important;
+    	.sprite-header{
+			text-align: center;
+    	}
+    }
+	@media all and (min-width: 640px) {
+		width: 70%;
+	}
+	@media all and (min-width: 980px) {
+		width: 50%;
+	}	
 }
 
 /* The Close Button */

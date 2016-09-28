@@ -7,7 +7,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
 var config = require('./config');
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8000;
 
 // Express App 
 var app = require('./app');

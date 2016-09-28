@@ -25,7 +25,17 @@
                     <!-- Modal content -->
                     <div class="modal-content">
                       <span class="close" (click)="hideModal()">×</span>
-                      <p>Some text in the Modal..</p>
+                      <div class="row">
+                        <div style="background-color:red" class="sprite-header col-xs-12">
+                          <div class="col-xs-6" style="border-right: 1px solid #000;">
+                            Avatars
+                          </div>
+                          <div class="col-xs-6">
+                            Objects
+                          </div>
+                        </div>
+                        
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -34,10 +44,11 @@
                   <textarea></textarea>                
                 </div>
               </div>                          
-              <div class="story-board-wrapper col-xs-12 col-sm-7"> 
-                <div>Story Board</div>
-                <div class="story-board" makeDraggable makeDroppable (drop)="onDrop($event)" >
-
+              <div class="story-board-container col-xs-12 col-sm-7"> 
+                <div class="">Story Board</div>
+                <div class="story-board-wrapper">
+                  <div class="story-board" makeDraggable makeDroppable (drop)="onDrop($event)" >
+                </div>
                 </div>
               </div>
             </div>
