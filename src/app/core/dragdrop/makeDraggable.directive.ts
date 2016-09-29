@@ -11,22 +11,21 @@ export class MakeDraggable {
   constructor(private _elementRef: ElementRef) {}
   
   ngOnInit() {
-    // Get the current element
-    let el = this._elementRef.nativeElement;
-    
-    // Set the draggable attribute to the element
-    el.draggable = 'true';
-    
-    // Set up the dragstart event and add the drag-src CSS class 
-    // to change the visual appearance. Set the current todo as the data
-    // payload by stringifying the object first
-    el.addEventListener('dragstart', (e) => {
-      console.log('Start');
+      // Get the current element
+      let el = this._elementRef.nativeElement;
+      
+      // Set the draggable attribute to the element
+      el.draggable = 'true';
+      /*console.log("start")*/
+      // Set up the dragstart event and add the drag-src CSS class 
+      // to change the visual appearance. Set the current todo as the data
+      // payload by stringifying the object first
+      el.addEventListener('dragstart', (e) => {
       jQuery('.story-actors, .story-board').addClass('highlight');
       jQuery('.add-more-actors').attr('src','/images/dustbin.svg').css({"border":"none"});
       el.classList.add('drag-src')
       e.dataTransfer.effectAllowed = 'move';
-      console.log(e.target.name);
+      /*console.log(e.target.name);*/
       e.dataTransfer.setData('text', e.target.name);
     });
     

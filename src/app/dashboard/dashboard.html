@@ -2,10 +2,13 @@
       <div id="content">
             <div class="story-box row">
               <div class="story-title col-xs-12">
-                <input type="textbox" name="title" placeholder="Title of the story">
+                <div>Title</div>
+                <input type="textbox" name="title" placeholder="My awesome story">
+              </div>
+              <div class="btn-wrapper col-xs-12">
                 <div class="btn-publish"> Publish </div>
                 <div class="btn-export"> View Source </div>
-                <div class="btn-reset" (click)="onReset()"> Reset </div>
+                <div class="btn-reset" (click)="onReset()"> Reset </div>                
               </div>
               <div class="col-xs-12 col-sm-5"> 
                 <div class="col-xs-12">
@@ -32,6 +35,13 @@
                 <div class="story-board-wrapper">
                   <div class="story-board" makeDraggable makeDroppable (drop)="onDrop($event)" >
                 </div>
+                </div>
+                <div class="story-controller">
+                  <img src="images/btn_previous.png" class="next-prev" (click)="execute('prev')">
+<!--                   <img src="images/btn_stop.png"> -->
+                  <img *ngIf="!play" src="images/btn_play.png" class="play-pause" (click)="execute('play')&&play=!play">
+                  <img *ngIf="!!play" src="images/btn_stop.png" class="play-pause" (click)="execute('pause')&&play=!play">
+                  <img src="images/btn_next.png" class="next-prev" (click)="execute('next')">
                 </div>
               </div>
             </div>

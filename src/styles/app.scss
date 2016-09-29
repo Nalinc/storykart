@@ -307,8 +307,12 @@ header{
 						width: 38%;
 					    padding: 0 10px;
 					}
+				}
+				.btn-wrapper{
+				    text-align: right;
+				    padding: 0;
+				    margin-bottom: 20px;
 					.btn-export{
-						float: right;
 						display: inline;
 						margin: 0 10px;
 						border: 1px solid #a9a9a9;
@@ -321,7 +325,6 @@ header{
 						}
 					}
 					.btn-reset{
-						float: right;
 						display: inline;
 						margin: 0 10px;
 						border: 1px solid #a9a9a9;
@@ -334,7 +337,6 @@ header{
 						}
 					}
 					.btn-publish{
-						float: right;
 						display: inline;
 						margin: 0 10px;
 						border: 1px solid #a9a9a9;
@@ -345,7 +347,7 @@ header{
 						&:hover{
 							color: #77C7AC;
 						}
-					}					
+					}
 				}
 				.add-more-actors{
 					width: 60px;
@@ -395,7 +397,27 @@ header{
 								float: none;
 							}
 						}
-					}				
+					}
+					.story-controller{
+    					text-align: center;
+    					img{
+    						cursor: pointer;
+	    					&.play-pause{
+	    						border: 1px solid #a9a9a9;
+	    						border-radius: 50px;
+	    						width: 60px;
+	    					}
+	    					&.next-prev{
+	    						border: 1px solid #a9a9a9;
+	    						border-radius: 50px;
+	    						width: 40px;
+	    						padding: 5px;
+	    					}
+	    					&:hover{
+	    						background-color: #8773ff;
+	    					}
+    					}
+					}
 				}
 				.highlight{
 					background-color: #f7f1ff;

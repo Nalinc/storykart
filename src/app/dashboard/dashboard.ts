@@ -17,6 +17,11 @@ export class Dashboard  implements AfterViewInit{
 	importAvatars: any;
 	active: any = 'avatars';
 	sprites: any;
+	play: any;
+	execute:any;
+	timer: any;
+	counter: any = 0;
+	array:any;
 
 	constructor(){
 		this.onDrop = function (ev) {
@@ -81,7 +86,8 @@ export class Dashboard  implements AfterViewInit{
 				{"name":"tree_1", "selected":""},
 				{"name":"sun", "selected":""}
 			]
-		}
+		};
+		this.array = [1,2,3,4,5,6,7];
 
 		this.showModal = function(){
 			this.sprites = {
@@ -129,11 +135,46 @@ export class Dashboard  implements AfterViewInit{
 					jQuery('.story-actors').append(eleObj);
 				}
 			}
-			this.hideModal();		
+			this.hideModal();
+		}
+		this.execute = function(mode){
+			if(mode == "play"){
+				var that = this; 
+				this.timer = setTimeout(function () {
+					if (that.array.length > that.counter){
+						console.log(that.array[that.counter]);
+						that.counter++;
+					   that.execute('play');
+					}
+					else{
+						that.play=false;
+						that.counter = 0;
+						clearTimeout(that.timer);
+					}
+				}, 1000);			
+			}
+			else if(mode == "pause"){
+				console.log("trying to stioop")
+				clearTimeout(this.timer);			
+			}
+			else if(mode == "prev" && this.counter > 0){
+				this.counter--;
+				console.log(this.array[this.counter-1]);
+			}
+			else if(mode == "next" && this.counter < this.array.length){
+				console.log(this.array[this.counter]);
+				this.counter++;
+			}
+			return true;
+		}
+		window.onresize = function(){
+			jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});		
 		}
 	}
 	ngAfterViewInit() {
 		jQuery("textarea").attr('placeholder', 'actor_1_name: ' + 'Hi' + '\n' + 'actor_2_name: ' + 'Hello');
+		jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});
+
 	}
 
 
