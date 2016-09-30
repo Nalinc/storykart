@@ -1,4 +1,6 @@
 @import 'grid';
+@import "default";
+
 *,
 *:before,
 *:after {
@@ -392,7 +394,8 @@ header{
 							    padding: 2px;
 							    cursor: move;
 							    position: absolute;					
-								&.speak {
+								&.speak
+								 {
 								  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 								  transform: translate3d(0, 0, 0);
 								  backface-visibility: hidden;

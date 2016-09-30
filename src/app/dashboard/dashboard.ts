@@ -8,6 +8,27 @@ declare var jQuery: any;
   },
   template: require('./dashboard.html')
 })
+/*
+actor     |     speech
+-----------------------------------
+top: 150		top: 150
+left: 150		left: 250(150+150)
+-----------------------------------
+top:300			top: 50(300-250)
+left:0			left:0
+-----------------------------------
+actor:top > 200px, speech:top = actor:top - 200, class=  btm-left-in
+actor:top < 200, speech:top = actor:top, class=left-in
+-----------------------------------
+actor:left < 300px, speech:left = actor:left + 80, class= left-in
+actor:left > 300px, speech:left = actor-left - 200, class= right-in
+-----------------------------------
+top: 300
+left: 510
+-----------------------------------
+top: 100
+left: 310
+*/
 export class Dashboard  implements AfterViewInit{
 	todo: string = "NALIN"; 
 	onDrop: any;
@@ -52,8 +73,8 @@ export class Dashboard  implements AfterViewInit{
 		};
 
 		this.onReset = function(){
-			jQuery('.story-board').html("");
-			jQuery('.story-actors').html("");
+			jQuery('.story-board .actor').remove();
+			jQuery('.story-actors .actor').remove();
 			var avatars = ["boy_1","girl_1","man_1"]
 			for(var i in avatars){
 				var ele = jQuery("<img />",{
@@ -61,7 +82,8 @@ export class Dashboard  implements AfterViewInit{
 					"name":avatars[i]
 				})
 				jQuery('.story-actors').append(ele);
-			}	
+			}
+			jQuery("#speech").html("").hide();
 		}
 
 		this.sprites = {
@@ -87,7 +109,7 @@ export class Dashboard  implements AfterViewInit{
 				{"name":"sun", "selected":""}
 			]
 		};
-		this.array = [1,2,3,4,5,6,7];
+		this.array = ["boy_1:hello","girl_1:hiiee","boy_1:woah, finally we are talking","girl_1:yepp","boy_1:it's soo cool"];
 
 		this.showModal = function(){
 			this.sprites = {
@@ -142,13 +164,17 @@ export class Dashboard  implements AfterViewInit{
 				var that = this; 
 				this.timer = setTimeout(function () {
 					if (that.array.length > that.counter){
-						console.log(that.array[that.counter]);
+						//console.log(that.array[that.counter]);
+						//var dialogue = that.array[that.counter].substring(0, that.array[that.counter].indexOf(":"))
+						var dialogue = that.array[that.counter].substring(that.array[that.counter].indexOf(":")+1,that.array[that.counter].length)
+						jQuery("#speech").html(dialogue).show();
 						that.counter++;
 					   that.execute('play');
 					}
 					else{
 						that.play=false;
 						that.counter = 0;
+						jQuery("#speech").html("").hide();
 						clearTimeout(that.timer);
 					}
 				}, 1000);			
@@ -157,13 +183,25 @@ export class Dashboard  implements AfterViewInit{
 				console.log("trying to stioop")
 				clearTimeout(this.timer);			
 			}
-			else if(mode == "prev" && this.counter > 0){
-				this.counter--;
-				console.log(this.array[this.counter-1]);
+			else if(mode == "prev"){
+				if(this.counter > 0){
+					this.counter--;
+					var dialogue = this.array[this.counter-1].substring(this.array[this.counter-1].indexOf(":")+1,this.array[this.counter-1].length)
+					jQuery("#speech").html(dialogue).show();				
+					//console.log(this.array[this.counter-1]);
+				}
+				else
+					jQuery("#speech").html("").hide();
 			}
-			else if(mode == "next" && this.counter < this.array.length){
-				console.log(this.array[this.counter]);
-				this.counter++;
+			else if(mode == "next"){
+				if(this.counter < this.array.length){
+					var dialogue = this.array[this.counter].substring(this.array[this.counter].indexOf(":")+1,this.array[this.counter].length)
+					jQuery("#speech").html(dialogue).show();
+					this.counter++;				
+					//console.log(this.array[this.counter]);
+				}
+				else
+					jQuery("#speech").html("").hide();
 			}
 			return true;
 		}
