@@ -17,8 +17,9 @@ left: 150		left: 250(150+150)
 top:300			top: 50(300-250)
 left:0			left:0
 -----------------------------------
+
 actor:top > 200px, speech:top = actor:top - 200, class=  btm-left-in
-actor:top < 200, speech:top = actor:top, class=left-in
+actor:top < 200px, speech:top = actor:top, class=left-in
 -----------------------------------
 actor:left < 300px, speech:left = actor:left + 80, class= left-in
 actor:left > 300px, speech:left = actor-left - 200, class= right-in
@@ -111,7 +112,11 @@ export class Dashboard  implements AfterViewInit{
 				{"name":"sun", "selected":""}
 			]
 		};
-		this.array = ["boy_1:hello","girl_1:hiiee","boy_1:woah, finally we are talking","girl_1:yepp","boy_1:it's soo cool"];
+		this.array = [	"boy_1:hello",
+						"girl_1:hiiee",
+						"boy_1:woah, finally we are talking",
+						"girl_1:yepp",
+						"boy_1:it's soo cool"];
 
 		this.showModal = function(){
 			this.sprites = {
@@ -168,10 +173,36 @@ export class Dashboard  implements AfterViewInit{
 				var that = this; 
 				this.timer = setTimeout(function () {
 					if (that.array.length > that.counter){
-						//console.log(that.array[that.counter]);
-						//var dialogue = that.array[that.counter].substring(0, that.array[that.counter].indexOf(":"))
+						var actorName = that.array[that.counter].substring(0, that.array[that.counter].indexOf(":"))
+						var positionClass, positionFix = jQuery('.story-board [name="'+actorName+'"]').position();
 						var dialogue = that.array[that.counter].substring(that.array[that.counter].indexOf(":")+1,that.array[that.counter].length)
-						jQuery("#speech").html(dialogue).show();
+
+						// quadrant 1
+						if(positionFix.top < 200 && positionFix.left > 300){
+							//positionFix.top = positionFix.top;
+							positionFix.left -= 200;
+							positionClass = "right-in";
+						}
+						// quadrant 2
+						else if(positionFix.top < 200 && positionFix.left < 300){
+							//positionFix.top = positionFix.top;
+							positionFix.left += 80;
+							positionClass = "left-in";
+						}
+						// quadrant 3
+						else if(positionFix.top > 200 && positionFix.left < 300){
+							positionFix.top -= 100;
+							//positionFix.left = positionFix.left;
+							positionClass = "btm-left-in";
+						}
+						// quadrant 4
+						else if(positionFix.top > 200 && positionFix.left > 300){
+							positionFix.top -= 100;
+							positionFix.left -= 120;
+							positionClass = "btm-right-in";
+						}
+
+						jQuery("#speech").html(dialogue).css(positionFix).removeClass("btm-left-in left-in right-in").addClass(positionClass).show();
 						that.counter++;
 					   that.execute('play');
 					}
