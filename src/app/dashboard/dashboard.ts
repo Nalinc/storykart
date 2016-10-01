@@ -56,7 +56,7 @@ export class Dashboard  implements AfterViewInit{
 		  var data=ev.dataTransfer.getData("text");
 
 		  if (ev.target == jQuery(".add-more-actors")[0]){
-			jQuery('.story-box [name="'+data+'"]').remove();
+			jQuery('.story-box #'+data).remove();
 			jQuery('.story-board, .story-actors').removeClass('highlight');
 			jQuery('.add-more-actors').attr('src','/images/add.svg').css({"border":"1px dashed #a9a9a9"});			
 			return;
@@ -67,7 +67,7 @@ export class Dashboard  implements AfterViewInit{
 		  /* As we put the ID of the source element into this variable, we can now use 
 		     this ID to manipulate the dragged element as we wish. */
 		  /* Let's just move it through the DOM and append it here */
-		  var ele = jQuery('.story-box [name="'+data+'"]');
+		  var ele = jQuery('.story-box #'+data);
 		  ele.css({	"top": ev.offsetY - 35,"left":ev.offsetX - 35});
 		  jQuery(ev.target).append(ele)
 		};
@@ -79,7 +79,9 @@ export class Dashboard  implements AfterViewInit{
 			for(var i in avatars){
 				var ele = jQuery("<img />",{
 					"src":'sprites/'+avatars[i]+'.svg',
-					"name":avatars[i]
+					"name":avatars[i],
+					"class":"actor",
+					"id": new Date().getTime()
 				})
 				jQuery('.story-actors').append(ele);
 			}
@@ -144,7 +146,8 @@ export class Dashboard  implements AfterViewInit{
 			for(var i in this.sprites.avatars){
 				if(this.sprites.avatars[i].selected){
 					var eleActor = jQuery( "<img />",{ 
-									  "src":'sprites/'+this.sprites.avatars[i].name+'.svg', 
+									  "src":'sprites/'+this.sprites.avatars[i].name+'.svg',
+									  "id": new Date().getTime(),
 									  "name":this.sprites.avatars[i].name })
 					jQuery('.story-actors').append(eleActor);
 				}
@@ -152,7 +155,8 @@ export class Dashboard  implements AfterViewInit{
 			for(var i in this.sprites.objects){
 				if(this.sprites.objects[i].selected){
 					var eleObj = jQuery( "<img />",{ 
-									  "src":'sprites/'+this.sprites.objects[i].name+'.svg', 
+									  "src":'sprites/'+this.sprites.objects[i].name+'.svg',
+									  "id": new Date().getTime(),
 									  "name":this.sprites.objects[i].name })
 					jQuery('.story-actors').append(eleObj);
 				}

@@ -25,8 +25,8 @@ export class MakeDraggable {
       jQuery('.add-more-actors').attr('src','/images/dustbin.svg').css({"border":"none"});
       el.classList.add('drag-src')
       e.dataTransfer.effectAllowed = 'move';
-      /*console.log(e.target.name);*/
-      e.dataTransfer.setData('text', e.target.name);
+      /*console.log(e.target.id);*/
+      e.dataTransfer.setData('text', e.target.id);
     });
     
     // Remove the drag-src class
