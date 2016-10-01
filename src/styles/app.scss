@@ -392,8 +392,8 @@ header{
 								width: 60px;
 								margin: 10px;
 							    padding: 2px;
-							    cursor: move;
-							    position: absolute;					
+							    cursor: pointer;
+							    position: absolute;
 								&.speak
 								 {
 								  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
@@ -430,15 +430,10 @@ header{
     					text-align: center;
     					img{
     						cursor: pointer;
-	    					&.play-pause{
-	    						border: 1px solid #a9a9a9;
-	    						border-radius: 50px;
-	    						width: 60px;
-	    					}
+    						border: 1px solid #a9a9a9;
+    						border-radius: 50px;
+    						width: 60px;
 	    					&.next-prev{
-	    						border: 1px solid #a9a9a9;
-	    						border-radius: 50px;
-	    						width: 40px;
 	    						padding: 5px;
 	    					}
 	    					&:hover{

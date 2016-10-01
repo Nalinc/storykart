@@ -42,11 +42,12 @@
                 </div>
                 <div class="story-controller">
 
-                  <img src="images/btn_previous.png" class="next-prev" (click)="execute('prev')">
+                  <img src="images/btn_previous.png" class="next-prev" (click)="storyStepPrev()">
 <!--                   <img src="images/btn_stop.png"> -->
-                  <img *ngIf="!play" src="images/btn_play.png" class="play-pause" (click)="execute('play')&&play=!play">
-                  <img *ngIf="!!play" src="images/btn_stop.png" class="play-pause" (click)="execute('pause')&&play=!play">
-                  <img src="images/btn_next.png" class="next-prev" (click)="execute('next')">
+                  <img *ngIf="storyMode=='paused'" src="images/btn_play.png" class="play-pause" (click)="storyPlay('play')">
+                  <img *ngIf="storyMode=='play'" src="images/btn_pause.png" class="play-pause" (click)="storyMode='paused'">
+                  <img  src="images/btn_stop.png" class="play-pause" (click)="storyReset()">
+                  <img src="images/btn_next.png" class="next-prev" (click)="storyStepNext()">
                 </div>
               </div>
             </div>

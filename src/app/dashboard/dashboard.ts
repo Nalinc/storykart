@@ -8,28 +8,7 @@ declare var jQuery: any;
   },
   template: require('./dashboard.html')
 })
-/*
-actor     |     speech
------------------------------------
-top: 150		top: 150
-left: 150		left: 250(150+150)
------------------------------------
-top:300			top: 50(300-250)
-left:0			left:0
------------------------------------
 
-actor:top > 200px, speech:top = actor:top - 200, class=  btm-left-in
-actor:top < 200px, speech:top = actor:top, class=left-in
------------------------------------
-actor:left < 300px, speech:left = actor:left + 80, class= left-in
-actor:left > 300px, speech:left = actor-left - 200, class= right-in
------------------------------------
-top: 300
-left: 510
------------------------------------
-top: 100
-left: 310
-*/
 export class Dashboard  implements AfterViewInit{
 	todo: string = "NALIN"; 
 	onDrop: any;
@@ -39,7 +18,12 @@ export class Dashboard  implements AfterViewInit{
 	importAvatars: any;
 	active: any = 'avatars';
 	sprites: any;
-	play: any;
+	storyMode: any;
+	storyPlay: any;
+	storyReset: any;
+	storyPause: any;
+	storyStepNext: any;
+	storyStepPrev: any;
 	execute:any;
 	timer: any;
 	counter: any = 0;
@@ -112,11 +96,12 @@ export class Dashboard  implements AfterViewInit{
 				{"name":"sun", "selected":""}
 			]
 		};
-		this.array = [	"boy_1:hello",
-						"girl_1:hiiee",
-						"boy_1:woah, finally we are talking",
-						"girl_1:yepp",
-						"boy_1:it's soo cool"];
+		this.storyMode = "paused";
+		this.array = [	"boy_1:hello 1",
+						"girl_1:hiiee 2",
+						"boy_1:woah, finally we are talking 3 ",
+						"girl_1:yepp 4",
+						"boy_1:it's soo cool 5"];
 
 		this.showModal = function(){
 			this.sprites = {
@@ -168,78 +153,90 @@ export class Dashboard  implements AfterViewInit{
 			}
 			this.hideModal();
 		}
-		this.execute = function(mode){
+		this.storyPlay = function(mode){
+			
 			if(mode == "play"){
-				var that = this; 
-				this.timer = setTimeout(function () {
-					if (that.array.length > that.counter){
-						var actorName = that.array[that.counter].substring(0, that.array[that.counter].indexOf(":"))
-						var positionClass, positionFix = jQuery('.story-board [name="'+actorName+'"]').position();
-						var dialogue = that.array[that.counter].substring(that.array[that.counter].indexOf(":")+1,that.array[that.counter].length)
+				this.storyMode = mode;
+			};
+			if(this.storyMode == "paused" && mode != "stepNext" && mode != "stepPrev"){
+				clearTimeout(this.timer);
+				return true;
+			}
+			if(this.array.length <= this.counter){
+				this.storyReset();
+				return true;
+			}
+			var estimatedTime = 1000;
+			var actorName = this.array[this.counter].substring(0, this.array[this.counter].indexOf(":"))
+			var positionClass, positionFix = jQuery('.story-board [name="'+actorName+'"]').position();
+			var dialogue = this.array[this.counter].substring(this.array[this.counter].indexOf(":")+1,this.array[this.counter].length)
+			if(dialogue.length > 30)
+				estimatedTime = 1500;
+			if(dialogue.length > 80)
+				estimatedTime = 2000;
+			// quadrant 1
+			if(positionFix.top < 200 && positionFix.left > 300){
+				//positionFix.top = positionFix.top;
+				positionFix.left -= 200;
+				positionClass = "right-in";
+			}
+			// quadrant 2
+			else if(positionFix.top < 200 && positionFix.left < 300){
+				//positionFix.top = positionFix.top;
+				positionFix.left += 80;
+				positionClass = "left-in";
+			}
+			// quadrant 3
+			else if(positionFix.top > 200 && positionFix.left < 300){
+				positionFix.top -= 100;
+				//positionFix.left = positionFix.left;
+				positionClass = "btm-left-in";
+			}
+			// quadrant 4
+			else if(positionFix.top > 200 && positionFix.left > 300){
+				positionFix.top -= 100;
+				positionFix.left -= 120;
+				positionClass = "btm-right-in";
+			}
 
-						// quadrant 1
-						if(positionFix.top < 200 && positionFix.left > 300){
-							//positionFix.top = positionFix.top;
-							positionFix.left -= 200;
-							positionClass = "right-in";
-						}
-						// quadrant 2
-						else if(positionFix.top < 200 && positionFix.left < 300){
-							//positionFix.top = positionFix.top;
-							positionFix.left += 80;
-							positionClass = "left-in";
-						}
-						// quadrant 3
-						else if(positionFix.top > 200 && positionFix.left < 300){
-							positionFix.top -= 100;
-							//positionFix.left = positionFix.left;
-							positionClass = "btm-left-in";
-						}
-						// quadrant 4
-						else if(positionFix.top > 200 && positionFix.left > 300){
-							positionFix.top -= 100;
-							positionFix.left -= 120;
-							positionClass = "btm-right-in";
-						}
-
-						jQuery("#speech").html(dialogue).css(positionFix).removeClass("btm-left-in left-in right-in").addClass(positionClass).show();
+			jQuery("#speech").html(dialogue).css(positionFix)
+							 .removeClass("btm-left-in left-in right-in")
+							 .addClass(positionClass).show();
+			if(this.array[this.counter]){
+				if(mode !="stepNext" && mode !="stepPrev" && this.storyMode=='play'){
+					var that = this;
+					this.timer = setTimeout(function () {
 						that.counter++;
-					   that.execute('play');
-					}
-					else{
-						that.play=false;
-						that.counter = 0;
-						jQuery("#speech").html("").hide();
-						clearTimeout(that.timer);
-					}
-				}, 1000);			
-			}
-			else if(mode == "pause"){
-				console.log("trying to stioop")
-				clearTimeout(this.timer);			
-			}
-			else if(mode == "prev"){
-				if(this.counter > 0){
-					this.counter--;
-					var dialogue = this.array[this.counter-1].substring(this.array[this.counter-1].indexOf(":")+1,this.array[this.counter-1].length)
-					jQuery("#speech").html(dialogue).show();				
-					//console.log(this.array[this.counter-1]);
+					    that.storyPlay();
+					},estimatedTime)				
 				}
-				else
-					jQuery("#speech").html("").hide();
 			}
-			else if(mode == "next"){
-				if(this.counter < this.array.length){
-					var dialogue = this.array[this.counter].substring(this.array[this.counter].indexOf(":")+1,this.array[this.counter].length)
-					jQuery("#speech").html(dialogue).show();
-					this.counter++;				
-					//console.log(this.array[this.counter]);
-				}
-				else
-					jQuery("#speech").html("").hide();
+			else{
+				this.storyReset();
 			}
 			return true;
 		}
+		this.storyStepNext = function(){
+			if(this.counter < this.array.length){
+				console.log("next")
+				this.storyPlay("stepNext");
+				this.counter++;
+			}
+		}
+		this.storyStepPrev = function(){
+			if(this.counter > 0){
+				console.log("previous");
+				this.counter--;		
+				this.storyPlay("stepPrev");
+			}
+		}
+		this.storyReset = function(){
+			this.counter = 0;
+			this.storyMode = "paused";
+			clearTimeout(this.timer);
+			jQuery("#speech").html("").hide();			
+		}
+
 		window.onresize = function(){
 			jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});		
 		}
@@ -247,7 +244,6 @@ export class Dashboard  implements AfterViewInit{
 	ngAfterViewInit() {
 		jQuery("textarea").attr('placeholder', 'actor_1_name: ' + 'Hi' + '\n' + 'actor_2_name: ' + 'Hello');
 		jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});
-
 	}
 
 
