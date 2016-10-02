@@ -37,7 +37,7 @@ declare var jQuery: any;
 */
 
 export class Dashboard  implements AfterViewInit{
-	todo: string = "NALIN"; 
+	storyTitle: string = ""; 
 	onDrop: any;
 	onReset: any;
 	showModal: any;
@@ -56,7 +56,8 @@ export class Dashboard  implements AfterViewInit{
 	storyScript: any;
 	compileScript: any;
 	initScript: any;
-	errScript: amy;
+	errScript: any;
+	publishStory: any;
 
 	constructor(){
 
@@ -190,13 +191,12 @@ export class Dashboard  implements AfterViewInit{
 		}
 
 		this.compileScript = function(val){
-			console.log(val.split('\n'));
+			// Need to validate script
 			this.storyScript = val.split('\n');
 			return this.storyScript;
 		}
 
 		this.storyPlay = function(mode){
-			console.log(this.storyScript)
 			if(mode == "play"){
 				this.storyMode = mode;
 			};
@@ -284,6 +284,27 @@ export class Dashboard  implements AfterViewInit{
 			this.storyMode = "paused";
 			clearTimeout(this.timer);
 			jQuery("#speech").html("").hide();			
+		}
+
+		this.publishStory = function(){
+			var storySlug = {
+				"title": this.storyTitle,
+				"author": "Anonymous",
+				"stars": "0",
+				"timestamp": new Date().getTime(),
+				"visibility":"public",
+				"actors":{},
+				"script": this.storyScript
+			};
+
+			jQuery('.story-board').children('.actor').each(function () {
+			    storySlug.actors[this.name] = {
+			    	"left": this.style.left,
+			    	"top": this.style.top,
+			    	"url": this.style.src
+			    }
+			});
+			console.log(storySlug)
 		}
 
 		window.onresize = function(){

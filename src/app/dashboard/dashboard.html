@@ -5,10 +5,10 @@
                 <div>Title
                 
                 </div>
-                <input type="textbox" name="title" placeholder="My awesome story">
+                <input type="textbox" #st (blur)="storyTitle=st.value" name="title" placeholder="My awesome story" [value]="storyTitle">
               </div>
               <div class="btn-wrapper col-xs-12">
-                <div class="btn-publish"> Publish </div>
+                <div class="btn-publish" (click)="publishStory()"> Publish </div>
                 <div class="btn-export" (click) = "errScript=!errScript"> View Source </div>
                 <div class="btn-reset" (click)="onReset()"> Reset </div>                
               </div>
