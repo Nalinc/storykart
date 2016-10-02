@@ -301,7 +301,7 @@ export class Dashboard  implements AfterViewInit{
 			    storySlug.actors[this.name] = {
 			    	"left": this.style.left,
 			    	"top": this.style.top,
-			    	"url": this.style.src
+			    	"url": this.src
 			    }
 			});
 			console.log(storySlug)
