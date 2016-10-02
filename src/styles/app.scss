@@ -351,32 +351,52 @@ header{
 						}
 					}
 				}
-				.add-more-actors{
-					width: 60px;
-					padding: 10px;
-					margin: 5px;
-					border: 1px dashed #a9a9a9;
-					display: inline-block;
-					cursor: pointer;
-					float: left;
-				}
-				.story-actors{
-					height: 90px;
-					overflow-x: auto;
-					overflow-y: hidden;
-					white-space: nowrap;
-					img{
+				.story-make-container{
+					.add-more-actors{
 						width: 60px;
+						padding: 10px;
 						margin: 5px;
-					    border: 1px solid #a9a9a9;
-					    padding: 2px;
-					    cursor: move;
+						border: 1px dashed #a9a9a9;
+						display: inline-block;
+						cursor: pointer;
+						float: left;
 					}
-				}
-				textarea{
-					width:100%;
-					height:280px;
-					resize: none;
+					.story-actors{
+						height: 90px;
+						overflow-x: auto;
+						overflow-y: hidden;
+						white-space: nowrap;
+						img{
+							width: 60px;
+							margin: 5px;
+						    border: 1px solid #a9a9a9;
+						    padding: 2px;
+						    cursor: move;
+						}
+					}
+					.story-script{
+						textarea{
+							width:100%;
+							height:280px;
+							resize: none;
+							padding: 10px;
+						}
+						.script-message{
+							padding: 10px;
+							text-align: justify;
+							font-size: 12px;
+							border-left: 3px solid #a9a9a9;
+							border-right: 3px solid #a9a9a9;
+							.message{
+								color: red;
+							}
+							.note{
+								i{
+									color: green;
+								}							
+							}
+						}	
+					}
 				}
 				.story-board-container{
 					text-align: right;
