@@ -24,10 +24,9 @@ export class Dashboard  implements AfterViewInit{
 	storyPause: any;
 	storyStepNext: any;
 	storyStepPrev: any;
-	execute:any;
 	timer: any;
 	counter: any = 0;
-	array:any;
+	storyScript:any;
 
 	constructor(){
 		this.onDrop = function (ev) {
@@ -97,7 +96,7 @@ export class Dashboard  implements AfterViewInit{
 			]
 		};
 		this.storyMode = "paused";
-		this.array = [	"boy_1:hello 1",
+		this.storyScript = [	"boy_1:hello 1",
 						"girl_1:hiiee 2",
 						"boy_1:woah, finally we are talking 3 ",
 						"girl_1:yepp 4",
@@ -162,14 +161,14 @@ export class Dashboard  implements AfterViewInit{
 				clearTimeout(this.timer);
 				return true;
 			}
-			if(this.array.length <= this.counter){
+			if(this.storyScript.length <= this.counter){
 				this.storyReset();
 				return true;
 			}
 			var estimatedTime = 1000;
-			var actorName = this.array[this.counter].substring(0, this.array[this.counter].indexOf(":"))
+			var actorName = this.storyScript[this.counter].substring(0, this.storyScript[this.counter].indexOf(":"))
 			var positionClass, positionFix = jQuery('.story-board [name="'+actorName+'"]').position();
-			var dialogue = this.array[this.counter].substring(this.array[this.counter].indexOf(":")+1,this.array[this.counter].length)
+			var dialogue = this.storyScript[this.counter].substring(this.storyScript[this.counter].indexOf(":")+1,this.storyScript[this.counter].length)
 			if(dialogue.length > 30)
 				estimatedTime = 1500;
 			if(dialogue.length > 80)
@@ -188,21 +187,21 @@ export class Dashboard  implements AfterViewInit{
 			}
 			// quadrant 3
 			else if(positionFix.top > 200 && positionFix.left < 300){
-				positionFix.top -= 100;
-				//positionFix.left = positionFix.left;
-				positionClass = "btm-left-in";
+				//positionFix.top -= 100;
+				positionFix.left += 80;
+				positionClass = "left-in";
 			}
 			// quadrant 4
 			else if(positionFix.top > 200 && positionFix.left > 300){
-				positionFix.top -= 100;
-				positionFix.left -= 120;
-				positionClass = "btm-right-in";
+				//positionFix.top = positionFix.top;
+				positionFix.left -= 200;
+				positionClass = "right-in";
 			}
 
 			jQuery("#speech").html(dialogue).css(positionFix)
 							 .removeClass("btm-left-in left-in right-in")
 							 .addClass(positionClass).show();
-			if(this.array[this.counter]){
+			if(this.storyScript[this.counter]){
 				if(mode !="stepNext" && mode !="stepPrev" && this.storyMode=='play'){
 					var that = this;
 					this.timer = setTimeout(function () {
@@ -217,7 +216,7 @@ export class Dashboard  implements AfterViewInit{
 			return true;
 		}
 		this.storyStepNext = function(){
-			if(this.counter < this.array.length){
+			if(this.counter < this.storyScript.length){
 				console.log("next")
 				this.storyPlay("stepNext");
 				this.counter++;
