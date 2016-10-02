@@ -9,7 +9,7 @@
               </div>
               <div class="btn-wrapper col-xs-12">
                 <div class="btn-publish"> Publish </div>
-                <div class="btn-export"> View Source </div>
+                <div class="btn-export" (click) = "errScript=!errScript"> View Source </div>
                 <div class="btn-reset" (click)="onReset()"> Reset </div>                
               </div>
               <div class="story-make-container col-xs-12 col-sm-5"> 
@@ -21,18 +21,17 @@
                     </span>
                     <div class="story-actors" makeDraggable makeDroppable (drop)="onDrop($event)">
                       <!-- http://www.flaticon.com/packs/kids-avatars -->
-                      <img class="actor" src="sprites/boy_1.svg" name="boy_1" id="1475340109980">
-                      <img class="actor" src="sprites/girl_1.svg" name="girl_1" id="1475340132841">
-                      <img class="actor" src="sprites/man_1.svg" name="man_1" id="1475340159582">
+                      <img class="actor" src="sprites/girl_1.svg" title="girl_1" name="girl_1" id="1475340132841">
+                      <img class="actor" src="sprites/man_1.svg" title="man_1" name="man_1" id="1475340159582">
                     </div>                    
                   </div>
                 </div>
                 <div class="story-script col-xs-12">
-                  <div>Dialogues</div>
-                  <textarea #ta (blur)="compileScript(ta.value)" [value]="initScript"></textarea>
-                  <div class="script-message"> 
-                    <div class="message">Syntax error in script of the story.</div>
-                    <div class="note">Please follow <i>actor:dialogue</i> format with each dialogue in a separate line</div>
+                  <div>Script</div>
+                  <textarea id="script-area" #ta (blur)="compileScript(ta.value)" [value]="initScript"></textarea>
+                  <div  *ngIf="errScript" class="script-message"> 
+                    <div class="message">Syntax error in script.</div>
+                    <div class="note">Please follow <i>actor:dialogue</i> format with <span>each dialogue in a separate line</span></div>
                   </div>
                 </div>
               </div>                          
@@ -40,7 +39,7 @@
                 <div class="">Story Board</div>
                 <div class="story-board-wrapper">
                   <div class="story-board" makeDraggable makeDroppable (drop)="onDrop($event)" >
-                    <img class="actor"  src="sprites/boy_1.svg" name="boy_1" id="1475340909902" style="top:150px;left:150px;"> 
+                    <img class="actor"  src="sprites/boy_1.svg" name="boy_1"  title="boy_1" id="1475340909902" style="top:150px;left:150px;"> 
                     <div class="talk-bubble tri-right border round left-in" id="speech"></div>
                   </div>
                 </div>
@@ -74,18 +73,18 @@
                         <img  (click)="sprites.avatars[i].selected=!sprites.avatars[i].selected" 
                               [class.highlight]="sprites.avatars[i].selected" 
                               *ngFor="let actor of sprites.avatars, let i = index"
-                              src="sprites/{{sprites.avatars[i].name}}.svg" name="{{sprites.avatars[i].name}}" > 
+                              src="sprites/{{sprites.avatars[i].name}}.svg" title="{{sprites.avatars[i].name}}" name="{{sprites.avatars[i].name}}" > 
                       </div>
                       <div *ngIf="active=='objects'">
                         <img  (click)="sprites.objects[i].selected=!sprites.objects[i].selected" 
                               [class.highlight]="sprites.objects[i].selected" 
                               *ngFor="let obj of sprites.objects, let i = index"
-                              src="sprites/{{sprites.objects[i].name}}.svg" name="{{sprites.objects[i].name}}" >
+                              src="sprites/{{sprites.objects[i].name}}.svg" title="{{sprites.objects[i].name}}" name="{{sprites.objects[i].name}}" >
                       </div>
                     </div>
                   </div>
                   <div class="modal-footer col-xs-12">
-                    <span>Choose multiple sprites by clicking and click import</span>
+                    <span>Select multiple sprites and click import</span>
                     <div class="btn-import" (click)="importAvatars()"> Import </div>
                   </div>
 

@@ -393,7 +393,12 @@ header{
 							.note{
 								i{
 									color: green;
-								}							
+									font-weight: bold;
+									letter-spacing: 2px;
+								}
+								span{
+									border-bottom: 1px solid;
+								}
 							}
 						}	
 					}

@@ -9,6 +9,33 @@ declare var jQuery: any;
   template: require('./dashboard.html')
 })
 
+/*
+{
+	"title":"my awesome story",
+	"author":"",
+	"stars":"",
+	"timestamp":"",
+	"visibility":"public/private",
+	"actors":{
+		"boy_1":{
+			"url": "http:.//url",
+			"left": "10px",
+			"top": "50px"
+		},
+		"boy_2":{
+			"url": "http:.//url",
+			"left": "10px",
+			"top": "50px"
+		}
+	},
+	"dialogues":[
+		"",
+		"",
+		""
+	]
+}
+*/
+
 export class Dashboard  implements AfterViewInit{
 	todo: string = "NALIN"; 
 	onDrop: any;
@@ -29,12 +56,13 @@ export class Dashboard  implements AfterViewInit{
 	storyScript: any;
 	compileScript: any;
 	initScript: any;
+	errScript: amy;
 
 	constructor(){
 
 		this.storyMode = "paused";
-		
-		this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panal aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
+		this.errScript = false;	
+		this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panel aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
 		this.storyScript = this.initScript.split('\n');
 
 		this.onDrop = function (ev) {
@@ -65,6 +93,8 @@ export class Dashboard  implements AfterViewInit{
 		};
 
 		this.onReset = function(){
+			this.storyScript = "";
+			jQuery('#script-area').val("")
 			jQuery('.story-board .actor').remove();
 			jQuery('.story-actors .actor').remove();
 			var avatars = ["boy_1","girl_1","man_1"]
@@ -138,7 +168,9 @@ export class Dashboard  implements AfterViewInit{
 				if(this.sprites.avatars[i].selected){
 					var eleActor = jQuery( "<img />",{ 
 									  "src":'sprites/'+this.sprites.avatars[i].name+'.svg',
+									  "class": "actor",									  
 									  "id": new Date().getTime(),
+									  "title": this.sprites.avatars[i].name,
 									  "name":this.sprites.avatars[i].name })
 					jQuery('.story-actors').append(eleActor);
 				}
@@ -147,7 +179,9 @@ export class Dashboard  implements AfterViewInit{
 				if(this.sprites.objects[i].selected){
 					var eleObj = jQuery( "<img />",{ 
 									  "src":'sprites/'+this.sprites.objects[i].name+'.svg',
+									  "class": "actor",
 									  "id": new Date().getTime(),
+									  "title": this.sprites.objects[i].name,
 									  "name":this.sprites.objects[i].name })
 					jQuery('.story-actors').append(eleObj);
 				}
@@ -177,7 +211,11 @@ export class Dashboard  implements AfterViewInit{
 			var estimatedTime = 1000;
 			var actorName = this.storyScript[this.counter].substring(0, this.storyScript[this.counter].indexOf(":"))
 			var positionClass, positionFix = jQuery('.story-board [name="'+actorName+'"]').position();
-			var dialogue = this.storyScript[this.counter].substring(this.storyScript[this.counter].indexOf(":")+1,this.storyScript[this.counter].length)
+			var dialogue = this.storyScript[this.counter].substring(this.storyScript[this.counter].indexOf(":")+1,this.storyScript[this.counter].length);
+
+			//var actor = jQuery('.story-board [name="'+actorName+'"]');
+			jQuery('.story-board [name="'+actorName+'"]').addClass("shake");
+			//console.log(jQuery('.story-board [name="'+actorName+'"]'))
 			if(dialogue.length > 30)
 				estimatedTime = 1500;
 			if(dialogue.length > 80)
@@ -207,6 +245,8 @@ export class Dashboard  implements AfterViewInit{
 				positionClass = "right-in";
 			}
 
+			//jQuery('.story-board [name="'+actorName+'"]').removeClass("shake");
+
 			jQuery("#speech").html(dialogue).css(positionFix)
 							 .removeClass("btm-left-in left-in right-in")
 							 .addClass(positionClass).show();
@@ -215,6 +255,7 @@ export class Dashboard  implements AfterViewInit{
 					var that = this;
 					this.timer = setTimeout(function () {
 						that.counter++;
+						jQuery('.story-board [name="'+actorName+'"]').removeClass("shake");
 					    that.storyPlay();
 					},estimatedTime)				
 				}
@@ -250,7 +291,7 @@ export class Dashboard  implements AfterViewInit{
 		}
 	}
 	ngAfterViewInit() {
-		jQuery("textarea").attr('placeholder', 'actor_1_name: ' + 'Hi' + '\n' + 'actor_2_name: ' + 'Hello');
+		jQuery("textarea").attr('placeholder', this.initScript);
 		jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});
 	}
 
