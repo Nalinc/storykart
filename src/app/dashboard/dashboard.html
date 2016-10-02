@@ -29,7 +29,7 @@
                 </div>
                 <div class="story-script col-xs-12">
                   <div>Dialogues</div>
-                  <textarea></textarea>
+                  <textarea #ta (blur)="compileScript(ta.value)" [value]="initScript"></textarea>
                   <div class="script-message"> 
                     <div class="message">Syntax error in script of the story.</div>
                     <div class="note">Please follow <i>actor:dialogue</i> format with each dialogue in a separate line</div>

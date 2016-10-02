@@ -26,9 +26,17 @@ export class Dashboard  implements AfterViewInit{
 	storyStepPrev: any;
 	timer: any;
 	counter: any = 0;
-	storyScript:any;
+	storyScript: any;
+	compileScript: any;
+	initScript: any;
 
 	constructor(){
+
+		this.storyMode = "paused";
+		
+		this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panal aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
+		this.storyScript = this.initScript.split('\n');
+
 		this.onDrop = function (ev) {
 		  /* The default handling is not to process a drop action and hand it to the next 
 		     higher html element in your DOM. */
@@ -95,12 +103,6 @@ export class Dashboard  implements AfterViewInit{
 				{"name":"sun", "selected":""}
 			]
 		};
-		this.storyMode = "paused";
-		this.storyScript = [	"boy_1:hello 1",
-						"girl_1:hiiee 2",
-						"boy_1:woah, finally we are talking 3 ",
-						"girl_1:yepp 4",
-						"boy_1:it's soo cool 5"];
 
 		this.showModal = function(){
 			this.sprites = {
@@ -152,8 +154,15 @@ export class Dashboard  implements AfterViewInit{
 			}
 			this.hideModal();
 		}
+
+		this.compileScript = function(val){
+			console.log(val.split('\n'));
+			this.storyScript = val.split('\n');
+			return this.storyScript;
+		}
+
 		this.storyPlay = function(mode){
-			
+			console.log(this.storyScript)
 			if(mode == "play"){
 				this.storyMode = mode;
 			};
