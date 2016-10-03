@@ -1,7 +1,6 @@
 //External Node Modules
 var express = require('express');
 var path = require('path');
-var compression = require('compression');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
@@ -11,8 +10,6 @@ var port = process.env.PORT || 8000;
 
 // Express App 
 var app = require('./app');
-
-app.use(compression());
 
 var isProduction = process.env.NODE_ENV === 'production';
 if (!isProduction) {

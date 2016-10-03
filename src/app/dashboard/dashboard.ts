@@ -12,6 +12,9 @@ declare var jQuery: any;
 
 export class Dashboard  implements AfterViewInit{
 	storyTitle: string = ""; 
+	storyAuthor:string = "Anonymous";
+	storyAuthorEmail:string = "";
+	storyJSON: any;
 	onDrop: any;
 	onReset: any;
 	showModal: any;
@@ -32,6 +35,7 @@ export class Dashboard  implements AfterViewInit{
 	initScript: any;
 	errScript: any;
 	publishStory: any;
+	modalType: any;
 
 	constructor(private storyService: StoryService){
 
@@ -109,29 +113,55 @@ export class Dashboard  implements AfterViewInit{
 			jQuery("#speech").html("").hide();
 		}
 
-		this.showModal = function(){
-			this.sprites = {
-				avatars: [
-					{"name":"boy_1", "selected":""},
-					{"name":"boy_2", "selected":""},
-					{"name":"boy_3", "selected":""},
-					{"name":"boy_4", "selected":""},
-					{"name":"boy_5", "selected":""},
-					{"name":"man_1", "selected":""},
-					{"name":"man_2", "selected":""},
-					{"name":"girl_1", "selected":""},
-					{"name":"girl_2", "selected":""},
-					{"name":"girl_3", "selected":""},
-					{"name":"girl_4", "selected":""},
-					{"name":"girl_5", "selected":""},
-					{"name":"woman_1", "selected":""},
-					{"name":"woman_2", "selected":""}
-				],
-				objects:[
-					{"name":"dog", "selected":""},
-					{"name":"tree_1", "selected":""},
-					{"name":"sun", "selected":""}
-				]
+		this.showModal = function(type){
+
+			if(type=='import'){
+				this.modalType='import';
+				this.sprites = {
+					avatars: [
+						{"name":"boy_1", "selected":""},
+						{"name":"boy_2", "selected":""},
+						{"name":"boy_3", "selected":""},
+						{"name":"boy_4", "selected":""},
+						{"name":"boy_5", "selected":""},
+						{"name":"man_1", "selected":""},
+						{"name":"man_2", "selected":""},
+						{"name":"girl_1", "selected":""},
+						{"name":"girl_2", "selected":""},
+						{"name":"girl_3", "selected":""},
+						{"name":"girl_4", "selected":""},
+						{"name":"girl_5", "selected":""},
+						{"name":"woman_1", "selected":""},
+						{"name":"woman_2", "selected":""}
+					],
+					objects:[
+						{"name":"dog", "selected":""},
+						{"name":"tree_1", "selected":""},
+						{"name":"sun", "selected":""}
+					]
+				}
+			}
+			else if(type=='publish'){
+				this.modalType='publish';
+
+				var that = this;
+				this.storyJSON = { "title": this.storyTitle,
+					"author": this.storyAuthor,
+					"email": this.storyAuthorEmail,
+					"stars": "0",
+					"timestamp": new Date().getTime(),
+					"visibility":"public",
+					"actors":{},
+					"script": this.storyScript
+				};
+
+				jQuery('.story-board').children('.actor').each(function () {
+				    that.storyJSON.actors[this.name] = {
+				    	"left": this.style.left,
+				    	"top": this.style.top,
+				    	"url": this.src
+				    }
+				});
 			}
 			jQuery("#myModal").css({"display":"block"})
 		}
@@ -275,26 +305,11 @@ export class Dashboard  implements AfterViewInit{
 		}
 
 		this.publishStory = function(){
-			var storySlug = {
-				"title": this.storyTitle,
-				"author": "Anonymous",
-				"stars": "0",
-				"timestamp": new Date().getTime(),
-				"visibility":"public",
-				"actors":{},
-				"script": this.storyScript
-			};
 
-			jQuery('.story-board').children('.actor').each(function () {
-			    storySlug.actors[this.name] = {
-			    	"left": this.style.left,
-			    	"top": this.style.top,
-			    	"url": this.src
-			    }
-			});
-			console.log(storySlug)
+			console.log(this.storyJSON);
 
-			this.storyService.publishStory(storySlug).subscribe(
+
+			this.storyService.publishStory(this.storyJSON).subscribe(
 			   data => {
 			     // refresh the list
 			     console.log(data)
@@ -305,15 +320,6 @@ export class Dashboard  implements AfterViewInit{
 			   }
 			);
 
-
-/*			this.storyService.publishStory()
-			.subscribe(
-				stories => this.stories = stories, //Bind to view
-				err => {
-					// Log errors if any
-					console.log(err);
-				}
-			);*/
 		}
 
 		window.onresize = function(){
@@ -324,7 +330,4 @@ export class Dashboard  implements AfterViewInit{
 		jQuery("textarea").attr('placeholder', this.initScript);
 		jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});
 	}
-
-
-
 }

@@ -25,9 +25,10 @@ export class StoryService {
 	}
 
 	publishStory(story) {
-		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
 		let options = new RequestOptions({ headers: headers });
 		let body = JSON.stringify(story);
-		return this.http.post(this.storiesUrl, body, headers).map((res: Response) => res.json());
+		return this.http.post(this.storiesUrl, body, options).map((res: Response) => res.json());
 	}
 }

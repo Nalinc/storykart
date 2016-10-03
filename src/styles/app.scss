@@ -498,17 +498,17 @@ header{
 }
 
 /* Modal Content */
-.modal-content {
+.modal-container {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    height: 80%;
+    height: 90%;
     .row{
     	padding: 0!important;
     	height: inherit;
-    	.sprite-header{
+    	.modal-header{
 			background-color: chocolate;
 			color: #000;
 			margin-bottom: 20px;    	
@@ -521,7 +521,7 @@ header{
     			border-bottom: 5px solid #000;
 			}
     	}
-		div.sprite-container{
+		div.modal-content{
 			height: 55%;
 			margin-bottom: 20px;
 			div.sprites{
@@ -533,16 +533,29 @@ header{
 					cursor: pointer;
 				}
 			}
+			div.story-json{
+				overflow-y: auto;
+				height: 100%;
+				pre{
+					font-size: 12px;
+					white-space: pre-line;
+				}
+				background-color: #000;
+			}
 		}
 		.modal-footer{
 			text-align: center;
 			span{
 				font-size: 12px;
 			}
-			.btn-import{
+			.col-xs-12, .col-md-6{
+				margin: 2px auto;
+			}
+			.btn-import, .btn-publish{
 				cursor: pointer;
 				border: 1px solid #a9a9a9;
 				border-radius: 7px;
+				margin: 10px 0;
 			}		
 		}
 
