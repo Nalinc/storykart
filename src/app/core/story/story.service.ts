@@ -23,4 +23,11 @@ export class StoryService {
 		//...errors if any
 		.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 	}
+
+	publishStory(story) {
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+		let body = JSON.stringify(story);
+		return this.http.post(this.storiesUrl, body, headers).map((res: Response) => res.json());
+	}
 }

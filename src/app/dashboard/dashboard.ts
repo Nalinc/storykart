@@ -1,4 +1,5 @@
 import {Component, AfterViewInit} from '@angular/core';
+import { StoryService } from '../core/story/story.service';
 declare var jQuery: any;
 
 @Component({
@@ -8,33 +9,6 @@ declare var jQuery: any;
   },
   template: require('./dashboard.html')
 })
-
-/*
-{
-	"title":"my awesome story",
-	"author":"",
-	"stars":"",
-	"timestamp":"",
-	"visibility":"public/private",
-	"actors":{
-		"boy_1":{
-			"url": "http:.//url",
-			"left": "10px",
-			"top": "50px"
-		},
-		"boy_2":{
-			"url": "http:.//url",
-			"left": "10px",
-			"top": "50px"
-		}
-	},
-	"dialogues":[
-		"",
-		"",
-		""
-	]
-}
-*/
 
 export class Dashboard  implements AfterViewInit{
 	storyTitle: string = ""; 
@@ -59,7 +33,7 @@ export class Dashboard  implements AfterViewInit{
 	errScript: any;
 	publishStory: any;
 
-	constructor(){
+	constructor(private storyService: StoryService){
 
 		this.storyMode = "paused";
 		this.errScript = false;	
@@ -319,6 +293,27 @@ export class Dashboard  implements AfterViewInit{
 			    }
 			});
 			console.log(storySlug)
+
+			this.storyService.publishStory(storySlug).subscribe(
+			   data => {
+			     // refresh the list
+			     console.log(data)
+			     return true;
+			   },
+			   error => {
+			     console.error("Error saving food!");
+			   }
+			);
+
+
+/*			this.storyService.publishStory()
+			.subscribe(
+				stories => this.stories = stories, //Bind to view
+				err => {
+					// Log errors if any
+					console.log(err);
+				}
+			);*/
 		}
 
 		window.onresize = function(){
