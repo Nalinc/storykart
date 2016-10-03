@@ -65,6 +65,29 @@ export class Dashboard  implements AfterViewInit{
 		this.errScript = false;	
 		this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panel aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
 		this.storyScript = this.initScript.split('\n');
+		this.sprites = {
+			avatars: [
+				{"name":"boy_1", "selected":""},
+				{"name":"boy_2", "selected":""},
+				{"name":"boy_3", "selected":""},
+				{"name":"boy_4", "selected":""},
+				{"name":"boy_5", "selected":""},
+				{"name":"man_1", "selected":""},
+				{"name":"man_2", "selected":""},
+				{"name":"girl_1", "selected":""},
+				{"name":"girl_2", "selected":""},
+				{"name":"girl_3", "selected":""},
+				{"name":"girl_4", "selected":""},
+				{"name":"girl_5", "selected":""},
+				{"name":"woman_1", "selected":""},
+				{"name":"woman_2", "selected":""}
+			],
+			objects:[
+				{"name":"dog", "selected":""},
+				{"name":"tree_1", "selected":""},
+				{"name":"sun", "selected":""}
+			]
+		};
 
 		this.onDrop = function (ev) {
 		  /* The default handling is not to process a drop action and hand it to the next 
@@ -111,30 +134,6 @@ export class Dashboard  implements AfterViewInit{
 			jQuery("#speech").html("").hide();
 		}
 
-		this.sprites = {
-			avatars: [
-				{"name":"boy_1", "selected":""},
-				{"name":"boy_2", "selected":""},
-				{"name":"boy_3", "selected":""},
-				{"name":"boy_4", "selected":""},
-				{"name":"boy_5", "selected":""},
-				{"name":"man_1", "selected":""},
-				{"name":"man_2", "selected":""},
-				{"name":"girl_1", "selected":""},
-				{"name":"girl_2", "selected":""},
-				{"name":"girl_3", "selected":""},
-				{"name":"girl_4", "selected":""},
-				{"name":"girl_5", "selected":""},
-				{"name":"woman_1", "selected":""},
-				{"name":"woman_2", "selected":""}
-			],
-			objects:[
-				{"name":"dog", "selected":""},
-				{"name":"tree_1", "selected":""},
-				{"name":"sun", "selected":""}
-			]
-		};
-
 		this.showModal = function(){
 			this.sprites = {
 				avatars: [
@@ -165,12 +164,13 @@ export class Dashboard  implements AfterViewInit{
 			jQuery("#myModal").css({"display":"none"})
 		}
 		this.importAvatars = function(){
+			var _id = new Date().getTime()
 			for(var i in this.sprites.avatars){
 				if(this.sprites.avatars[i].selected){
 					var eleActor = jQuery( "<img />",{ 
 									  "src":'sprites/'+this.sprites.avatars[i].name+'.svg',
 									  "class": "actor",									  
-									  "id": new Date().getTime(),
+									  "id": _id+parseInt(i),
 									  "title": this.sprites.avatars[i].name,
 									  "name":this.sprites.avatars[i].name })
 					jQuery('.story-actors').append(eleActor);
@@ -181,7 +181,7 @@ export class Dashboard  implements AfterViewInit{
 					var eleObj = jQuery( "<img />",{ 
 									  "src":'sprites/'+this.sprites.objects[i].name+'.svg',
 									  "class": "actor",
-									  "id": new Date().getTime(),
+									  "id": _id-parseInt(i)-1,
 									  "title": this.sprites.objects[i].name,
 									  "name":this.sprites.objects[i].name })
 					jQuery('.story-actors').append(eleObj);
