@@ -191,8 +191,21 @@ export class Dashboard  implements AfterViewInit{
 		}
 
 		this.compileScript = function(val){
-			// Need to validate script
-			this.storyScript = val.split('\n');
+			var that = this;
+			this.errScript = false;
+			var pattern = /\w+[\w\s]*:\s*\w+[\w\s]*/g;
+			var scriptArray = val.split('\n')
+							  .filter(function(o){return o})
+							  .map(function(o){return o.trim()});
+			if(scriptArray.length != val.match(/:/g).length)
+				this.errScript = true;			
+			scriptArray.forEach(function(dialog){
+				if(!dialog.match(pattern))
+					that.errScript = true;
+			})
+			if(!this.errScript){
+				this.storyScript = scriptArray;
+			}
 			return this.storyScript;
 		}
 
