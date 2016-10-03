@@ -105,7 +105,7 @@ export class Dashboard  implements AfterViewInit{
 			jQuery('.add-more-actors').attr('src','/images/add.svg').css({"border":"1px dashed #a9a9a9"});			
 			return;
 		  }
-		  else if(jQuery(ev.target).hasClass('actor'))
+		  else if(jQuery(ev.target).hasClass('actor') || !data)
 		  	return;
 
 		  /* As we put the ID of the source element into this variable, we can now use 
@@ -118,6 +118,7 @@ export class Dashboard  implements AfterViewInit{
 
 		this.onReset = function(){
 			this.storyScript = "";
+			var _id = new Date().getTime();
 			jQuery('#script-area').val("")
 			jQuery('.story-board .actor').remove();
 			jQuery('.story-actors .actor').remove();
@@ -127,7 +128,7 @@ export class Dashboard  implements AfterViewInit{
 					"src":'sprites/'+avatars[i]+'.svg',
 					"name":avatars[i],
 					"class":"actor",
-					"id": new Date().getTime()
+					"id": _id - parseInt(i)
 				})
 				jQuery('.story-actors').append(ele);
 			}
