@@ -5,7 +5,8 @@ var compression = require('compression');
 var exphbs  = require('express-handlebars');
 var app = express();
 var fs = require('fs');
-
+var storyController = require('./controllers/');
+var story = new storyController();
 
 app.use(compression());
 
@@ -30,9 +31,7 @@ app.get('/stories',function(req,res){
 	res.send(obj)
 })
 
-app.post('/stories', function(req, res, next) {
-	console.log(req.body)
-	var obj = {"success":true,"code":"200"}
-	res.send(obj)
-});
+app.post('/stories', story.create);
+
+
 module.exports = app;
