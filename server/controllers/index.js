@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 //Application options
 var options = require('../options');
-var mongoDBURL =  process.env.MONGOLAB_JADE_URI || options.mongodb;
+var mongoDBURL =  process.env.MONGODB_URI || options.mongodb;
 
 
 var Schema = mongoose.Schema;
