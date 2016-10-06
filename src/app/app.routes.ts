@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {Core} from './core/core';
 import {Home} from './home/home';
 import {Dashboard} from './dashboard/dashboard';
+import {Story} from './core/story/story.component';
 
 const appRoutes: Routes = [
   {
@@ -17,6 +18,13 @@ const appRoutes: Routes = [
     component: Dashboard,
     data: {
       title: 'Dashboard'
+    }
+  },
+  {
+    path: 'story/:id',
+    component: Story,
+    data: {
+      title: 'View Story'
     }
   },
   { 

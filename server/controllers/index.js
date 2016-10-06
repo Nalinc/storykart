@@ -35,7 +35,7 @@ var storyController = function() {
     this.create = function(req, res) {
         var response;
         var story = new Story(req.body);
-        story.save(function (err) {
+        story.save(function (err, storyObj) {
             if (err) {
                 console.log("Error in creating the story")
                 response = {
@@ -50,7 +50,7 @@ var storyController = function() {
                 console.log("Successfully created a new story")
                 response = {
                     "status" : "success",
-                    "story" : story
+                    "story" : storyObj
                 }
             }
             res.send(response);

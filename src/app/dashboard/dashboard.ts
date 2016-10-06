@@ -1,4 +1,5 @@
 import {Component, AfterViewInit} from '@angular/core';
+import {Router} from '@angular/router';
 import { StoryService } from '../core/story/story.service';
 declare var jQuery: any;
 
@@ -37,7 +38,7 @@ export class Dashboard  implements AfterViewInit{
 	publishStory: any;
 	modalType: any;
 
-	constructor(private storyService: StoryService){
+	constructor(private storyService: StoryService, private router: Router){
 
 		this.storyMode = "paused";
 		this.errScript = false;	
@@ -305,14 +306,12 @@ export class Dashboard  implements AfterViewInit{
 		}
 
 		this.publishStory = function(){
-
 			console.log(this.storyJSON);
-
-
 			this.storyService.publishStory(this.storyJSON).subscribe(
 			   data => {
 			     // refresh the list
-			     console.log(data)
+			     console.log(data);
+			     this.router.navigate(['/story', data.story._id]);
 			     return true;
 			   },
 			   error => {

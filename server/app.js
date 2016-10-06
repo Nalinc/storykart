@@ -31,7 +31,12 @@ app.get('/stories',function(req,res){
 	res.send(obj)
 })
 
-app.post('/stories', story.create);
+app.get('/story/:storyid', function(req,res){
+	console.log(req.params['storyid']);
+	var obj = JSON.parse(fs.readFileSync(__dirname + '/api/stories.json', 'utf8'));
+	res.send(obj)
+});
 
+app.post('/stories', story.create);
 
 module.exports = app;
