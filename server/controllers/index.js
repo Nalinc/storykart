@@ -17,7 +17,7 @@ var storySchema = new Schema({
     stars: String,
     timestamp: String,
     visibility: String,
-    actors: Object,
+    actors: Array,
     script: Array
 });
 var Story = mongoose.model('story', storySchema);
@@ -59,6 +59,52 @@ var storyController = function() {
 
     this.del = function(id, callback) {
         //TBD
+    }
+    this.find = function(req, res){
+
+        Story.findById(req.params['storyid'], function (err, storyObj){
+            if (err) {
+                console.log("Error in fetching the story")
+                response = {
+                    "status" : "error",
+                    "errorMessage" : err,
+                    "code": 500
+                };
+                if(err.code) {
+                    response.code = err.code + 500;
+                }               
+            } else {
+                console.log("Successfully fetched a story")
+                response = {
+                    "status" : "success",
+                    "story" : storyObj
+                }
+            }
+            res.send(response);
+        });
+    }
+    this.findAll = function(req, res){
+
+        Story.find({"visibility": "public"}, function (err, storyObj){
+            if (err) {
+                console.log("Error in fetching the story")
+                response = {
+                    "status" : "error",
+                    "errorMessage" : err,
+                    "code": 500
+                };
+                if(err.code) {
+                    response.code = err.code + 500;
+                }               
+            } else {
+                console.log("Successfully fetched a story")
+                response = {
+                    "status" : "success",
+                    "stories" : storyObj
+                }
+            }
+            res.send(response);
+        });
     }
 
     this.init(mongoDBURL)

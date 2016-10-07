@@ -1,5 +1,6 @@
 import {Component, AfterViewInit} from '@angular/core';
 import { StoryService } from './story.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 declare var jQuery: any;
 
 @Component({
@@ -24,8 +25,9 @@ export class Story {
 	timer: any;
 	counter: any = 0;
 	storyScript: any;
+	storyActors: any;
 
-	constructor(public storyService: StoryService){
+	constructor(public storyService: StoryService, public route: ActivatedRoute,  public router: Router){
 		this.storyMode = "paused";
 		this.storyPlay = function(mode){
 			if(mode == "play"){
@@ -39,7 +41,7 @@ export class Story {
 				this.storyReset();
 				return true;
 			}
-			var estimatedTime = 1000;
+			var estimatedTime = 2000;
 			var actorName = this.storyScript[this.counter].substring(0, this.storyScript[this.counter].indexOf(":"))
 			var positionClass, positionFix = jQuery('.story-board [name="'+actorName+'"]').position();
 			var dialogue = this.storyScript[this.counter].substring(this.storyScript[this.counter].indexOf(":")+1,this.storyScript[this.counter].length);
@@ -48,9 +50,9 @@ export class Story {
 			jQuery('.story-board [name="'+actorName+'"]').addClass("shake");
 			//console.log(jQuery('.story-board [name="'+actorName+'"]'))
 			if(dialogue.length > 30)
-				estimatedTime = 1500;
+				estimatedTime = 4000;
 			if(dialogue.length > 80)
-				estimatedTime = 2000;
+				estimatedTime = 5000;
 			// quadrant 1
 			if(positionFix.top < 200 && positionFix.left > 300){
 				//positionFix.top = positionFix.top;
@@ -122,13 +124,35 @@ export class Story {
 	ngAfterViewInit() {
 	}
 	ngOnInit(){
-		this.loadStory();
+		this.route.params.forEach((params: Params) => {
+	        if(params['id']){
+	        	this.loadStory(params['id']);	
+	        }
+	    });
 	}
-	loadStory() {
+	loadStory(storyid) {
 		// Get all story
-		this.storyService.getStory()
+		this.storyService.getStory(storyid)
 		.subscribe(
-			story => {console.log(story)}, //Bind to view
+			response => {
+				this.storyTitle = response['story'].title;
+				this.storyAuthor = response['story'].author;
+				this.storyAuthorEmail = response['story'].email;
+				this.storyScript = response['story'].script;
+				this.storyActors = response['story'].actors;
+				for(var actor in this.storyActors){
+					var eleObj = jQuery( "<img />",{ 
+									  "src":this.storyActors[actor].url,
+									  "class": "actor",
+									  "title": this.storyActors[actor].name,
+									  "name": this.storyActors[actor].name })
+					eleObj.css({
+						"left":this.storyActors[actor].left,
+						"top":this.storyActors[actor].top});
+					jQuery('.story-board').append(eleObj);
+				}
+
+			}, //Bind to view
 			err => {
 				// Log errors if any
 				console.log(err);

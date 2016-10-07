@@ -23,7 +23,7 @@ export class Home {
 		// Get all stories
 		this.storyService.getStories()
 		.subscribe(
-			stories => this.stories = stories, //Bind to view
+			response => this.stories = response['stories'], //Bind to view
 			err => {
 				// Log errors if any
 				console.log(err);

@@ -1,11 +1,10 @@
   <div id="main">
       <div id="content">
 
-              <div class="story-board-container col-xs-12"> 
-                <div class="">{{this.storyTitle}}</div>
+              <div class="story-board-container col-xs-12" style="margin-top:-60px;text-align:center;"> 
+                <div class="">{{storyTitle || "Untitled Story"}}</div>
                 <div class="story-board-wrapper">
-                  <div class="story-board">
-                    <img class="actor"  src="sprites/boy_1.svg" name="boy_1"  title="boy_1" id="1475340909902" style="top:150px;left:150px;"> 
+                  <div class="story-board" style="float: none;">
                     <div class="talk-bubble tri-right border round left-in" id="speech"></div>
                   </div>
                 </div>

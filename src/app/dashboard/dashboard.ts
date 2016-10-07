@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StoryService } from '../story/story.service';
 import { Story } from '../story/story.component';
 declare var jQuery: any;
@@ -39,8 +39,8 @@ export class Dashboard extends Story implements AfterViewInit{
 	publishStory: any;
 	modalType: any;
 
-	constructor(public storyService: StoryService, public router: Router){
-		super(storyService);
+	constructor(public storyService: StoryService, public route: ActivatedRoute,  public router: Router){
+		super(storyService, route, router);
 		this.storyMode = "paused";
 		this.errScript = false;	
 		this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panel aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
@@ -153,16 +153,17 @@ export class Dashboard extends Story implements AfterViewInit{
 					"stars": "0",
 					"timestamp": new Date().getTime(),
 					"visibility":"public",
-					"actors":{},
+					"actors":[],
 					"script": this.storyScript
 				};
 
 				jQuery('.story-board').children('.actor').each(function () {
-				    that.storyJSON.actors[this.name] = {
+				    that.storyJSON.actors.push({
+				    	"name": this.name,
 				    	"left": this.style.left,
 				    	"top": this.style.top,
 				    	"url": this.src
-				    }
+				    })
 				});
 			}
 			jQuery("#myModal").css({"display":"block"})

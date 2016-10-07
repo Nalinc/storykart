@@ -26,16 +26,14 @@ app.get('/',function(req, res){
 	res.render("index")
 })
 
-app.get('/stories',function(req,res){
+/*app.get('/stories',function(req,res){
 	var obj = JSON.parse(fs.readFileSync(__dirname + '/api/stories.json', 'utf8'));
 	res.send(obj)
 })
+*/
+app.get('/stories', story.findAll);
 
-app.get('/story/:storyid', function(req,res){
-	console.log(req.params['storyid']);
-	var obj = JSON.parse(fs.readFileSync(__dirname + '/api/stories.json', 'utf8'));
-	res.send(obj)
-});
+app.get('/story/:storyid', story.find);
 
 app.post('/stories', story.create);
 
