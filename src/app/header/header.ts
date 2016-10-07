@@ -32,13 +32,13 @@ export class Header {
 	ngOnInit() {
 		this.router.events.subscribe(event => {
 			if(event instanceof NavigationStart) {
-				if(event.url == "/dashboard"){
-					jQuery('header, .page-wrap').addClass('scrolled')
-					this.mode = "hide-header";				
-				}else if(event.url == "/"){
+				if(event.url == "/"){
 					jQuery(document).scrollTop(0);
 					jQuery('header, .page-wrap').removeClass('scrolled');
 					this.mode = "maximized";
+				}else{
+					jQuery('header, .page-wrap').addClass('scrolled');
+					this.mode = "hide-header";
 				}
 			}
 		});	

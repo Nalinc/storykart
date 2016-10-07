@@ -406,71 +406,7 @@ header{
 						}	
 					}
 				}
-				.story-board-container{
-					text-align: right;
-					.story-board-wrapper{
-						overflow: auto;
-						.story-board{
-							border: 1px solid #a9a9a9;
-							height: 400px;
-							width: 600px;
-							float: right;
-							margin: 0 auto;
-							position: relative;
-							img{
-								width: 60px;
-								margin: 10px;
-							    padding: 2px;
-							    cursor: move;
-							    position: absolute;
-								&.shake
-								 {
-								  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-								  transform: translate3d(0, 0, 0);
-								  backface-visibility: hidden;
-								  perspective: 1000px;
-								}
 
-								@keyframes shake {
-								  10%, 90% {
-								    transform: translate3d(-1px, 0, 0);
-								  }
-								  
-								  20%, 80% {
-								    transform: translate3d(2px, 0, 0);
-								  }
-
-								  30%, 50%, 70% {
-								    transform: translate3d(-4px, 0, 0);
-								  }
-
-								  40%, 60% {
-								    transform: translate3d(4px, 0, 0);
-								  }
-								}
-
-							}
-							@media all and (max-width: 1200px) {
-								float: none;
-							}
-						}
-					}
-					.story-controller{
-    					text-align: center;
-    					img{
-    						cursor: pointer;
-    						border: 1px solid #a9a9a9;
-    						border-radius: 50px;
-    						width: 60px;
-	    					&.next-prev{
-	    						padding: 5px;
-	    					}
-	    					&:hover{
-	    						background-color: #8773ff;
-	    					}
-    					}
-					}
-				}
 				.highlight{
 					background-color: #f7f1ff;
 					border: 1px solid #a9a9a9;
@@ -482,7 +418,71 @@ header{
 		}
 	}
 }
+.story-board-container{
+	text-align: right;
+	.story-board-wrapper{
+		overflow: auto;
+		.story-board{
+			border: 1px solid #a9a9a9;
+			height: 400px;
+			width: 600px;
+			float: right;
+			margin: 0 auto;
+			position: relative;
+			img{
+				width: 60px;
+				margin: 10px;
+			    padding: 2px;
+			    cursor: move;
+			    position: absolute;
+				&.shake
+				 {
+				  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+				  transform: translate3d(0, 0, 0);
+				  backface-visibility: hidden;
+				  perspective: 1000px;
+				}
 
+				@keyframes shake {
+				  10%, 90% {
+				    transform: translate3d(-1px, 0, 0);
+				  }
+				  
+				  20%, 80% {
+				    transform: translate3d(2px, 0, 0);
+				  }
+
+				  30%, 50%, 70% {
+				    transform: translate3d(-4px, 0, 0);
+				  }
+
+				  40%, 60% {
+				    transform: translate3d(4px, 0, 0);
+				  }
+				}
+
+			}
+			@media all and (max-width: 1200px) {
+				float: none;
+			}
+		}
+	}
+	.story-controller{
+		text-align: center;
+		img{
+			cursor: pointer;
+			border: 1px solid #a9a9a9;
+			border-radius: 50px;
+			width: 60px;
+			&.next-prev{
+				padding: 5px;
+			}
+			&:hover{
+				background-color: #8773ff;
+			}
+		}
+	}
+}
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

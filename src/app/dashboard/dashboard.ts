@@ -1,6 +1,7 @@
-import {Component, AfterViewInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, AfterViewInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { StoryService } from '../story/story.service';
+import { Story } from '../story/story.component';
 declare var jQuery: any;
 
 @Component({
@@ -11,11 +12,11 @@ declare var jQuery: any;
   template: require('./dashboard.html')
 })
 
-export class Dashboard  implements AfterViewInit{
-	storyTitle: string = ""; 
-	storyAuthor:string = "Anonymous";
-	storyAuthorEmail:string = "";
-	storyJSON: any;
+export class Dashboard extends Story implements AfterViewInit{
+	@Input() storyTitle: string = ""; 
+	@Input() storyAuthor:string = "Anonymous";
+	@Input() storyAuthorEmail:string = "";
+	@Input() storyJSON: any;
 	onDrop: any;
 	onReset: any;
 	showModal: any;
@@ -23,23 +24,23 @@ export class Dashboard  implements AfterViewInit{
 	importAvatars: any;
 	active: any = 'avatars';
 	sprites: any;
-	storyMode: any;
-	storyPlay: any;
-	storyReset: any;
-	storyPause: any;
-	storyStepNext: any;
-	storyStepPrev: any;
-	timer: any;
-	counter: any = 0;
-	storyScript: any;
+	@Input() storyMode: any;
+	@Input() storyPlay: any;
+	@Input() storyReset: any;
+	@Input() storyPause: any;
+	@Input() storyStepNext: any;
+	@Input() storyStepPrev: any;
+	@Input() timer: any;
+	@Input() counter: any = 0;
+	@Input() storyScript: any;
 	compileScript: any;
 	initScript: any;
 	errScript: any;
 	publishStory: any;
 	modalType: any;
 
-	constructor(private storyService: StoryService, private router: Router){
-
+	constructor(public storyService: StoryService, public router: Router){
+		super(storyService);
 		this.storyMode = "paused";
 		this.errScript = false;	
 		this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panel aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
@@ -213,96 +214,6 @@ export class Dashboard  implements AfterViewInit{
 				this.storyScript = scriptArray;
 			}
 			return this.storyScript;
-		}
-
-		this.storyPlay = function(mode){
-			if(mode == "play"){
-				this.storyMode = mode;
-			};
-			if(this.storyMode == "paused" && mode != "stepNext" && mode != "stepPrev"){
-				clearTimeout(this.timer);
-				return true;
-			}
-			if(this.storyScript.length <= this.counter){
-				this.storyReset();
-				return true;
-			}
-			var estimatedTime = 1000;
-			var actorName = this.storyScript[this.counter].substring(0, this.storyScript[this.counter].indexOf(":"))
-			var positionClass, positionFix = jQuery('.story-board [name="'+actorName+'"]').position();
-			var dialogue = this.storyScript[this.counter].substring(this.storyScript[this.counter].indexOf(":")+1,this.storyScript[this.counter].length);
-
-			//var actor = jQuery('.story-board [name="'+actorName+'"]');
-			jQuery('.story-board [name="'+actorName+'"]').addClass("shake");
-			//console.log(jQuery('.story-board [name="'+actorName+'"]'))
-			if(dialogue.length > 30)
-				estimatedTime = 1500;
-			if(dialogue.length > 80)
-				estimatedTime = 2000;
-			// quadrant 1
-			if(positionFix.top < 200 && positionFix.left > 300){
-				//positionFix.top = positionFix.top;
-				positionFix.left -= 200;
-				positionClass = "right-in";
-			}
-			// quadrant 2
-			else if(positionFix.top < 200 && positionFix.left < 300){
-				//positionFix.top = positionFix.top;
-				positionFix.left += 80;
-				positionClass = "left-in";
-			}
-			// quadrant 3
-			else if(positionFix.top > 200 && positionFix.left < 300){
-				//positionFix.top -= 100;
-				positionFix.left += 80;
-				positionClass = "left-in";
-			}
-			// quadrant 4
-			else if(positionFix.top > 200 && positionFix.left > 300){
-				//positionFix.top = positionFix.top;
-				positionFix.left -= 200;
-				positionClass = "right-in";
-			}
-
-			//jQuery('.story-board [name="'+actorName+'"]').removeClass("shake");
-
-			jQuery("#speech").html(dialogue).css(positionFix)
-							 .removeClass("btm-left-in left-in right-in")
-							 .addClass(positionClass).show();
-			if(this.storyScript[this.counter]){
-				if(mode !="stepNext" && mode !="stepPrev" && this.storyMode=='play'){
-					var that = this;
-					this.timer = setTimeout(function () {
-						that.counter++;
-						jQuery('.story-board [name="'+actorName+'"]').removeClass("shake");
-					    that.storyPlay();
-					},estimatedTime)				
-				}
-			}
-			else{
-				this.storyReset();
-			}
-			return true;
-		}
-		this.storyStepNext = function(){
-			if(this.counter < this.storyScript.length){
-				console.log("next")
-				this.storyPlay("stepNext");
-				this.counter++;
-			}
-		}
-		this.storyStepPrev = function(){
-			if(this.counter > 0){
-				console.log("previous");
-				this.counter--;		
-				this.storyPlay("stepPrev");
-			}
-		}
-		this.storyReset = function(){
-			this.counter = 0;
-			this.storyMode = "paused";
-			clearTimeout(this.timer);
-			jQuery("#speech").html("").hide();			
 		}
 
 		this.publishStory = function(){

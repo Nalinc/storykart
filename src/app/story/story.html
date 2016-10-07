@@ -1,5 +1,23 @@
   <div id="main">
       <div id="content">
-      	STORY VIEW PAGE
+
+              <div class="story-board-container col-xs-12"> 
+                <div class="">{{this.storyTitle}}</div>
+                <div class="story-board-wrapper">
+                  <div class="story-board">
+                    <img class="actor"  src="sprites/boy_1.svg" name="boy_1"  title="boy_1" id="1475340909902" style="top:150px;left:150px;"> 
+                    <div class="talk-bubble tri-right border round left-in" id="speech"></div>
+                  </div>
+                </div>
+                <div class="story-controller">
+                  <img src="images/btn_previous.png" class="next-prev" (click)="storyStepPrev()">
+                  <img *ngIf="storyMode=='paused'" src="images/btn_play.png" class="play-pause" (click)="storyPlay('play')">
+                  <img *ngIf="storyMode=='play'" src="images/btn_pause.png" class="play-pause" (click)="storyMode='paused'">
+                  <img  src="images/btn_stop.png" class="play-pause" (click)="storyReset()">
+                  <img src="images/btn_next.png" class="next-prev" (click)="storyStepNext()">
+                </div>
+              </div>
+
+
      </div>
   </div>

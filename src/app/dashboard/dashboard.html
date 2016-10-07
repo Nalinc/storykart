@@ -44,9 +44,7 @@
                   </div>
                 </div>
                 <div class="story-controller">
-
                   <img src="images/btn_previous.png" class="next-prev" (click)="storyStepPrev()">
-<!--                   <img src="images/btn_stop.png"> -->
                   <img *ngIf="storyMode=='paused'" src="images/btn_play.png" class="play-pause" (click)="storyPlay('play')">
                   <img *ngIf="storyMode=='play'" src="images/btn_pause.png" class="play-pause" (click)="storyMode='paused'">
                   <img  src="images/btn_stop.png" class="play-pause" (click)="storyReset()">
