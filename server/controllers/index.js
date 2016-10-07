@@ -17,8 +17,8 @@ var storySchema = new Schema({
     stars: String,
     timestamp: String,
     visibility: String,
-    actors: Array,
-    script: Object
+    actors: Object,
+    script: Array
 });
 var Story = mongoose.model('story', storySchema);
 

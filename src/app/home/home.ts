@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import { Story } from '../core/story/story.model';
-import { StoryService } from '../core/story/story.service';
+import { Story } from '../story/story.model';
+import { StoryService } from '../story/story.service';
 
 @Component({
   selector: '[home]',

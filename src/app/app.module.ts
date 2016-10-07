@@ -9,20 +9,19 @@ import {
 } from '@angular/common';
 
 import { App }  from './app';
-import { Core }  from './core/core';
 import { Home }  from './home/home';
-import { Story }  from './core/story/story.component';
+import { Story }  from './story/story.component';
 import { Dashboard }  from './dashboard/dashboard';
-import { Header } from './core/header/header';
-import { Footer } from './core/footer/footer';
-import { StoryService } from './core/story/story.service';
-import { MakeDroppable } from './core/dragdrop/makeDroppable.directive'
-import { MakeDraggable } from './core/dragdrop/makeDraggable.directive'
+import { Header } from './header/header';
+import { Footer } from './footer/footer';
+import { StoryService } from './story/story.service';
+import { MakeDroppable } from './dashboard/makeDroppable.directive';
+import { MakeDraggable } from './dashboard/makeDraggable.directive';
 
 
 @NgModule({
   imports: [ BrowserModule, routing, HttpModule],       // module dependencies
-  declarations: [ App, Core, Home, Story, Dashboard, Header, Footer, MakeDraggable, MakeDroppable],   // components and directives
+  declarations: [ App, Home, Story, Dashboard, Header, Footer, MakeDraggable, MakeDroppable],   // components and directives
   bootstrap: [ App ],     // root component
   providers: [StoryService, {provide: LocationStrategy, useClass: HashLocationStrategy}]   // services
 })

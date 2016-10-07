@@ -1,6 +1,6 @@
 import {Component, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
-import { StoryService } from '../core/story/story.service';
+import { StoryService } from '../story/story.service';
 declare var jQuery: any;
 
 @Component({

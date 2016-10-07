@@ -1,9 +1,8 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {Core} from './core/core';
-import {Home} from './home/home';
-import {Dashboard} from './dashboard/dashboard';
-import {Story} from './core/story/story.component';
+import { Home } from './home/home';
+import { Dashboard } from './dashboard/dashboard';
+import { Story } from './story/story.component';
 
 const appRoutes: Routes = [
   {
