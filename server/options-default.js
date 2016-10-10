@@ -1,6 +1,8 @@
 'use strict';
 var opt = {
-	"mongodb": ""
+	"mongodb": "",
+	"email":"",
+	"password":""
 };
 
 module.exports = opt;

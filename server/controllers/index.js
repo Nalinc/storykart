@@ -1,9 +1,12 @@
 //Load the annotation module
 var mongoose = require('mongoose');
-
+var nodemailer = require('nodemailer');
+var env = process.env.NODE_ENV || 'development';
+var options = {};
 //Application options
-var options = require('../options');
-var mongoDBURL =  process.env.MONGOLAB_JADE_URI || options.mongodb;
+if( env == "development")
+    options = require('../options');
+var mongoDBURL =  process.env.MONGODB_URI || options.mongodb;
 
 
 var Schema = mongoose.Schema;
