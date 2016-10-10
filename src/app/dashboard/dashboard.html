@@ -102,13 +102,22 @@
                     </div>
                     <div *ngIf="modalType=='publish'">
                       <div class="row">
-                        <div class="col-xs-12 col-md-6">Author Name</div>
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-md-5">Author Name</div>
+                        <div class="col-xs-12 col-md-7">
                           <input type="text" name="author" #sa (blur)="storyJSON.author=sa.value" [value]="'Anonymous'">
                         </div>
-                        <div class="col-xs-12 col-md-6">Author Email</div>
-                        <div class="col-xs-12 col-md-6">
-                          <input type="text" name="author" #sae (blur)="storyJSON.email=sae.value" [value]="">
+                        <div class="col-xs-12 col-md-5">Author Email</div>
+                        <div class="col-xs-12 col-md-7">
+                          <input type="email" name="author" #sae (blur)="storyJSON.email=sae.value" [value]="">
+                        </div>
+                        <div class="col-xs-12 col-md-5 visibility-label">Story Visibility</div>
+                        <div class="col-xs-12 col-md-7">
+                          <span class="visibility-option">Public</span>
+                          <label class="switch">
+                            <input type="checkbox" (change)="(storyJSON.visibility=='private')?storyJSON.visibility='public':storyJSON.visibility='private'">
+                            <div class="slider"></div>
+                          </label>
+                          <span class="visibility-option">Private</span>
                         </div>
 
                         <div class="btn-publish col-xs-12" (click)="publishStory()">Publish</div>

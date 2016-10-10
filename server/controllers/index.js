@@ -7,7 +7,8 @@ var options = {};
 if( env == "development")
     options = require('../options');
 var mongoDBURL =  process.env.MONGODB_URI || options.mongodb;
-
+var email =  process.env.email || options.email;
+var password =  process.env.password || options.password;
 
 var Schema = mongoose.Schema;
 
@@ -54,6 +55,34 @@ var storyController = function() {
                 response = {
                     "status" : "success",
                     "story" : storyObj
+                }
+                if(storyObj.visibility=="private"){
+                    // create reusable transporter object using the default SMTP transport 
+                    var transporter = nodemailer.createTransport({
+                            service: 'Gmail',
+                            auth: {
+                                user: email,
+                                pass: password
+                            }
+                        });
+
+                    var link = "https://storykart.herokuapp.com/#/story/"+storyObj['_id'];
+                    var mailOptions = {
+                        from: email,
+                        to: storyObj.email,
+                        subject: '"'+storyObj.title+'": Storykart Private Story',
+                         html:  "<b>Hello "+storyObj.author+"</b><br/><br/>"+
+                                "Here's the link to your private story<br/><br/>"+
+                                "<a href="+link+" >"+ link+"</a>"+" <br/><br/>"+
+                                "Cheers,<br/>Nalin_C"
+                    };
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if(error){
+                            console.log(error);
+                        }else{
+                            console.log('Private story sent to: ' + storyObj.email);
+                        };
+                    });
                 }
             }
             res.send(response);
