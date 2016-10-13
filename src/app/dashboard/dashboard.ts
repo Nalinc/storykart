@@ -153,6 +153,7 @@ export class Dashboard extends Story implements AfterViewInit{
 					"stars": "0",
 					"timestamp": new Date().getTime(),
 					"visibility":"public",
+					"background":this.storyBackground,
 					"actors":[],
 					"script": this.storyScript
 				};

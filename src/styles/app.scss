@@ -421,7 +421,8 @@ header{
 .story-board-container{
 	text-align: right;
 	.story-board-wrapper{
-		overflow: auto;
+		overflow-y: hidden;
+		overflow-x: auto;
 		.story-board{
 			border: 1px solid #a9a9a9;
 			height: 400px;

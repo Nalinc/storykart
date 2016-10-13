@@ -21,6 +21,7 @@ var storySchema = new Schema({
     stars: String,
     timestamp: String,
     visibility: String,
+    background: String,
     actors: Array,
     script: Array
 });

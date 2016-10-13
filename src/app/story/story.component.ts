@@ -17,6 +17,7 @@ export class Story {
 	storyAuthorEmail:string = "";
 	storyJSON: any;
 	storyMode: any;
+	storyBackground: any = "";
 	storyPlay: any;
 	storyReset: any;
 	storyPause: any;
@@ -140,6 +141,7 @@ export class Story {
 				this.storyAuthorEmail = response['story'].email;
 				this.storyScript = response['story'].script;
 				this.storyActors = response['story'].actors;
+				this.storyBackground = response['story'].background;
 				for(var actor in this.storyActors){
 					var eleObj = jQuery( "<img />",{ 
 									  "src":this.storyActors[actor].url,

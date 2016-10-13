@@ -4,7 +4,7 @@
               <div class="story-board-container col-xs-12" style="margin-top:-60px;text-align:center;"> 
                 <div class="">{{storyTitle || "Untitled Story"}}</div>
                 <div class="story-board-wrapper">
-                  <div class="story-board" style="float: none;">
+                  <div class="story-board" style="float: none;" [style.background-image]="'url(' + storyBackground + ')'">
                     <div class="talk-bubble tri-right border round left-in" id="speech"></div>
                   </div>
                 </div>
