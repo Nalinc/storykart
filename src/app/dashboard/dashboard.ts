@@ -33,11 +33,13 @@ export class Dashboard extends Story implements AfterViewInit{
 	@Input() timer: any;
 	@Input() counter: any = 0;
 	@Input() storyScript: any;
+	@Input() storyBackground: any;
 	compileScript: any;
 	initScript: any;
 	errScript: any;
 	publishStory: any;
 	modalType: any;
+	bgs: any;
 
 	constructor(public storyService: StoryService, public route: ActivatedRoute,  public router: Router){
 		super(storyService, route, router);
@@ -166,6 +168,12 @@ export class Dashboard extends Story implements AfterViewInit{
 				    	"url": this.src
 				    })
 				});
+			}
+			else if(type=='background'){
+				this.modalType='background';
+				this.bgs = ['classroom_1','classroom_2','desert_1','desert_2',
+									'jungle_1','jungle_2','night_1','night_2','road_1',
+									'road_2','stage_1',	'stage_2']
 			}
 			jQuery("#myModal").css({"display":"block"})
 		}

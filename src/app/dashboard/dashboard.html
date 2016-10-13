@@ -9,7 +9,7 @@
               </div>
               <div class="btn-wrapper col-xs-12">
                 <div class="btn-publish" (click)="showModal('publish')"> Publish </div>
-                <div class="btn-export" (click) = "errScript=!errScript"> View Source </div>
+                <div class="btn-export" (click) = "showModal('background')"> Background </div>
                 <div class="btn-reset" (click)="onReset()"> Reset </div>                
               </div>
               <div class="story-make-container col-xs-12 col-md-5"> 
@@ -38,7 +38,7 @@
               <div class="story-board-container col-xs-12 col-md-7"> 
                 <div class="">Story Board</div>
                 <div class="story-board-wrapper">
-                  <div class="story-board" makeDraggable makeDroppable (drop)="onDrop($event)" >
+                  <div class="story-board" makeDraggable makeDroppable (drop)="onDrop($event)" [style.background-image]="'url(' + storyBackground + ')'">
                     <img class="actor"  src="sprites/boy_1.svg" name="boy_1"  title="boy_1" id="1475340909902" style="top:150px;left:150px;"> 
                     <div class="talk-bubble tri-right border round left-in" id="speech"></div>
                   </div>
@@ -69,6 +69,9 @@
                     <div *ngIf="modalType=='publish'">
                       {{storyTitle||"Untitled Story"}}
                     </div>
+                    <div *ngIf="modalType=='background'">
+                      {{"Available Backgrounds"}}
+                    </div>
                   </div>
                   <div class="modal-content col-xs-12">
                     <div class="sprites" *ngIf="modalType=='import'">
@@ -94,6 +97,13 @@
                         </pre>                        
                       </div>
                     </div>
+                    <div class="backgrounds" *ngIf="modalType=='background'">
+                        <img  (click)="storyBackground='//storykart.herokuapp.com/backgrounds/'+bg+'.png'" 
+                              [class.highlight]="storyBackground=='//storykart.herokuapp.com/backgrounds/'+bg+'.png'" 
+                              *ngFor="let bg of bgs, let i = index"
+                              src="backgrounds/{{bg}}.png" title="{{bg}}" name="{{bg}}" >
+                    </div>
+
                   </div>
                   <div class="modal-footer col-xs-12">
                     <div *ngIf="modalType=='import'">
@@ -123,6 +133,10 @@
                         <div class="btn-publish col-xs-12" (click)="publishStory()">Publish</div>
                           
                       </div>
+                    </div>
+                    <div *ngIf="modalType=='background'">
+                      <div class="no-bg" (click)="storyBackground=''">None</div>
+                      <div class="btn-import" (click)="hideModal()"> Okay </div>
                     </div>
                   </div>
 

@@ -535,6 +535,18 @@ header{
 					cursor: pointer;
 				}
 			}
+			div.backgrounds{
+				overflow-y: auto;
+				height: 100%;
+				img{
+					width: 150px;
+					margin: 10px;
+					cursor: pointer;
+					&.highlight{
+						border: 10px solid goldenrod;
+					}
+				}
+			}
 			div.story-json{
 				overflow-y: auto;
 				height: 100%;
@@ -557,6 +569,15 @@ header{
 			.col-xs-12, .col-md-6{
 				margin: 2px auto;
 			}
+			.no-bg{
+				width: 100px;
+				border: 1px solid #a9a9a9;
+				display: block;
+				height: 100px;
+			    margin: 0 auto;
+			    cursor: pointer;
+			    line-height: 100px;				
+			}			
 			.btn-import, .btn-publish{
 				cursor: pointer;
 				border: 1px solid #a9a9a9;
