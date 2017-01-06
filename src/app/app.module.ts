@@ -12,6 +12,7 @@ import { App }  from './app';
 import { Home }  from './home/home';
 import { Story }  from './story/story.component';
 import { Dashboard }  from './dashboard/dashboard';
+import { ScriptBuilder }  from './scriptbuilder/scriptbuilder.component';
 import { Header } from './header/header';
 import { Footer } from './footer/footer';
 import { StoryService } from './story/story.service';
@@ -21,7 +22,7 @@ import { MakeDraggable } from './dashboard/makeDraggable.directive';
 
 @NgModule({
   imports: [ BrowserModule, routing, HttpModule],       // module dependencies
-  declarations: [ App, Home, Story, Dashboard, Header, Footer, MakeDraggable, MakeDroppable],   // components and directives
+  declarations: [ App, Home, Story, Dashboard, ScriptBuilder, Header, Footer, MakeDraggable, MakeDroppable],   // components and directives
   bootstrap: [ App ],     // root component
   providers: [StoryService, {provide: LocationStrategy, useClass: HashLocationStrategy}]   // services
 })

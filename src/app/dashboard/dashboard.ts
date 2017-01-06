@@ -2,6 +2,7 @@ import { Component, AfterViewInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StoryService } from '../story/story.service';
 import { Story } from '../story/story.component';
+import { ScriptBuilder } from '../scriptbuilder/scriptbuilder.component';
 declare var jQuery: any;
 
 @Component({

@@ -28,6 +28,7 @@
                 </div>
                 <div class="story-script col-xs-12">
                   <div>Script</div>
+                  <script-builder></script-builder>
                   <textarea id="script-area" #ta (blur)="compileScript(ta.value)" [value]="initScript"></textarea>
                   <div  *ngIf="errScript" class="script-message"> 
                     <div class="message">Syntax error in script.</div>
