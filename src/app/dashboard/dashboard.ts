@@ -244,11 +244,11 @@ export class Dashboard extends Story implements AfterViewInit{
 		}
 
 		window.onresize = function(){
-			jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});		
+		//	jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});
 		}
 	}
 	ngAfterViewInit() {
 		jQuery("textarea").attr('placeholder', this.initScript);
-		jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left});
+		//jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left+125});
 	}
 }

@@ -7,35 +7,30 @@
                 </div>
                 <input type="textbox" #st (blur)="storyTitle=st.value" name="title" placeholder="My awesome story" [value]="storyTitle">
               </div>
-              <div class="btn-wrapper col-xs-12">
-                <div class="btn-publish" (click)="showModal('publish')"> Publish </div>
-                <div class="btn-export" (click) = "showModal('background')"> Background </div>
-                <div class="btn-reset" (click)="onReset()"> Reset </div>                
-              </div>
-              <div class="story-make-container col-xs-12 col-md-5"> 
-                <div class="col-xs-12">
-                  <div>Actors</div>
-                  <div>
-                    <span makeDroppable (drop)="onDrop($event)"> 
-                      <img class="add-more-actors" src="images/add.svg" (click)="showModal('import')">
-                    </span>
-                    <div class="story-actors" makeDraggable makeDroppable (drop)="onDrop($event)">
-                      <!-- http://www.flaticon.com/packs/kids-avatars -->
-                      <img class="actor" src="sprites/girl_1.svg" title="girl_1" name="girl_1" id="1475340132841">
-                      <img class="actor" src="sprites/man_1.svg" title="man_1" name="man_1" id="1475340159582">
-                    </div>                    
-                  </div>
+              <div class="btn-wrapper col-xs-12 story-make-container">
+                <div class="pull-right">
+                  <div>Widgets</div>
+                  <span makeDroppable (drop)="onDrop($event)"> 
+                    <img class="add-more-actors" src="images/add.svg" (click)="showModal('import')">
+                  </span>
+                    <img class="btn-publish" src="https://attendease.com/assets/images/features/scheduling-icons/attendease-publishing-icon.png" (click)="showModal('publish')">
+                    <img class="btn-background" src="http://icons.iconarchive.com/icons/umut-pulat/tulliana-2/128/background-icon.png" (click)="showModal('background')">
+                    <img class="btn-reset" src="https://cdn0.iconfinder.com/data/icons/media-player/100/player-08-128.png" (click)="onReset()">
                 </div>
-                <div class="story-script col-xs-12">
-                  <div>Script</div>
-                  <script-builder></script-builder>
-                  <textarea id="script-area" #ta (blur)="compileScript(ta.value)" [value]="initScript"></textarea>
-                  <div  *ngIf="errScript" class="script-message"> 
-                    <div class="message">Syntax error in script.</div>
-                    <div class="note">Please follow <i>actor:dialogue</i> format with <span>each dialogue in a separate line</span></div>
+                <div class="pull-left">
+                  <div class="col-xs-12">
+                    <div>Staging Area</div>
+                    <div>
+                      <div class="story-actors" makeDraggable makeDroppable (drop)="onDrop($event)">
+                        <!-- http://www.flaticon.com/packs/kids-avatars -->
+                        <img class="actor" src="sprites/girl_1.svg" title="girl_1" name="girl_1" id="1475340132841">
+                        <img class="actor" src="sprites/man_1.svg" title="man_1" name="man_1" id="1475340159582">
+                      </div>                    
+                    </div>
                   </div>
-                </div>
+                </div>                
               </div>
+
               <div class="story-board-container col-xs-12 col-md-7"> 
                 <div class="">Story Board</div>
                 <div class="story-board-wrapper">
@@ -44,12 +39,23 @@
                     <div class="talk-bubble tri-right border round left-in" id="speech"></div>
                   </div>
                 </div>
-                <div class="story-controller">
-                  <img src="images/btn_previous.png" class="next-prev" (click)="storyStepPrev()">
-                  <img *ngIf="storyMode=='paused'" src="images/btn_play.png" class="play-pause" (click)="storyPlay('play')">
-                  <img *ngIf="storyMode=='play'" src="images/btn_pause.png" class="play-pause" (click)="storyMode='paused'">
-                  <img  src="images/btn_stop.png" class="play-pause" (click)="storyReset()">
-                  <img src="images/btn_next.png" class="next-prev" (click)="storyStepNext()">
+                <div class="story-controller-wrapper">
+                  <div class="story-controller">
+                    <img src="images/btn_previous.png" class="next-prev" (click)="storyStepPrev()">
+                    <img *ngIf="storyMode=='paused'" src="images/btn_play.png" class="play-pause" (click)="storyPlay('play')">
+                    <img *ngIf="storyMode=='play'" src="images/btn_pause.png" class="play-pause" (click)="storyMode='paused'">
+                    <img  src="images/btn_stop.png" class="play-pause" (click)="storyReset()">
+                    <img src="images/btn_next.png" class="next-prev" (click)="storyStepNext()">
+                  </div>
+                </div>                  
+              </div>
+              <div class="story-make-container col-xs-12 col-md-5">
+                <div class="story-script col-xs-12">
+                  <script-builder></script-builder>
+                  <div  *ngIf="errScript" class="script-message"> 
+                    <div class="message">Syntax error in script.</div>
+                    <div class="note">Please follow <i>actor:dialogue</i> format with <span>each dialogue in a separate line</span></div>
+                  </div>
                 </div>
               </div>
             </div>
