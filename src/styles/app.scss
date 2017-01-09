@@ -464,7 +464,6 @@ header{
 				}
 				.story-make-container{
 					.story-script{
-						overflow: auto;
 						.script-builder{
 							float: right;
 							text-align: right;
@@ -489,9 +488,9 @@ header{
 								padding: 25px;
 								height:400px;
 								overflow-y: auto;
-								width: 700px;
+								width: 100%;
 								.jigsaw{
-									width: 100%;
+								    	width: 700px;
 									&:first-child{
 											.parallel{
 											  .text{
