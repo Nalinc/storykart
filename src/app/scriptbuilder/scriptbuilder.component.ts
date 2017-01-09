@@ -8,8 +8,7 @@ declare var jQuery: any;
 })
 
 export class ScriptBuilder {
-	mode:string = "maximized";
-	isHome:string;
+	removeMode:boolean = false;
 
 	constructor(private router: Router) {
 	}

@@ -22,7 +22,7 @@ html, body {
 	font-weight: 300;
 	font-size: 16px;
 	line-height: 1.8;
-	font-family: 'Harry Potter';
+	font-family: cursive;
 	letter-spacing: 1px;
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 100;
@@ -311,67 +311,134 @@ header{
 					    	width: 100%;
 					    }
 					}
+					@media all and (max-width: 992px){
+						text-align: center;
+				    }
 				}
 				.btn-wrapper{
 				    text-align: right;
 				    padding: 0;
 				    margin-bottom: 20px;
-					.btn-background{
-						padding: 10px;
-						margin: 5px;
-						border: 1px dashed #a9a9a9;
-						display: inline-block;
-						cursor: pointer;
-						float: left;
-						width: 60px;
-						height: 60px;
-						&:hover{
-							color: #77C7AC;
-						}
-					}
-					.btn-reset{
-						padding: 10px;
-						margin: 5px;
-						border: 1px dashed #a9a9a9;
-						display: inline-block;
-						cursor: pointer;
-						float: left;
-						width: 60px;
-						height: 60px;
-
-						&:hover{
-							color: #77C7AC;
-						}
-					}
-					.btn-publish{
-						padding: 10px;
-						margin: 5px;
-						border: 1px dashed #a9a9a9;
-						display: inline-block;
-						cursor: pointer;
-						float: left;
-						width: 60px;
-						height: 60px;
-						&:hover{
-							color: #77C7AC;
-						}
-					}
-				}
-				.story-make-container{
-					.pull-right{
+					.widget-wrapper{
 						padding-right: 15px;
+						float:right;
 						.add-more-actors{
-							width: 60px;
-							padding: 10px;
-							margin: 5px;
-							border: 1px dashed #a9a9a9;
 							display: inline-block;
 							cursor: pointer;
-							float: left;
-							@media all and (max-width: 992px) {
-								float: none;
-							}						
+							img{
+								width: 60px;
+								padding: 10px;
+								margin: 5px;
+								border: 1px dashed #a9a9a9;
+								border-radius: 15px;
+								display: inline-block;
+								&:hover{
+									background-color: #604ae4;
+								}
+							}
+							&:hover::after{
+								visibility: visible;
+							}
+							&:after{
+								content: "Objects";
+								visibility:hidden;
+								display: block;
+								font-weight: bold;
+								text-align: center;
+								margin-top: -5px;
+								font-size: 10px;
+							}
 						}
+						.btn-background{
+							display: inline-block;
+							cursor: pointer;
+							img{
+								padding: 10px;
+								margin: 5px;
+								border: 1px solid #a9a9a9;
+								border-radius: 15px;
+								display: inline-block;
+								width: 60px;
+								height: 60px;
+								&:hover{
+									background-color: #604ae4;
+								}
+
+							}
+							&:hover::after{
+								visibility: visible;
+							}
+							&:after{
+								content: "Backgrounds";
+								visibility:hidden;
+								display: block;
+								font-weight: bold;
+								text-align: center;
+								margin-top: -5px;
+								font-size: 10px;
+							}
+						}
+						.btn-reset{
+							display: inline-block;
+							cursor: pointer;
+							img{
+								padding: 10px;
+								margin: 5px;
+								border: 1px solid #a9a9a9;
+								border-radius: 15px;
+								display: inline-block;
+								width: 60px;
+								height: 60px;
+								&:hover{
+									background-color: #604ae4;
+								}
+
+							}
+							&:hover::after{
+								visibility: visible;
+							}
+							&:after{
+								content: "Reset";
+								visibility:hidden;
+								display: block;
+								font-weight: bold;
+								text-align: center;
+								margin-top: -5px;
+								font-size: 10px;
+							}							
+						}
+						.btn-publish{
+							display: inline-block;
+							cursor: pointer;
+							img{
+								padding: 10px;
+								margin: 5px;
+								border: 1px solid #a9a9a9;
+								border-radius: 15px;
+								display: inline-block;
+								width: 60px;
+								height: 60px;
+								&:hover{
+									background-color: #604ae4;
+								}
+							}
+							&:hover::after{
+								visibility: visible;
+							}
+							&:after{
+								content: "Publish";
+								visibility:hidden;
+								display: block;
+								font-weight: bold;
+								text-align: center;
+								margin-top: -5px;
+								font-size: 10px;
+							}							
+						}
+
+						@media all and (max-width: 992px) {
+							float: none;
+						}						
 					}
 					.pull-left{
 						 text-align: left;
@@ -393,22 +460,31 @@ header{
 							text-align: center;
 							width: 100%;
 						}	
-					}
+					}					
+				}
+				.story-make-container{
 					.story-script{
 						.script-builder{
 							float: right;
 							text-align: right;
-							.btn-add{
-								display: inline;
-								margin: 0 10px;
-								border: 1px solid #a9a9a9;
-								padding: 5px 5px 0 5px;
-								font-size: 17px;
-								border-radius: 10px;
-								cursor: pointer;
+							.script-controls{
+								a{
+									color: #337ab7;
+									font-family: fantasy;
+									cursor: pointer;
+									text-decoration: none;
+									&.removeDialogue{
+										width: 60px;
+										display: inline-block;
+										text-align: left;
+									}
+									&:hover{
+										color: #e83c5d;
+									}
+								}							
 							}
 							.jigsawContainer{
-								padding: 40px 0 25px 0;
+								padding: 20px 0;
 								height:400px;
 								overflow-y: auto;
 								.jigsaw{
@@ -538,6 +614,7 @@ header{
 											top: 5px;
 											width: 30px;
 											cursor: pointer;
+											display:block;
 											-webkit-transform: rotate(180deg);
 											border-radius: 20px;
 											&:hover{
@@ -549,6 +626,7 @@ header{
 											top: 60px;
 											width: 30px;
 											cursor: pointer;
+											display:block;
 											/*-webkit-transform: rotate(180deg);*/
 											border-radius: 20px;
 											&:hover{
@@ -560,8 +638,9 @@ header{
 											width: 25px;
 											border-radius: 90%;
 											cursor: pointer;
-											top: -25px;
-											right: 136px;
+											display:none;
+										    top: 5px;
+										    right: 5px;
 											&:hover{
 												background-color: #e26161;
 											}
@@ -573,6 +652,34 @@ header{
 									}
 								}
 							}
+							&.remove{
+								.script-controls{
+									a.removeDialogue{
+										color: #e83c5d;
+									}
+								}
+								.jigsawContainer{
+									.jigsaw{
+										.text{
+											.dustbin{
+												display:block;
+											}
+											.btnUp,.btnDown{
+												display:none;
+											}
+										}
+									}
+								}
+							}
+
+							@media all and (max-width: 992px) {
+							    float: none;
+							    text-align: center;
+							    margin-top: 20px;
+							    border-top: 1px solid #a9a9a9;
+							    padding-top: 10px;
+							}	
+
 						}
 						.script-message{
 							padding: 10px;

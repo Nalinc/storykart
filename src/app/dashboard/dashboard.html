@@ -8,14 +8,14 @@
                 <input type="textbox" #st (blur)="storyTitle=st.value" name="title" placeholder="My awesome story" [value]="storyTitle">
               </div>
               <div class="btn-wrapper col-xs-12 story-make-container">
-                <div class="pull-right">
+                <div class="widget-wrapper">
                   <div>Widgets</div>
                   <span makeDroppable (drop)="onDrop($event)"> 
-                    <img class="add-more-actors" src="images/add.svg" (click)="showModal('import')">
+                    <span  class="add-more-actors"><img src="images/add.svg" (click)="showModal('import')"></span>
                   </span>
-                    <img class="btn-publish" src="https://attendease.com/assets/images/features/scheduling-icons/attendease-publishing-icon.png" (click)="showModal('publish')">
-                    <img class="btn-background" src="http://icons.iconarchive.com/icons/umut-pulat/tulliana-2/128/background-icon.png" (click)="showModal('background')">
-                    <img class="btn-reset" src="https://cdn0.iconfinder.com/data/icons/media-player/100/player-08-128.png" (click)="onReset()">
+                    <span class="btn-background"><img src="http://icons.iconarchive.com/icons/umut-pulat/tulliana-2/128/background-icon.png" (click)="showModal('background')"></span>
+                    <span class="btn-publish" ><img src="https://attendease.com/assets/images/features/scheduling-icons/attendease-publishing-icon.png" (click)="showModal('publish')"></span>
+                    <span class="btn-reset"><img src="https://cdn0.iconfinder.com/data/icons/media-player/100/player-08-128.png" (click)="onReset()"></span>
                 </div>
                 <div class="pull-left">
                   <div class="col-xs-12">

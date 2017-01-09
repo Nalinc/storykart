@@ -1,13 +1,16 @@
-<div class="script-builder">
+<div class="script-builder"  [class.remove]="removeMode">
   <div>
     <span>Dialogues</span>
-    <span class="btn-add" onclick="addDialogue()">Add</span>
+    <span class="script-controls">
+        <a class="addDialogue" (click)="removeMode=false">Add</a>/
+        <a class="removeDialogue" (click)="removeMode=!removeMode">{{(removeMode)?"Okay":"Remove"}}</a>
+    </span>
   </div>
 
   <div class="jigsawContainer">
     <div class="jigsaw">
-        <span class="t"></span>
-        <span class="b"></span>
+<!--         <span class="t"></span>
+        <span class="b"></span> -->
       <span class="text">
         <img class="actor" src="http://storykart.herokuapp.com/sprites/boy_1.svg"/>
         <img class="dustbin" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
@@ -18,8 +21,8 @@
     </div>
 
     <div class="jigsaw">
-        <span class="t"></span>
-        <span class="b"></span>
+<!--         <span class="t"></span>
+        <span class="b"></span> -->
       <span class="text">
       <img class="actor" src="http://storykart.herokuapp.com/sprites/girl_1.svg"/>
       <img class="dustbin" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
@@ -30,8 +33,8 @@
     </div>
 
     <div class="jigsaw">
-        <span class="t"></span>
-        <span class="b"></span>
+<!--         <span class="t"></span>
+        <span class="b"></span> -->
       <span class="text">
         <img class="actor" src="http://storykart.herokuapp.com/sprites/boy_1.svg"/>
         <img class="dustbin" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
