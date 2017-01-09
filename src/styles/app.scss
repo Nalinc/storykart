@@ -464,9 +464,11 @@ header{
 				}
 				.story-make-container{
 					.story-script{
+						overflow: auto;
 						.script-builder{
 							float: right;
 							text-align: right;
+							width: 100%;
 							.script-controls{
 								a{
 									color: #337ab7;
@@ -484,172 +486,194 @@ header{
 								}							
 							}
 							.jigsawContainer{
-								padding: 20px 0;
+								padding: 25px;
 								height:400px;
 								overflow-y: auto;
+								width: 700px;
 								.jigsaw{
-									width: 300px;
-									height: 6em;
-									margin: 3px;
-									position: relative;
-									-webkit-border-radius: .5em;
-									-moz-border-radius: .5em;
-									border-radius: .5em;
-									cursor: move;						
+									width: 100%;
 									&:first-child{
-									  .text{
-									  	.btnUp{
-									  		display: none;
-									  	}
-									  }
-									}
-									&:last-child{
-									  .text{
-									  	.btnDown{
-									  		display: none;
-									  	}
-									  }
-									}
-									&:nth-of-type(odd){
-										background-color:#483d8b!important;
-										.t{
+											.parallel{
+											  .text{
+											  	.btnUp{
+											  		display: none;
+											  	}
+											  }
+											}
+										}
+										&:last-child{
+											.parallel{
+											  .text{
+											  	.btnDown{
+											  		display: none;
+											  	}
+											  }
+											}
+										}
+										&:nth-of-type(odd){
+											.parallel{
 											background-color:#483d8b!important;
-										}
-										.text{
-											textarea{
-												float:left;
-											}
-											.actor{
-												float: left;
-											}
-											.btnUp, .btnDown{
-												right: 12px;
-											}
-										}
-									}
-									&:nth-of-type(even){
-										background-color:#5397e8!important;
-										.t{
-											background-color:#5397e8!important;  
-										}
-										.text{
-											textarea{
-												float:right;
-											}								
-											.actor{
-												float: right;
-											}
-											.btnUp, .btnDown{
-												left: 12px;
+												.t{
+													background-color:#483d8b!important;
+												}
+												.l{
+													background-color:#483d8b!important;
+												}
+												.text{
+													textarea{
+														float:left;
+													}
+													.actor{
+														float: left;
+													}
+													.btnUp, .btnDown{
+														right: 12px;
+													}
+												}
 											}
 										}
-									}
-									.t{
-										width: 2em;
-										height: 2em;
-										position: absolute;
-										top: -1.7em;
-										left: 8.5em;
-										-webkit-border-radius: 4em;
-										-moz-border-radius: 4em;
-										border-radius: 4em;
-									}
-									.b{
-										width: 1.8em;
-										height: 1.8em;
-										position: absolute;
-										top: 4.5em;
-										left: 8.5em;
-										-webkit-border-radius: 4em;
-										-moz-border-radius: 4em;
-										border-radius: 4em;
-										background-color: #fff;
-									}
-									.r{
-										width: 2em;
-										height: 2em;
-										position: absolute;
-										top: 2em;
-										left: 5.5em;
-										-webkit-border-radius: 4em;
-										-moz-border-radius: 4em;
-										border-radius: 4em;
-									}
-									.l{
-										width: 1.8em;
-										height: 1.8em;
-										position: absolute;
-										top: 2.2em;
-										left: -.4em;
-										-webkit-border-radius: 4em;
-										-moz-border-radius: 4em;
-										border-radius: 4em;
-										background-color: #fff;							
-									}
-									.text{
-										display: block;
-										color: #fff;
-										font-size: 1.2em;
-										text-align: center;
-										padding: 1em;
+										&:nth-of-type(even){
+											.parallel{
+												background-color:#5397e8!important;
+												.t{
+													background-color:#5397e8!important;
+												}
+												.l{
+													background-color:#5397e8!important;
+												}
+												.text{
+													textarea{
+														float:right;
+													}								
+													.actor{
+														float: right;
+													}
+													.btnUp, .btnDown{
+														left: 12px;
+													}
+												}
+											}
+										}
+
+
+									.parallel{
+										width: 300px;
+										height: 6em;
+										margin: 3px;
 										position: relative;
-										background: transparent !important;							
-										textarea{
+										-webkit-border-radius: .5em;
+										-moz-border-radius: .5em;
+										border-radius: .5em;
+										cursor: move;
+										display: inline-block;
+										float:left;
+										.t{
+											width: 2em;
+											height: 2em;
+											position: absolute;
+											top: -1.7em;
+											left: 8.5em;
+											-webkit-border-radius: 4em;
+											-moz-border-radius: 4em;
+											border-radius: 4em;
+										}
+										.b{
+											width: 1.8em;
+											height: 1.8em;
+											position: absolute;
+											top: 4.5em;
+											left: 8.5em;
+											-webkit-border-radius: 4em;
+											-moz-border-radius: 4em;
+											border-radius: 4em;
+											background-color: #fff;
+										}
+										.r{
+											width: 2em;
+											height: 2em;
+											position: absolute;
+											top: 2.1em;
+											right: -1em;
+											-webkit-border-radius: 4em;
+											-moz-border-radius: 4em;
+											border-radius: 4em;
+											background-color: #fff;
+										}
+										.l{
+											width: 1.8em;
+											height: 1.8em;
+											position: absolute;
+											top: 2.2em;
+											left: -1.3em;
+											-webkit-border-radius: 4em;
+											-moz-border-radius: 4em;
+											border-radius: 4em;
+										}
+										.text{
+											display: block;
+											color: #fff;
+											font-size: 1.2em;
+											text-align: center;
+											padding: 1em;
 											position: relative;
-											font-size: 14px;
-											height: 50px;
-											resize: none;
-											color: #000;
-										}
-										.actor{
-											width:50px;
-											position: relative;
-											cursor: pointer;
-											&:hover{
-											    border: 2px solid #000;
+											background: transparent !important;							
+											textarea{
+												position: relative;
+												font-size: 14px;
+												height: 50px;
+												resize: none;
+												color: #000;
 											}
-										}
-										.btnUp{
-											position: absolute;
-											top: 5px;
-											width: 30px;
-											cursor: pointer;
-											display:block;
-											-webkit-transform: rotate(180deg);
-											border-radius: 20px;
-											&:hover{
-												background-color: #a0e69f;
+											.actor{
+												width:50px;
+												position: relative;
+												cursor: pointer;
+												&:hover{
+												    border: 2px solid #000;
+												}
 											}
-										}
-										.btnDown{
-											position: absolute;
-											top: 60px;
-											width: 30px;
-											cursor: pointer;
-											display:block;
-											/*-webkit-transform: rotate(180deg);*/
-											border-radius: 20px;
-											&:hover{
-												background-color: #a0e69f;
+											.btnUp{
+												position: absolute;
+												top: 5px;
+												width: 30px;
+												cursor: pointer;
+												display:block;
+												-webkit-transform: rotate(180deg);
+												border-radius: 20px;
+												&:hover{
+													background-color: #a0e69f;
+												}
 											}
-										}
-										.dustbin{
-											position: absolute;
-											width: 25px;
-											border-radius: 90%;
-											cursor: pointer;
-											display:none;
-										    top: 5px;
-										    right: 5px;
-											&:hover{
-												background-color: #e26161;
+											.btnDown{
+												position: absolute;
+												top: 60px;
+												width: 30px;
+												cursor: pointer;
+												display:block;
+												/*-webkit-transform: rotate(180deg);*/
+												border-radius: 20px;
+												&:hover{
+													background-color: #a0e69f;
+												}
 											}
-										}							
+											.dustbin{
+												position: absolute;
+												width: 25px;
+												border-radius: 90%;
+												cursor: pointer;
+												display:none;
+											    top: 5px;
+											    right: 5px;
+												&:hover{
+													background-color: #e26161;
+												}
+											}							
+										}
 									}
 
 									@media all and (max-width: 992px) {
 										margin: 3px auto;
-									}
+									}									
 								}
 							}
 							&.remove{
@@ -660,12 +684,14 @@ header{
 								}
 								.jigsawContainer{
 									.jigsaw{
-										.text{
-											.dustbin{
-												display:block;
-											}
-											.btnUp,.btnDown{
-												display:none;
+										.parallel{
+											.text{
+												.dustbin{
+													display:block;
+												}
+												.btnUp,.btnDown{
+													display:none;
+												}
 											}
 										}
 									}
