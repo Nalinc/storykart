@@ -9,8 +9,17 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class StoryService {
+	storyScript: any;
     // Resolve HTTP using the constructor
-    constructor (private http: Http) {}
+    constructor (private http: Http) {
+		this.storyScript=[{
+			"boy_1":"Hello World_1",
+			"girl_1":"Hello World_2"
+		},{
+			"boy_1":"Hello World_3"
+		}
+		]
+    }
 
 	getStories() : Observable<Story[]> {
 	// ...using get request

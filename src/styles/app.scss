@@ -489,6 +489,7 @@ header{
 								height:400px;
 								overflow-y: auto;
 								width: 100%;
+							    border: 1px solid #a9a9a9;
 								.jigsaw{
 								    	width: 700px;
 									&:first-child{
@@ -672,7 +673,10 @@ header{
 
 									@media all and (max-width: 992px) {
 										margin: 3px auto;
-									}									
+									}
+								}
+								@media all and (max-width: 1199px) {
+									height:420px;
 								}
 							}
 							&.remove{
@@ -749,7 +753,6 @@ header{
 		overflow-y: hidden;
 		overflow-x: auto;
 		.story-board{
-			border: 1px solid #a9a9a9;
 			height: 400px;
 			width: 600px;
 			float: left;
@@ -818,6 +821,27 @@ header{
 	}
 	@media all and (max-width: 992px) {
 		text-align:center;
+	}
+	&.display-main{
+		.story-board-wrapper{
+			.story-board{
+				border: 1px solid #a9a9a9;
+			}	
+		}
+		.story-controller-wrapper{
+			.story-controller{
+				width:100%;
+				margin:0;
+			}			
+		}
+
+	}
+	&.display-preview{
+		.story-board-wrapper{
+			.story-board{
+				border: 1px solid #a9a9a9;
+			}	
+		}
 	}	
 }
 .modal {

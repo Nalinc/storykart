@@ -1,22 +1,23 @@
   <div id="main">
       <div id="content">
-
-              <div class="story-board-container col-xs-12" style="margin-top:-60px;text-align:center;"> 
+        <div class="story-box">
+              <div class="story-board-container display-main col-xs-12" style="margin-top:-60px;text-align:center;"> 
                 <div class="">{{storyTitle || "Untitled Story"}}</div>
                 <div class="story-board-wrapper">
-                  <div class="story-board" style="float: none;" [style.background-image]="'url(' + storyBackground + ')'">
+                  <div class="story-board" id="story-board" style="float: none;" [style.background-image]="'url(' + storyBackground + ')'">
                     <div class="talk-bubble tri-right border round left-in" id="speech"></div>
                   </div>
                 </div>
-                <div class="story-controller">
-                  <img src="images/btn_previous.png" class="next-prev" (click)="storyStepPrev()">
-                  <img *ngIf="storyMode=='paused'" src="images/btn_play.png" class="play-pause" (click)="storyPlay('play')">
-                  <img *ngIf="storyMode=='play'" src="images/btn_pause.png" class="play-pause" (click)="storyMode='paused'">
-                  <img  src="images/btn_stop.png" class="play-pause" (click)="storyReset()">
-                  <img src="images/btn_next.png" class="next-prev" (click)="storyStepNext()">
+                <div class="story-controller-wrapper">
+                  <div class="story-controller">
+                    <img src="images/btn_previous.png" class="next-prev" (click)="storyStepPrev()">
+                    <img *ngIf="storyMode=='paused'" src="images/btn_play.png" class="play-pause" (click)="storyPlay('play')">
+                    <img *ngIf="storyMode=='play'" src="images/btn_pause.png" class="play-pause" (click)="storyMode='paused'">
+                    <img  src="images/btn_stop.png" class="play-pause" (click)="storyReset()">
+                    <img src="images/btn_next.png" class="next-prev" (click)="storyStepNext()">
+                  </div>
                 </div>
               </div>
-
-
+        </div>
      </div>
   </div>

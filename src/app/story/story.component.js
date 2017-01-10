@@ -28,6 +28,7 @@ var Story = (function () {
             }
             ;
             if (this.storyMode == "paused" && mode != "stepNext" && mode != "stepPrev") {
+                jQuery(".talk-bubble");
                 clearTimeout(this.timer);
                 return true;
             }
@@ -36,9 +37,11 @@ var Story = (function () {
                 return true;
             }
             var estimatedTime = 2000;
-            var actorName = this.storyScript[this.counter].substring(0, this.storyScript[this.counter].indexOf(":"));
+            var actorName = Object.keys(this.storyScript[this.counter])[0];
             var positionClass, positionFix = jQuery('.story-board [name="' + actorName + '"]').position();
-            var dialogue = this.storyScript[this.counter].substring(this.storyScript[this.counter].indexOf(":") + 1, this.storyScript[this.counter].length);
+            var dialogue = this.storyScript[this.counter][actorName];
+            console.log(actorName);
+            console.log(dialogue);
             //var actor = jQuery('.story-board [name="'+actorName+'"]');
             jQuery('.story-board [name="' + actorName + '"]').addClass("shake");
             //console.log(jQuery('.story-board [name="'+actorName+'"]'))
@@ -68,7 +71,10 @@ var Story = (function () {
                 positionClass = "right-in";
             }
             //jQuery('.story-board [name="'+actorName+'"]').removeClass("shake");
-            jQuery("#speech").html(dialogue).css(positionFix)
+            /*<div class="talk-bubble tri-right border round left-in" id="speech"></div>*/
+            var ele = jQuery("<div class='talk-bubble tri-right border round left-in'></div>");
+            jQuery("#story-board").append(ele);
+            ele.html(dialogue).css(positionFix)
                 .removeClass("btm-left-in left-in right-in")
                 .addClass(positionClass).show();
             if (this.storyScript[this.counter]) {
@@ -77,6 +83,7 @@ var Story = (function () {
                     this.timer = setTimeout(function () {
                         that.counter++;
                         jQuery('.story-board [name="' + actorName + '"]').removeClass("shake");
+                        ele.remove();
                         that.storyPlay();
                     }, estimatedTime);
                 }

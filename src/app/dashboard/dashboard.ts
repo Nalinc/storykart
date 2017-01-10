@@ -33,8 +33,10 @@ export class Dashboard extends Story implements AfterViewInit{
 	@Input() storyStepPrev: any;
 	@Input() timer: any;
 	@Input() counter: any = 0;
-	@Input() storyScript: any;
 	@Input() storyBackground: any;
+	storyScript: any;
+	updateDialogue: any;
+	deleteDialogue: any;
 	compileScript: any;
 	initScript: any;
 	errScript: any;
@@ -47,7 +49,9 @@ export class Dashboard extends Story implements AfterViewInit{
 		this.storyMode = "paused";
 		this.errScript = false;	
 		this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panel aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
-		this.storyScript = this.initScript.split('\n');
+		//this.storyScript = this.initScript.split('\n');
+		//this.storyScript = this.initScript.split('\n');
+		this.storyScript= storyService.storyScript;
 		this.sprites = {
 			avatars: [
 				{"name":"boy_1", "selected":""},
@@ -225,6 +229,12 @@ export class Dashboard extends Story implements AfterViewInit{
 				this.storyScript = scriptArray;
 			}
 			return this.storyScript;
+		}
+		this.updateDialogue = function(index, actor, dialogue){
+			this.storyScript[index][actor] = dialogue;
+		}
+		this.deleteDialogue = function(index, actor){
+			delete this.storyScript[index][actor];
 		}
 
 		this.publishStory = function(){

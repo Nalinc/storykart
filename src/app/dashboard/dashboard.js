@@ -32,7 +32,15 @@ var Dashboard = (function (_super) {
         _this.storyMode = "paused";
         _this.errScript = false;
         _this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panel aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
-        _this.storyScript = _this.initScript.split('\n');
+        //this.storyScript = this.initScript.split('\n');
+        //this.storyScript = this.initScript.split('\n');
+        _this.storyScript = [{
+                "boy_1": "Hello World_1",
+                "boy_2": "Hello World_2"
+            }, {
+                "boy_1": "Hello World_3"
+            }
+        ];
         _this.sprites = {
             avatars: [
                 { "name": "boy_1", "selected": "" },

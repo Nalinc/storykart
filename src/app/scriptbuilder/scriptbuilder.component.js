@@ -14,17 +14,16 @@ var ScriptBuilder = (function () {
     function ScriptBuilder(router) {
         this.router = router;
         this.removeMode = false;
-        this.scriptArray = [{
-                "boy_1": "Hello World_1"
-            }, {
-                "girl_1": "Hello World_2"
-            }
-        ];
+        console.log(this.storyScript);
     }
     ScriptBuilder.prototype.ngOnInit = function () {
     };
     return ScriptBuilder;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], ScriptBuilder.prototype, "storyScript", void 0);
 ScriptBuilder = __decorate([
     core_1.Component({
         selector: 'script-builder',

@@ -8,21 +8,7 @@
   </div>
 
   <div class="jigsawContainer">
-<!--
-    <div class="jigsaw">
-        <span class="t"></span>
-        <span class="b"></span>
-      <span class="text">
-        <img class="actor" src="http://storykart.herokuapp.com/sprites/boy_1.svg"/>
-        <img class="dustbin" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
-        <textarea>Hello World 1</textarea>
-        <img onclick="moveUp(event,this.parentNode.parentNode);" class="btnUp" src="http://freevector.co/wp-content/uploads/2013/07/56692-down-arrow-in-a-circle.png"/>
-        <img onclick="moveDown(event,this.parentNode.parentNode);" class="btnDown" src="http://freevector.co/wp-content/uploads/2013/07/56692-down-arrow-in-a-circle.png"/>
-      </span>
-    </div>
- -->
-
-    <div class="jigsaw clearfix" *ngFor="let script of scriptArray, let i = index">
+    <div class="jigsaw clearfix" *ngFor="let script of storyScript, let i = index">
       <div class="parallel" *ngFor="let item of script | keys">
         <span class="t"></span>
         <span class="b"></span>
@@ -30,24 +16,12 @@
         <span class="r"></span>
         <span class="text">
         <img class="actor" src="http://storykart.herokuapp.com/sprites/{{item.key}}.svg"/>
-        <img class="dustbin" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
-        <textarea>{{item.value}}</textarea>
+        <img class="dustbin" (click)="deleteDialogue(i,item.key)" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
+        <textarea (change)="updateDialogue($event,i,item.key)" >{{item.value}}</textarea>
           <img onclick="moveUp(event,this.parentNode.parentNode);" class="btnUp" src="http://freevector.co/wp-content/uploads/2013/07/56692-down-arrow-in-a-circle.png"/>
           <img onclick="moveDown(event,this.parentNode.parentNode);" class="btnDown" src="http://freevector.co/wp-content/uploads/2013/07/56692-down-arrow-in-a-circle.png"/>
         </span>
       </div>
     </div>
-
-<!--     <div class="jigsaw">
-        <span class="t"></span>
-        <span class="b"></span>
-      <span class="text">
-        <img class="actor" src="http://storykart.herokuapp.com/sprites/boy_1.svg"/>
-        <img class="dustbin" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
-        <textarea>Hello World 1</textarea>
-        <img onclick="moveUp(event,this.parentNode.parentNode);" class="btnUp" src="http://freevector.co/wp-content/uploads/2013/07/56692-down-arrow-in-a-circle.png"/>
-        <img onclick="moveDown(event,this.parentNode.parentNode);" class="btnDown" src="http://freevector.co/wp-content/uploads/2013/07/56692-down-arrow-in-a-circle.png"/>
-      </span>
-    </div> -->
   </div>
 </div>

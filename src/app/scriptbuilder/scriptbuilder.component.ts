@@ -1,5 +1,7 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
+import { Story } from '../story/story.component';
+import { Dashboard } from '../dashboard/dashboard';
 declare var jQuery: any;
 
 @Component({
@@ -9,19 +11,20 @@ declare var jQuery: any;
 
 export class ScriptBuilder {
 	removeMode:boolean = false;
-	scriptArray:any;
+	storyScript: any;
+	updateDialogue: any;
+	deleteDialogue: any;
 
-	constructor(private router: Router) {
-		this.scriptArray=[{
-			"boy_1":"Hello World_1",
-			"boy_2":"Hello World_2"
-		},{
-			"girl_3":"Hello World_3"
+	constructor(public dashboardInstance: Dashboard) {
+		this.storyScript= dashboardInstance.storyScript;
+		this.updateDialogue = function(ev, index, actor){
+			dashboardInstance.updateDialogue(index, actor, ev.target.value);
 		}
-		]
+		this.deleteDialogue = function(index, actor){
+			delete this.storyScript[index][actor];
+			console.log(this.storyScript)
+			dashboardInstance.deleteDialogue(index, actor);
+		}
 	}
 
-	ngOnInit() {
-
-	}
 }
