@@ -11,6 +11,7 @@ declare var jQuery: any;
 
 export class ScriptBuilder {
 	removeMode:boolean = false;
+	addMode:boolean = false;
 	storyScript: any;
 	updateDialogue: any;
 	deleteDialogue: any;
@@ -31,6 +32,7 @@ export class ScriptBuilder {
 		}
 		this.addDialogue = function(index, actor, dialogue){
 			this.removeMode=false;
+			this.addMode=
 			dashboardInstance.addDialogue();
 		}		
 	}

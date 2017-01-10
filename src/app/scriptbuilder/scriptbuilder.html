@@ -1,10 +1,16 @@
 <div class="script-builder"  [class.remove]="removeMode">
   <div>
-    <span>Dialogues</span>
     <span class="script-controls">
-        <a class="addDialogue" (click)="addDialogue()">Add</a>/
+        <a class="addDialogue" (click)="addMode=!addMode" *ngIf="!addMode || removeMode">Add</a>
+        <span class="btnScript" *ngIf="addMode && !removeMode">
+          <img src="images/UD.png" (click)="addDialogue()"/>
+          <img src="images/LR.png" (click)="addDialogue()"/>
+          <img class="cancel" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png" (click)="addMode=!addMode"/>
+
+        </span>/
         <a class="removeDialogue" (click)="removeMode=!removeMode">{{(removeMode)?"Okay":"Remove"}}</a>
     </span>
+    <span>Dialogues</span>
   </div>
 
   <div class="jigsawContainer">

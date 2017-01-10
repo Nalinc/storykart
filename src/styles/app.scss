@@ -469,6 +469,26 @@ header{
 							text-align: right;
 							width: 100%;
 							.script-controls{
+								.btnScript{
+									img{
+										width:25px;
+										cursor:pointer;
+										border: 2px solid;
+										border-radius: 5px;
+										margin-top: -10px;
+										&.cancel{
+											width: 16px;
+											border: none;
+											&:hover{
+											background-color: #e26161;
+											}
+										}
+										&:hover{
+											background-color: #aaf636;
+											border-radius: 5px;
+										}
+									}
+								}
 								a{
 									color: #337ab7;
 									font-family: fantasy;
