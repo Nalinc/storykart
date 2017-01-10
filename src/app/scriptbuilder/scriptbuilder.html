@@ -2,14 +2,14 @@
   <div>
     <span>Dialogues</span>
     <span class="script-controls">
-        <a class="addDialogue" (click)="removeMode=false">Add</a>/
+        <a class="addDialogue" (click)="addDialogue()">Add</a>/
         <a class="removeDialogue" (click)="removeMode=!removeMode">{{(removeMode)?"Okay":"Remove"}}</a>
     </span>
   </div>
 
   <div class="jigsawContainer">
     <div class="jigsaw clearfix" *ngFor="let script of storyScript, let i = index">
-      <div class="parallel" *ngFor="let item of script | keys">
+      <div class="parallel" *ngFor="let item of script | keys" [attr.data-name]="item.key">
         <span class="t"></span>
         <span class="b"></span>
         <span class="l"></span>

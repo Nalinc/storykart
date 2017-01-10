@@ -37,6 +37,7 @@ export class Dashboard extends Story implements AfterViewInit{
 	storyScript: any;
 	updateDialogue: any;
 	deleteDialogue: any;
+	addDialogue: any;
 	compileScript: any;
 	initScript: any;
 	errScript: any;
@@ -235,6 +236,9 @@ export class Dashboard extends Story implements AfterViewInit{
 		}
 		this.deleteDialogue = function(index, actor){
 			delete this.storyScript[index][actor];
+		}
+		this.addDialogue = function(){
+			this.storyScript.push({"boy_1":"Hi"})
 		}
 
 		this.publishStory = function(){

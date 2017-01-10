@@ -14,6 +14,7 @@ export class ScriptBuilder {
 	storyScript: any;
 	updateDialogue: any;
 	deleteDialogue: any;
+	addDialogue: any;
 
 	constructor(public dashboardInstance: Dashboard) {
 		this.storyScript= dashboardInstance.storyScript;
@@ -21,10 +22,17 @@ export class ScriptBuilder {
 			dashboardInstance.updateDialogue(index, actor, ev.target.value);
 		}
 		this.deleteDialogue = function(index, actor){
-			delete this.storyScript[index][actor];
-			console.log(this.storyScript)
+			var ele = jQuery('.jigsawContainer .jigsaw')[index];
+			if(jQuery(ele).find('.parallel').length > 1)
+				jQuery(ele).find('.parallel[data-name='+actor+']').remove();
+			else
+				jQuery(ele).remove();
 			dashboardInstance.deleteDialogue(index, actor);
 		}
+		this.addDialogue = function(index, actor, dialogue){
+			this.removeMode=false;
+			dashboardInstance.addDialogue();
+		}		
 	}
 
 }
