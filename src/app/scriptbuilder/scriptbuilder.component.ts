@@ -33,9 +33,9 @@ export class ScriptBuilder {
 				jQuery(ele).remove();
 			dashboardInstance.deleteDialogue(index, actor);
 		}
-		this.addDialogue = function(){
+		this.addDialogue = function(mode){
 			this.removeMode=false;
-			dashboardInstance.addDialogue();
+			dashboardInstance.addDialogue(mode);
 			var that = this;
 			setTimeout(function(){
 				that.initiateSortable();	

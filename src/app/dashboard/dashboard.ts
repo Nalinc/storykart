@@ -237,8 +237,16 @@ export class Dashboard extends Story implements AfterViewInit{
 		this.deleteDialogue = function(index, actor){
 			delete this.storyScript[index][actor];
 		}
-		this.addDialogue = function(){
-			this.storyScript.push({"boy_1":"Hi"})
+		this.addDialogue = function(mode){
+			if(mode=="horizontal"){
+				console.log(mode)
+				this.storyScript[this.storyScript.length-1]["boy_1"]="Hi";
+			}
+			else{
+				console.log("=======")
+				this.storyScript.push({"boy_1":"Hi"});
+			}
+			console.log(this.storyScript)
 		}
 
 		this.publishStory = function(){
