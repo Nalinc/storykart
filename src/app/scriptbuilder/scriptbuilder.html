@@ -3,8 +3,8 @@
     <span class="script-controls">
         <a class="addDialogue" (click)="addMode=!addMode" *ngIf="!addMode || removeMode">Add</a>
         <span class="btnScript" *ngIf="addMode && !removeMode">
-          <img src="images/UD.png" (click)="addDialogue()"/>
-          <img src="images/LR.png" (click)="addDialogue()"/>
+          <img src="images/UD.png" (click)="addDialogue('vertical')"/>
+          <img src="images/LR.png" (click)="addDialogue('horizontal')"/>
           <img class="cancel" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png" (click)="addMode=!addMode"/>
 
         </span>/
@@ -14,7 +14,7 @@
   </div>
 
   <div class="jigsawContainer">
-    <div class="jigsaw clearfix" *ngFor="let script of storyScript, let i = index">
+    <div class="jigsaw clearfix" *ngFor="let script of storyScript, let i = index" id="{{i}}">
       <div class="parallel" *ngFor="let item of script | keys" [attr.data-name]="item.key">
         <span class="t"></span>
         <span class="b"></span>
@@ -24,8 +24,6 @@
         <img class="actor" src="http://storykart.herokuapp.com/sprites/{{item.key}}.svg"/>
         <img class="dustbin" (click)="deleteDialogue(i,item.key)" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
         <textarea (change)="updateDialogue($event,i,item.key)" >{{item.value}}</textarea>
-          <img onclick="moveUp(event,this.parentNode.parentNode);" class="btnUp" src="http://freevector.co/wp-content/uploads/2013/07/56692-down-arrow-in-a-circle.png"/>
-          <img onclick="moveDown(event,this.parentNode.parentNode);" class="btnDown" src="http://freevector.co/wp-content/uploads/2013/07/56692-down-arrow-in-a-circle.png"/>
         </span>
       </div>
     </div>

@@ -511,7 +511,7 @@ header{
 								width: 100%;
 							    border: 1px solid #a9a9a9;
 								.jigsaw{
-							    	width: 700px;
+							    	width: 900px;
 							    	height: 100px;
 						    	    float: left;
 									&:first-child{
@@ -544,9 +544,12 @@ header{
 												.text{
 													textarea{
 														float:left;
+														left: -15px;
+
 													}
 													.actor{
 														float: left;
+														left: -15px;
 													}
 													.btnUp, .btnDown{
 														right: 12px;
@@ -566,9 +569,11 @@ header{
 												.text{
 													textarea{
 														float:right;
+														right: 0px;
 													}								
 													.actor{
 														float: right;
+														right: 0px;
 													}
 													.btnUp, .btnDown{
 														left: 12px;
@@ -579,7 +584,7 @@ header{
 
 
 									.parallel{
-										width: 300px;
+										width: 200px;
 										height: 6em;
 										margin: 3px;
 										position: relative;
@@ -594,7 +599,7 @@ header{
 											height: 2em;
 											position: absolute;
 											top: -1.7em;
-											left: 8.5em;
+											left: 5.5em;
 											-webkit-border-radius: 4em;
 											-moz-border-radius: 4em;
 											border-radius: 4em;
@@ -604,7 +609,7 @@ header{
 											height: 1.8em;
 											position: absolute;
 											top: 4.5em;
-											left: 8.5em;
+											left: 5.5em;
 											-webkit-border-radius: 4em;
 											-moz-border-radius: 4em;
 											border-radius: 4em;
@@ -641,13 +646,15 @@ header{
 											background: transparent !important;							
 											textarea{
 												position: relative;
-												font-size: 14px;
+												font-size: 12px;
+												line-height: 10px;
 												height: 50px;
+												width: 120px;
 												resize: none;
 												color: #000;
 											}
 											.actor{
-												width:50px;
+												width:40px;
 												position: relative;
 												cursor: pointer;
 												&:hover{

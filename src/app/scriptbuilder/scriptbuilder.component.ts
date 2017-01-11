@@ -33,9 +33,8 @@ export class ScriptBuilder {
 				jQuery(ele).remove();
 			dashboardInstance.deleteDialogue(index, actor);
 		}
-		this.addDialogue = function(index, actor, dialogue){
+		this.addDialogue = function(){
 			this.removeMode=false;
-			this.addMode=false;
 			dashboardInstance.addDialogue();
 			var that = this;
 			setTimeout(function(){
@@ -45,16 +44,44 @@ export class ScriptBuilder {
 		}
 		this.initiateSortable = function(){
 			this.jigsawArray = jQuery(".jigsawContainer .jigsaw");
-			console.log(this.jigsawArray)
 			jQuery(this.jigsawArray).sortable({
-				connectWith: ".jigsaw"
+				connectWith: ".jigsaw",
+				stop: function (ev, elem) {
+					var actorName = elem.item[0].getAttribute("data-name");
+					var sourceIndex = jQuery(ev.target).index()
+					var destinationIndex = jQuery(elem.item[0].parentNode).index()
+					console.log(actorName)
+					console.log(sourceIndex)
+					console.log(destinationIndex)
+					if(dashboardInstance.storyScript[destinationIndex][actorName]){
+						var ele = jQuery('.jigsawContainer .jigsaw')[destinationIndex];
+						jQuery(ele).first('.parallel[data-name='+actorName+']').remove();
+					}
+					setTimeout(function(){
+						dashboardInstance.storyScript[destinationIndex][actorName] = dashboardInstance.storyScript[sourceIndex][actorName];
+						delete dashboardInstance.storyScript[sourceIndex][actorName];
+					})
+					if(Object.keys(dashboardInstance.storyScript[sourceIndex]).length == 0 ){
+						dashboardInstance.storyScript.pop();
+					}
+					console.log(dashboardInstance.storyScript)
+
+				}
 			});
 		}
 	}
 
 	ngAfterViewInit() {
-		console.log()
 		this.initiateSortable();
+/*		jQuery(document).on('mouseup', ".jigsaw", function(ev){
+			console.log(ev);
+			console.log(ev.target);
+			console.log(ev.target.parentNode);
+			console.log(ev.target.parentNode.parentNode);
+			console.log(ev.target.nextSibling);
+			console.log(jQuery(ev.target).closest('.jigsaw'));
+			console.log(jQuery(ev.target).closest('.jigsaw').index());
+		});*/
 	}
 
 }
