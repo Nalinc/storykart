@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, AfterViewInit} from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
 import { Story } from '../story/story.component';
 import { Dashboard } from '../dashboard/dashboard';
+require('jquery-ui/sortable');
 declare var jQuery: any;
 
 @Component({
@@ -16,6 +17,8 @@ export class ScriptBuilder {
 	updateDialogue: any;
 	deleteDialogue: any;
 	addDialogue: any;
+	jigsawArray: any;
+	initiateSortable: any;
 
 	constructor(public dashboardInstance: Dashboard) {
 		this.storyScript= dashboardInstance.storyScript;
@@ -32,9 +35,26 @@ export class ScriptBuilder {
 		}
 		this.addDialogue = function(index, actor, dialogue){
 			this.removeMode=false;
-			this.addMode=
+			this.addMode=false;
 			dashboardInstance.addDialogue();
-		}		
+			var that = this;
+			setTimeout(function(){
+				that.initiateSortable();	
+			})
+			
+		}
+		this.initiateSortable = function(){
+			this.jigsawArray = jQuery(".jigsawContainer .jigsaw");
+			console.log(this.jigsawArray)
+			jQuery(this.jigsawArray).sortable({
+				connectWith: ".jigsaw"
+			});
+		}
+	}
+
+	ngAfterViewInit() {
+		console.log()
+		this.initiateSortable();
 	}
 
 }

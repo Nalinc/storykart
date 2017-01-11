@@ -511,7 +511,9 @@ header{
 								width: 100%;
 							    border: 1px solid #a9a9a9;
 								.jigsaw{
-								    	width: 700px;
+							    	width: 700px;
+							    	height: 100px;
+						    	    float: left;
 									&:first-child{
 											.parallel{
 											  .text{

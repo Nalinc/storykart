@@ -36,7 +36,11 @@ module.exports = {
     //ToDo
     cache: false,
     // Webpack will process these file extensions
-    extensions: ['','.ts','.js','.json','.css','.html']
+    extensions: ['','.ts','.js','.json','.css','.html'],
+    alias: {
+      'jquery-ui': 'jquery-ui/ui/widgets'
+    }    
+
   },
   devtool: 'source-map',
   module: {
