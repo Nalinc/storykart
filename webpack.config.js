@@ -39,7 +39,7 @@ module.exports = {
     extensions: ['','.ts','.js','.json','.css','.html'],
     alias: {
       'jquery-ui': 'jquery-ui/ui/widgets'
-    }    
+    }
 
   },
   devtool: 'source-map',
