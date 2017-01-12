@@ -20,18 +20,20 @@ export class ScriptBuilder {
 	jigsawArray: any;
 	initiateSortable: any;
 
-	constructor(public dashboardInstance: Dashboard) {
+	constructor(private dashboardInstance: Dashboard) {
 		this.storyScript= dashboardInstance.storyScript;
-		this.updateDialogue = function(ev, index, actor){
-			dashboardInstance.updateDialogue(index, actor, ev.target.value);
+		this.updateDialogue = function(ev, actor){
+			var sourceIndex = jQuery(ev.target.parentNode.parentNode.parentNode).index();
+			dashboardInstance.updateDialogue(sourceIndex, actor, ev.target.value);
 		}
-		this.deleteDialogue = function(index, actor){
-			var ele = jQuery('.jigsawContainer .jigsaw')[index];
+		this.deleteDialogue = function(event, actor){
+			var sourceIndex = jQuery(event.target.parentNode.parentNode.parentNode).index();
+			var ele = jQuery('.jigsawContainer .jigsaw')[sourceIndex];
 			if(jQuery(ele).find('.parallel').length > 1)
 				jQuery(ele).find('.parallel[data-name='+actor+']').remove();
 			else
 				jQuery(ele).remove();
-			dashboardInstance.deleteDialogue(index, actor);
+			delete this.storyScript[sourceIndex][actor];
 		}
 		this.addDialogue = function(mode){
 			this.removeMode=false;
@@ -50,21 +52,17 @@ export class ScriptBuilder {
 					var actorName = elem.item[0].getAttribute("data-name");
 					var sourceIndex = jQuery(ev.target).index()
 					var destinationIndex = jQuery(elem.item[0].parentNode).index()
-					console.log(actorName)
-					console.log(sourceIndex)
-					console.log(destinationIndex)
 					if(dashboardInstance.storyScript[destinationIndex][actorName]){
-						var ele = jQuery('.jigsawContainer .jigsaw')[destinationIndex];
-						jQuery(ele).first('.parallel[data-name='+actorName+']').remove();
+						var ele = jQuery(elem.item[0]);
+						ele.siblings('[data-name='+actorName+']').remove()
 					}
 					setTimeout(function(){
 						dashboardInstance.storyScript[destinationIndex][actorName] = dashboardInstance.storyScript[sourceIndex][actorName];
 						delete dashboardInstance.storyScript[sourceIndex][actorName];
+						if(Object.keys(dashboardInstance.storyScript[sourceIndex]).length == 0 ){
+							dashboardInstance.storyScript.splice(sourceIndex,1);
+						}
 					})
-					if(Object.keys(dashboardInstance.storyScript[sourceIndex]).length == 0 ){
-						dashboardInstance.storyScript.pop();
-					}
-					console.log(dashboardInstance.storyScript)
 
 				}
 			});
@@ -73,15 +71,6 @@ export class ScriptBuilder {
 
 	ngAfterViewInit() {
 		this.initiateSortable();
-/*		jQuery(document).on('mouseup', ".jigsaw", function(ev){
-			console.log(ev);
-			console.log(ev.target);
-			console.log(ev.target.parentNode);
-			console.log(ev.target.parentNode.parentNode);
-			console.log(ev.target.nextSibling);
-			console.log(jQuery(ev.target).closest('.jigsaw'));
-			console.log(jQuery(ev.target).closest('.jigsaw').index());
-		});*/
 	}
 
 }

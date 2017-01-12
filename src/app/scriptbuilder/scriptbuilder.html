@@ -21,9 +21,9 @@
         <span class="l"></span>
         <span class="r"></span>
         <span class="text">
-        <img class="actor" src="http://storykart.herokuapp.com/sprites/{{item.key}}.svg"/>
-        <img class="dustbin" (click)="deleteDialogue(i,item.key)" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
-        <textarea (change)="updateDialogue($event,i,item.key)" >{{item.value}}</textarea>
+          <img class="actor" src="http://storykart.herokuapp.com/sprites/{{item.key}}.svg"/>
+          <img class="dustbin" (click)="deleteDialogue($event,item.key)" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
+          <textarea (change)="updateDialogue($event,item.key)" >{{item.value}}</textarea>
         </span>
       </div>
     </div>
