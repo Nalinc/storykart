@@ -46,6 +46,28 @@ export class StoryService {
 		let body = JSON.stringify(story);
 		return this.http.post('/stories', body, options).map((res: Response) => res.json());
 	}
+
+	updateDialogue = function(index, actor, dialogue){
+		this.storyScript[index][actor] = dialogue;
+	}
+	deleteDialogue = function(index, actor){
+		if(Object.keys(this.storyScript[index]).length>1)
+			delete this.storyScript[index][actor];
+		else
+			this.storyScript.splice(index, 1);
+	}
+	addDialogue = function(mode){
+		if(mode=="horizontal"){
+			if(this.storyScript[this.storyScript.length-1]["boy_1"])
+				this.storyScript[this.storyScript.length-1]["boy_1"]+="\nHi";
+			else
+				this.storyScript[this.storyScript.length-1]["boy_1"]="Hi";
+		}
+		else if(mode=="vertical"){
+			this.storyScript.push({"boy_1":"Hi"});
+		}
+	}
+
 	ngOnInit(){
 		//console.log(this.params)
 	}

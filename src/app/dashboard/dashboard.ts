@@ -231,7 +231,7 @@ export class Dashboard extends Story implements AfterViewInit{
 			}
 			return this.storyScript;
 		}
-		this.updateDialogue = function(index, actor, dialogue){
+/*		this.updateDialogue = function(index, actor, dialogue){
 			this.storyScript[index][actor] = dialogue;
 		}
 		this.deleteDialogue = function(index, actor){
@@ -245,12 +245,11 @@ export class Dashboard extends Story implements AfterViewInit{
 				console.log(mode)
 				this.storyScript[this.storyScript.length-1]["boy_1"]="Hi";
 			}
-			else{
-				console.log("=======")
+			else if(mode=="vertical"){
 				this.storyScript.push({"boy_1":"Hi"});
 			}
 			console.log(this.storyScript)
-		}
+		}*/
 
 		this.publishStory = function(){
 			console.log(this.storyJSON);

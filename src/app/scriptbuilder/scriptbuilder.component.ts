@@ -1,13 +1,13 @@
-import {Component, Input, AfterViewInit} from '@angular/core';
+import {Component, Input, AfterViewInit, ChangeDetectionStrategy} from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
-import { Story } from '../story/story.component';
-import { Dashboard } from '../dashboard/dashboard';
+import { StoryService } from '../story/story.service';
 require('jquery-ui/sortable');
 declare var jQuery: any;
 
 @Component({
     selector: 'script-builder',
-    template: require('./scriptbuilder.html')
+    template: require('./scriptbuilder.html'),
+  	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ScriptBuilder {
@@ -20,11 +20,11 @@ export class ScriptBuilder {
 	jigsawArray: any;
 	initiateSortable: any;
 
-	constructor(private dashboardInstance: Dashboard) {
-		this.storyScript= dashboardInstance.storyScript;
+	constructor(private storyInstance: StoryService) {
+		this.storyScript= storyInstance.storyScript;
 		this.updateDialogue = function(ev, actor){
 			var sourceIndex = jQuery(ev.target.parentNode.parentNode.parentNode).index();
-			dashboardInstance.updateDialogue(sourceIndex, actor, ev.target.value);
+			storyInstance.updateDialogue(sourceIndex, actor, ev.target.value);
 		}
 		this.deleteDialogue = function(event, actor){
 			var sourceIndex = jQuery(event.target.parentNode.parentNode.parentNode).index();
@@ -37,10 +37,13 @@ export class ScriptBuilder {
 		}
 		this.addDialogue = function(mode){
 			this.removeMode=false;
-			dashboardInstance.addDialogue(mode);
+			storyInstance.addDialogue(mode);
 			var that = this;
+			if(mode=="horizontal"){
+				//elem.item[0].lastElementChild.lastElementChild.textContent = storyInstance.storyScript[destinationIndex][actorName];
+			}
 			setTimeout(function(){
-				that.initiateSortable();	
+				that.initiateSortable();
 			})
 			
 		}
@@ -52,18 +55,25 @@ export class ScriptBuilder {
 					var actorName = elem.item[0].getAttribute("data-name");
 					var sourceIndex = jQuery(ev.target).index()
 					var destinationIndex = jQuery(elem.item[0].parentNode).index()
-					if(dashboardInstance.storyScript[destinationIndex][actorName]){
-						var ele = jQuery(elem.item[0]);
-						ele.siblings('[data-name='+actorName+']').remove()
-					}
-					setTimeout(function(){
-						dashboardInstance.storyScript[destinationIndex][actorName] = dashboardInstance.storyScript[sourceIndex][actorName];
-						delete dashboardInstance.storyScript[sourceIndex][actorName];
-						if(Object.keys(dashboardInstance.storyScript[sourceIndex]).length == 0 ){
-							dashboardInstance.storyScript.splice(sourceIndex,1);
-						}
-					})
+					var text = "";
 
+					if(sourceIndex==destinationIndex) return;
+					if(storyInstance.storyScript[destinationIndex][actorName]){
+						var ele = jQuery(elem.item[0]);
+						var siblings = ele.siblings('[data-name='+actorName+']')
+						jQuery.each(siblings,function(i){
+							text += siblings[i].lastElementChild.textContent.trim()+"\n";
+						})
+						siblings.remove();
+						
+					}
+					storyInstance.storyScript[destinationIndex][actorName] = text + storyInstance.storyScript[sourceIndex][actorName];
+					elem.item[0].lastElementChild.lastElementChild.textContent = storyInstance.storyScript[destinationIndex][actorName];
+					delete storyInstance.storyScript[sourceIndex][actorName];
+					if(Object.keys(storyInstance.storyScript[sourceIndex]).length == 0 ){
+						jQuery('.jigsawContainer .jigsaw').last().remove()
+						storyInstance.storyScript.splice(sourceIndex,1);
+					}
 				}
 			});
 		}
