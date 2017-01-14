@@ -22,9 +22,19 @@ import { MakeDraggable } from './dashboard/makeDraggable.directive';
 
 
 @NgModule({
-  imports: [ BrowserModule, routing, HttpModule],       // module dependencies
-  declarations: [ App, Home, Story, Dashboard, ScriptBuilder, Header, Footer, MakeDraggable, MakeDroppable, KeysPipe],   // components and directives
-  bootstrap: [ App ],     // root component
-  providers: [StoryService, {provide: LocationStrategy, useClass: HashLocationStrategy}]   // services
+	imports: [ BrowserModule, routing, HttpModule],       // module dependencies
+	declarations: [ 
+		App,
+		Home, 
+		Story, 
+		Dashboard, 
+		ScriptBuilder, 
+		Header, 
+		Footer, 
+		MakeDraggable,
+		MakeDroppable, 
+		KeysPipe],   // components and directives
+	bootstrap: [ App ],     // root component
+	providers: [StoryService, {provide: LocationStrategy, useClass: HashLocationStrategy}]   // services
 })
 export class AppModule { }
