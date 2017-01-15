@@ -15,28 +15,28 @@
 
   <div class="jigsawContainer">
     <div class="jigsaw clearfix" *ngFor="let script of storyScript, let i = index" id="{{i}}" #jigsaw>
-      <div class="parallel" *ngFor="let item of script | keys" [attr.data-name]="item.key" #parallel>
+      <div class="parallel" *ngFor="let item of script, let j = index" [attr.data-name]="item.actor" #parallel>
         <span class="t"></span>
         <span class="b"></span>
         <span class="l"></span>
         <span class="r"></span>
         <span class="text">
-<!--           <img class="actor" src="http://storykart.herokuapp.com/sprites/{{item.key}}.svg"/> -->
+<!--           <img class="actor" src="http://storykart.herokuapp.com/sprites/{{item.actor}}.svg"/> -->
           <div class="multiple-select-wrapper">
             <div class="selected-item-box">
-                  <img class="scriptActor" #currentActor (click)="toggleList(actorsList,jigsaw)" src="http://storykart.herokuapp.com/sprites/{{item.key}}.svg" title="{{item.key}}" />
+                  <img class="scriptActor" #currentActor (click)="toggleList(actorsList,jigsaw)" src="http://storykart.herokuapp.com/sprites/{{item.actor}}.svg" title="{{item.actor}}" />
             </div>
             <div class="list" #actorsList>
              <ul class="items-list">
                 <li *ngFor="let actor of availableActors">
-                  <img (click)="changeActor(actor,currentActor,actorsList,jigsaw,parallel)" src="http://storykart.herokuapp.com/sprites/{{actor}}.svg" title="{{actor}}" alt="{{actor}}" />
+                  <img (click)="changeActor(actor,actorsList,i,j)" src="http://storykart.herokuapp.com/sprites/{{actor}}.svg" title="{{actor}}" alt="{{actor}}" />
                   <!--<div>{{airline.name}}</div>-->
                 </li>
               </ul>
             </div>
           </div>          
-          <img class="dustbin" (click)="deleteDialogue($event,item.key)" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
-          <textarea class="scriptText" (change)="updateDialogue($event,item.key)" >{{item.value}}</textarea>
+          <img class="dustbin" (click)="deleteDialogue(i,j)" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
+          <textarea class="scriptText" (change)="updateDialogue($event,i,j)" >{{item.speech}}</textarea>
         </span>
       </div>
     </div>

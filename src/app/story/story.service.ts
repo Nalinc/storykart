@@ -10,17 +10,27 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class StoryService {
 	storyScript: any;
+	scriptTransitionIndex: any;
     // Resolve HTTP using the constructor
     constructor (private http: Http) {
-		this.storyScript=[{
+		/*this.storyScript=[{
 			"boy_1":"Hello World_1",
 			"girl_1":"Hello World_2"
 		},{
 			"boy_1":"Hello World_3"
 		}
-		]
+		]*/
+		this.storyScript=[
+			[
+				{"actor":"boy_1","speech":"Hello World_11"},
+				{"actor":"girl_1","speech":"Hello World_22"}
+			],
+			[
+				{"actor":"boy_1","speech":"Hello World_33"}
+			]
+		];		
     }
-
+	
 	getStories() : Observable<Story[]> {
 	// ...using get request
 	return this.http.get('/stories')
@@ -47,24 +57,43 @@ export class StoryService {
 		return this.http.post('/stories', body, options).map((res: Response) => res.json());
 	}
 
-	updateDialogue = function(index, actor, dialogue){
-		this.storyScript[index][actor] = dialogue;
+	updateDialogue = function(i, j, dialogue){
+		console.log(i+", "+j)
+		var newI;
+		if(this.scriptTransitionIndex){
+			i = this.scriptTransitionIndex;
+			this.scriptTransitionIndex=undefined;
+		}
+		console.log(this.storyScript)
+		this.storyScript[i][j]["speech"] = dialogue;
 	}
-	deleteDialogue = function(index, actor){
-		if(Object.keys(this.storyScript[index]).length>1)
-			delete this.storyScript[index][actor];
-		else
-			this.storyScript.splice(index, 1);
+	deleteDialogue = function(i, j){
+		if(this.storyScript[i].length>1){
+			this.storyScript[i].splice(j,1)
+		}
+		else{
+			this.storyScript.splice(i,1)
+		}
 	}
 	addDialogue = function(mode){
 		if(mode=="horizontal"){
-			if(this.storyScript[this.storyScript.length-1]["boy_1"])
-				this.storyScript[this.storyScript.length-1]["boy_1"]+="\nHi";
-			else
-				this.storyScript[this.storyScript.length-1]["boy_1"]="Hi";
+			console.log(this.storyScript)
+			var lastIndex,lastText;
+			this.storyScript[this.storyScript.length-1].forEach(function(e,i){
+				if(e.actor=="boy_1"){
+					lastIndex=i;
+					lastText =e.speech;
+				}
+			})
+			if(!isNaN(lastIndex)){
+				this.storyScript[this.storyScript.length-1].splice(lastIndex,1);
+				this.storyScript[this.storyScript.length-1].push({"actor":"boy_1","speech":lastText+"\nHi"})
+			}else{
+				this.storyScript[this.storyScript.length-1].push({"actor":"boy_1","speech":"Hi"})
+			}
 		}
 		else if(mode=="vertical"){
-			this.storyScript.push({"boy_1":"Hi"});
+			this.storyScript.push([{"actor":"boy_1","speech":"Hi"}]);
 		}
 	}
 

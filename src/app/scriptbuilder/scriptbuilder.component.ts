@@ -30,57 +30,63 @@ export class ScriptBuilder {
 			if(event.target.className!="scriptActor")
 			jQuery(".multiple-select-wrapper .list").hide();
 		});
-		this.updateDialogue = function(ev, actor){
-			var sourceIndex = jQuery(ev.target.parentNode.parentNode.parentNode).index();
-			storyInstance.updateDialogue(sourceIndex, actor, ev.target.value);
+		this.updateDialogue = function(ev,i,j){
+			storyInstance.updateDialogue(i, j, ev.target.value);
 		}
-		this.deleteDialogue = function(event, actor){
-			var sourceIndex = jQuery(event.target.parentNode.parentNode.parentNode).index();
-			var ele = jQuery('.jigsawContainer .jigsaw')[sourceIndex];
-			if(jQuery(ele).find('.parallel').length > 1){
-
-				jQuery(ele).find('.parallel[data-name='+actor+']').remove();
-				delete this.storyScript[sourceIndex][actor];
-			}
-			else{
-				jQuery(ele).remove();
-				this.storyScript.splice(sourceIndex,1);
-			}
-			
+		this.deleteDialogue = function(i,j){
+			storyInstance.deleteDialogue(i,j);
 		}
 		this.addDialogue = function(mode){
-			this.removeMode=false;
 			storyInstance.addDialogue(mode);
-			var that = this;
-			if(mode=="horizontal"){
-				//elem.item[0].lastElementChild.lastElementChild.textContent = storyInstance.storyScript[destinationIndex][actorName];
-				var ele = jQuery(".jigsawContainer .jigsaw").last().find(".parallel[data-name=boy_1]")
-				if(ele.length){
-					ele.find(".scriptText").val(this.storyScript[this.storyScript.length-1]["boy_1"]);
-				}else{
-					var newJigsaw = jQuery(".jigsawContainer .jigsaw").last().find(".parallel").clone();
-					newJigsaw.attr("data-name","boy_1");
-					newJigsaw.find(".scriptActor").attr("src","http://storykart.herokuapp.com/sprites/boy_1.svg");
-					newJigsaw.find(".scriptActor").attr("title","boy_1");
-					newJigsaw.find(".scriptText").val("Hi");
-					jQuery(".jigsawContainer .jigsaw").last().append(newJigsaw);
-				}
-			}
-			setTimeout(function(){
-				that.initiateSortable();
-			})			
+			setTimeout(()=>{
+				this.initiateSortable();
+			})
 		}
 		this.initiateSortable = function(){
 			this.jigsawArray = jQuery(".jigsawContainer .jigsaw");
 			jQuery(this.jigsawArray).sortable({
 				connectWith: ".jigsaw",
-				stop: function (ev, elem) {
+				stop: (ev, elem) => {
 					var actorName = elem.item[0].getAttribute("data-name");
-					var sourceIndex = jQuery(ev.target).index()
+					var sourceIndex = jQuery(ev.target).index();
+					var sourceRelativeIndex;
 					var destinationIndex = jQuery(elem.item[0].parentNode).index()
+					var destinationRelativeIndex = jQuery(elem.item[0]).index()
 					var text = "";
-
 					if(sourceIndex==destinationIndex) return;
+					storyInstance.storyScript[sourceIndex].forEach(function(e,i){
+						if(e.actor==actorName){
+							sourceRelativeIndex = i;
+						}
+					});
+
+					var lastIndex,lastText;
+					var temp = storyInstance.storyScript[sourceIndex][sourceRelativeIndex];
+					storyInstance.storyScript[destinationIndex].forEach(function(e,i){
+						if(e.actor == actorName){
+							lastIndex = i;
+							lastText = e.speech + "\n";
+						}
+					})
+					if(!isNaN(lastIndex)){
+						storyInstance.storyScript[destinationIndex].splice(lastIndex,1);
+						storyInstance.storyScript[destinationIndex].splice(lastIndex,0,{"actor":actorName,"speech":lastText+temp.speech});
+						var existingElem = jQuery('.jigsawContainer .jigsaw:nth-child('+(destinationIndex+1)+') .parallel:nth-child('+(lastIndex+1)+')');
+						console.log(existingElem)
+						existingElem.find("textarea").val(lastText+temp.speech);
+						jQuery(elem.item[0]).remove();
+					}else{
+						storyInstance.storyScript[destinationIndex].splice(destinationRelativeIndex,0,temp);
+					}
+					storyInstance.storyScript[sourceIndex].splice(sourceRelativeIndex,1);
+					storyInstance.scriptTransitionIndex=destinationIndex;
+					if(storyInstance.storyScript[sourceIndex].length==0){
+						jQuery('.jigsawContainer .jigsaw:nth-child('+(sourceIndex+1)+')').remove()
+						storyInstance.storyScript.splice(sourceIndex,1);
+					}
+					console.log(storyInstance.storyScript)
+
+/*					if(sourceIndex==destinationIndex) return;
 					if(storyInstance.storyScript[destinationIndex][actorName]){
 						text = storyInstance.storyScript[destinationIndex][actorName]+"\n";
 						var siblings = jQuery(elem.item[0]).siblings('[data-name='+actorName+']')
@@ -92,7 +98,7 @@ export class ScriptBuilder {
 					if(Object.keys(storyInstance.storyScript[sourceIndex]).length == 0 ){
 						jQuery('.jigsawContainer .jigsaw:nth-child('+(sourceIndex+1)+')').remove()
 						storyInstance.storyScript.splice(sourceIndex,1);
-					}
+					}*/
 				}
 			});
 		}
@@ -111,13 +117,19 @@ export class ScriptBuilder {
 			if(this.availableActors.length>0)
 				jQuery(actorsList).toggle();
 		}
-		this.changeActor = function(selectedActor,currentActor,actorsList,jigsaw,parallel){
-			var index = jQuery(jigsaw).index()
-			this.storyScript[index][selectedActor] = this.storyScript[index][jQuery(currentActor).attr("title")]
-			delete this.storyScript[index][jQuery(currentActor).attr("title")];
+		this.changeActor = function(selectedActor,actorsList,i,j){
+			var temp = storyInstance.storyScript[i][j];
+			temp["actor"]=selectedActor;
+			storyInstance.storyScript[i].splice(j,1);
+			storyInstance.storyScript[i].splice(j,0,temp);
+/*			var index = jQuery(jigsaw).index()
+			var text = storyInstance.storyScript[index][jQuery(currentActor).attr("title")];
+			console.log(jQuery(currentActor).attr("title"))
+			delete storyInstance.storyScript[index][jQuery(currentActor).attr("title")];
+			storyInstance.storyScript.splice(index, 0, {selectedActor:text})
 			jQuery(currentActor).attr("title",selectedActor)
 			jQuery(currentActor).attr("src","http://storykart.herokuapp.com/sprites/"+selectedActor+".svg")
-			jQuery(parallel).attr("data-name",selectedActor)
+			jQuery(parallel).attr("data-name",selectedActor)*/
 			jQuery(actorsList).toggle();
 		}
 	}
