@@ -44,11 +44,11 @@ export class Story {
 				return true;
 			}
 			var eleArray = [];
-			for(var actor of Object.keys(this.storyScript[this.counter])){
+			for(var item of this.storyScript[this.counter]){
 				var estimatedTime = 2000;
-				var actorName = actor;
+				var actorName = item["actor"];
 				var positionClass, positionFix = jQuery('.story-board [name="'+actorName+'"]').position();
-				var dialogue = this.storyScript[this.counter][actorName];
+				var dialogue = item["speech"];
 				console.log(actorName)
 				console.log(dialogue)
 
