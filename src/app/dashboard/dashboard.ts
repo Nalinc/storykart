@@ -179,7 +179,7 @@ export class Dashboard extends Story implements AfterViewInit{
 				this.modalType='background';
 				this.bgs = ['classroom_1','classroom_2','desert_1','desert_2',
 									'jungle_1','jungle_2','night_1','night_2','road_1',
-									'road_2','stage_1',	'stage_2']
+									'road_2','stage_1',	'stage_2', 'ml']
 			}
 			jQuery("#myModal").css({"display":"block"})
 		}
