@@ -11,6 +11,7 @@ import 'rxjs/add/operator/catch';
 export class StoryService {
 	storyScript: any;
 	scriptTransitionIndex: any;
+	scriptTransitionRelativeIndex: any;
     // Resolve HTTP using the constructor
     constructor (private http: Http) {
 		/*this.storyScript=[{
@@ -58,11 +59,15 @@ export class StoryService {
 	}
 
 	updateDialogue = function(i, j, dialogue){
-		console.log(i+", "+j)
+		console.log("updateDialogue= "+i+", "+j);
 		var newI;
 		if(this.scriptTransitionIndex){
 			i = this.scriptTransitionIndex;
 			this.scriptTransitionIndex=undefined;
+		}
+		if(this.scriptTransitionRelativeIndex){
+			j = this.scriptTransitionRelativeIndex;
+			this.scriptTransitionRelativeIndex=undefined;
 		}
 		console.log(this.storyScript)
 		this.storyScript[i][j]["speech"] = dialogue;

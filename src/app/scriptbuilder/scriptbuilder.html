@@ -14,7 +14,7 @@
   </div>
 
   <div class="jigsawContainer">
-    <div class="jigsaw clearfix" *ngFor="let script of storyScript, let i = index" id="{{i}}" #jigsaw>
+    <div class="jigsaw clearfix" *ngFor="let script of storyScript, let i = index" id="{{i}}" #jigsaw [dragula]="'nested-bag'">
       <div class="parallel" *ngFor="let item of script, let j = index" [attr.data-name]="item.actor" #parallel>
         <span class="t"></span>
         <span class="b"></span>

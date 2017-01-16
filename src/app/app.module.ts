@@ -19,10 +19,11 @@ import { Footer } from './footer/footer';
 import { StoryService } from './story/story.service';
 import { MakeDroppable } from './dashboard/makeDroppable.directive';
 import { MakeDraggable } from './dashboard/makeDraggable.directive';
+import { DragulaModule } from 'ng2-dragula';
 
 
 @NgModule({
-	imports: [ BrowserModule, routing, HttpModule],       // module dependencies
+	imports: [ BrowserModule, routing, HttpModule, DragulaModule],       // module dependencies
 	declarations: [ 
 		App,
 		Home, 

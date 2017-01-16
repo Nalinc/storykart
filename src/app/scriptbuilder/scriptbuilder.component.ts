@@ -1,7 +1,8 @@
 import {Component, Input, AfterViewInit, ChangeDetectionStrategy} from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
 import { StoryService } from '../story/story.service';
-require('jquery-ui/sortable');
+//require('jquery-ui/sortable');
+import {DragulaService} from 'ng2-dragula/ng2-dragula';
 declare var jQuery: any;
 
 @Component({
@@ -38,9 +39,9 @@ export class ScriptBuilder {
 		}
 		this.addDialogue = function(mode){
 			storyInstance.addDialogue(mode);
-			setTimeout(()=>{
+			/*setTimeout(()=>{
 				this.initiateSortable();
-			})
+			})*/
 		}
 		this.initiateSortable = function(){
 			this.jigsawArray = jQuery(".jigsawContainer .jigsaw");
@@ -59,9 +60,10 @@ export class ScriptBuilder {
 							sourceRelativeIndex = i;
 						}
 					});
-
+					console.log("initiateSortable= "+sourceIndex+", "+sourceRelativeIndex+", "+destinationIndex+", "+destinationRelativeIndex)
 					var lastIndex,lastText;
 					var temp = storyInstance.storyScript[sourceIndex][sourceRelativeIndex];
+					console.log(temp)
 					storyInstance.storyScript[destinationIndex].forEach(function(e,i){
 						if(e.actor == actorName){
 							lastIndex = i;
@@ -80,25 +82,12 @@ export class ScriptBuilder {
 					}
 					storyInstance.storyScript[sourceIndex].splice(sourceRelativeIndex,1);
 					storyInstance.scriptTransitionIndex=destinationIndex;
+					storyInstance.scriptTransitionRelativeIndex=destinationRelativeIndex;
 					if(storyInstance.storyScript[sourceIndex].length==0){
 						jQuery('.jigsawContainer .jigsaw:nth-child('+(sourceIndex+1)+')').remove()
 						storyInstance.storyScript.splice(sourceIndex,1);
 					}
 					console.log(storyInstance.storyScript)
-
-/*					if(sourceIndex==destinationIndex) return;
-					if(storyInstance.storyScript[destinationIndex][actorName]){
-						text = storyInstance.storyScript[destinationIndex][actorName]+"\n";
-						var siblings = jQuery(elem.item[0]).siblings('[data-name='+actorName+']')
-						siblings[0].lastElementChild.lastElementChild.textContent= text + storyInstance.storyScript[sourceIndex][actorName]
-						jQuery(elem.item[0]).remove();
-					}
-					storyInstance.storyScript[destinationIndex][actorName] = text + storyInstance.storyScript[sourceIndex][actorName];
-					delete storyInstance.storyScript[sourceIndex][actorName];
-					if(Object.keys(storyInstance.storyScript[sourceIndex]).length == 0 ){
-						jQuery('.jigsawContainer .jigsaw:nth-child('+(sourceIndex+1)+')').remove()
-						storyInstance.storyScript.splice(sourceIndex,1);
-					}*/
 				}
 			});
 		}
@@ -118,6 +107,7 @@ export class ScriptBuilder {
 				jQuery(actorsList).toggle();
 		}
 		this.changeActor = function(selectedActor,actorsList,i,j){
+			console.log("changeActor="+i+", "+j)
 			var temp = storyInstance.storyScript[i][j];
 			temp["actor"]=selectedActor;
 			storyInstance.storyScript[i].splice(j,1);
@@ -135,7 +125,7 @@ export class ScriptBuilder {
 	}
 
 	ngAfterViewInit() {
-		this.initiateSortable();
+//		this.initiateSortable();
 	}
 
 }
