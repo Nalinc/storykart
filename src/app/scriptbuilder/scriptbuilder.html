@@ -1,6 +1,7 @@
 <div class="script-builder"  [class.remove]="removeMode">
   <div>
     <span class="script-controls">
+        <span id="refreshView" (click)="refresh!=refresh"></span>
         <a class="addDialogue" (click)="addMode=!addMode" *ngIf="!addMode || removeMode">Add</a>
         <span class="btnScript" *ngIf="addMode && !removeMode">
           <img src="images/UD.png" (click)="addDialogue('vertical')"/>
@@ -35,7 +36,7 @@
               </ul>
             </div>
           </div>          
-          <img class="dustbin" (click)="deleteDialogue(i,j)" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
+          <img class="dustbin" id="dusbin" (click)="deleteDialogue(i,j)" src="https://cdn1.iconfinder.com/data/icons/epic-hand-drawns/64/delete-512.png"/>
           <textarea class="scriptText" (change)="updateDialogue($event,i,j)" >{{item.speech}}</textarea>
         </span>
       </div>

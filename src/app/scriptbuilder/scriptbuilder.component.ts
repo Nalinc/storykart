@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, AfterViewInit, ChangeDetectionStrategy, ApplicationRef} from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
 import { StoryService } from '../story/story.service';
 require('jquery-ui/sortable');
@@ -23,7 +23,7 @@ export class ScriptBuilder {
 	availableActors:any;
 	changeActor: any;
 
-	constructor(private storyInstance: StoryService) {
+	constructor(public ref:ApplicationRef, private storyInstance: StoryService) {
 		this.storyScript= storyInstance.storyScript;
 
 		jQuery(document).on("click",".script-builder",(event) => {
@@ -53,38 +53,43 @@ export class ScriptBuilder {
 					var destinationIndex = jQuery(elem.item[0].parentNode).index()
 					var destinationRelativeIndex = jQuery(elem.item[0]).index()
 					var text = "";
-					if(sourceIndex==destinationIndex) return;
 					storyInstance.storyScript[sourceIndex].forEach(function(e,i){
 						if(e.actor==actorName){
 							sourceRelativeIndex = i;
 						}
 					});
-
-					var lastIndex,lastText;
-					var temp = storyInstance.storyScript[sourceIndex][sourceRelativeIndex];
-					storyInstance.storyScript[destinationIndex].forEach(function(e,i){
-						if(e.actor == actorName){
-							lastIndex = i;
-							lastText = e.speech + "\n";
-						}
-					})
-					if(!isNaN(lastIndex)){
-						storyInstance.storyScript[destinationIndex].splice(lastIndex,1);
-						storyInstance.storyScript[destinationIndex].splice(lastIndex,0,{"actor":actorName,"speech":lastText+temp.speech});
-						var existingElem = jQuery('.jigsawContainer .jigsaw:nth-child('+(destinationIndex+1)+') .parallel:nth-child('+(lastIndex+1)+')');
-						console.log(existingElem)
-						existingElem.find("textarea").val(lastText+temp.speech);
-						jQuery(elem.item[0]).remove();
+					if(sourceIndex==destinationIndex){
+						if(sourceRelativeIndex==destinationRelativeIndex) return;
+						var tem = storyInstance.storyScript[sourceIndex][sourceRelativeIndex];
+						storyInstance.storyScript[sourceIndex].splice(sourceRelativeIndex,1);
+						storyInstance.storyScript[destinationRelativeIndex].splice(destinationRelativeIndex,0,tem);
 					}else{
-						storyInstance.storyScript[destinationIndex].splice(destinationRelativeIndex,0,temp);
+						var lastIndex,lastText;
+						var temp = storyInstance.storyScript[sourceIndex][sourceRelativeIndex];
+						storyInstance.storyScript[destinationIndex].forEach(function(e,i){
+							if(e.actor == actorName){
+								lastIndex = i;
+								lastText = e.speech + "\n";
+							}
+						})
+						if(!isNaN(lastIndex)){
+							storyInstance.storyScript[destinationIndex].splice(lastIndex,1);
+							storyInstance.storyScript[destinationIndex].splice(lastIndex,0,{"actor":actorName,"speech":lastText+temp.speech});
+							var existingElem = jQuery('.jigsawContainer .jigsaw:nth-child('+(destinationIndex+1)+') .parallel:nth-child('+(lastIndex+1)+')');
+							existingElem.find("textarea").val(lastText+temp.speech);
+						}else{
+							storyInstance.storyScript[destinationIndex].splice(destinationRelativeIndex,0,temp);
+						}
+						storyInstance.storyScript[sourceIndex].splice(sourceRelativeIndex,1);
+						storyInstance.scriptTransitionIndex=destinationIndex;
+						if(storyInstance.storyScript[sourceIndex].length==0){
+							jQuery('.jigsawContainer .jigsaw:nth-child('+(sourceIndex+1)+')').remove()
+							storyInstance.storyScript.splice(sourceIndex,1);
+						}						
 					}
-					storyInstance.storyScript[sourceIndex].splice(sourceRelativeIndex,1);
-					storyInstance.scriptTransitionIndex=destinationIndex;
-					if(storyInstance.storyScript[sourceIndex].length==0){
-						jQuery('.jigsawContainer .jigsaw:nth-child('+(sourceIndex+1)+')').remove()
-						storyInstance.storyScript.splice(sourceIndex,1);
-					}
-					console.log(storyInstance.storyScript)
+
+					jQuery(elem.item[0]).remove();
+					jQuery("#refreshView").trigger("click");
 
 /*					if(sourceIndex==destinationIndex) return;
 					if(storyInstance.storyScript[destinationIndex][actorName]){
@@ -122,16 +127,18 @@ export class ScriptBuilder {
 			temp["actor"]=selectedActor;
 			storyInstance.storyScript[i].splice(j,1);
 			storyInstance.storyScript[i].splice(j,0,temp);
-/*			var index = jQuery(jigsaw).index()
-			var text = storyInstance.storyScript[index][jQuery(currentActor).attr("title")];
-			console.log(jQuery(currentActor).attr("title"))
-			delete storyInstance.storyScript[index][jQuery(currentActor).attr("title")];
-			storyInstance.storyScript.splice(index, 0, {selectedActor:text})
-			jQuery(currentActor).attr("title",selectedActor)
-			jQuery(currentActor).attr("src","http://storykart.herokuapp.com/sprites/"+selectedActor+".svg")
-			jQuery(parallel).attr("data-name",selectedActor)*/
 			jQuery(actorsList).toggle();
 		}
+		function move (arr, old_index, new_index) {
+		    if (new_index >= arr.length) {
+		        var k = new_index - arr.length;
+		        while ((k--) + 1) {
+		            arr.push(undefined);
+		        }
+		    }
+		    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+		    return arr; // for testing purposes
+		};		
 	}
 
 	ngAfterViewInit() {
