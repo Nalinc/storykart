@@ -19,7 +19,7 @@ import { Footer } from './footer/footer';
 import { StoryService } from './story/story.service';
 import { MakeDroppable } from './dashboard/makeDroppable.directive';
 import { MakeDraggable } from './dashboard/makeDraggable.directive';
-
+import {DndModule} from 'ng2-dnd';
 
 @NgModule({
 	imports: [ BrowserModule, routing, HttpModule],       // module dependencies
@@ -30,10 +30,12 @@ import { MakeDraggable } from './dashboard/makeDraggable.directive';
 		Dashboard, 
 		ScriptBuilder, 
 		Header, 
-		Footer, 
+		Footer,
 		MakeDraggable,
 		MakeDroppable, 
-		KeysPipe],   // components and directives
+		KeysPipe
+		DndModule
+	],   // components and directives
 	bootstrap: [ App ],     // root component
 	providers: [StoryService, {provide: LocationStrategy, useClass: HashLocationStrategy}]   // services
 })

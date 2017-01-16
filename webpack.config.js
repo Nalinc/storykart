@@ -38,7 +38,8 @@ module.exports = {
     // Webpack will process these file extensions
     extensions: ['','.ts','.js','.json','.css','.html'],
     alias: {
-      'jquery-ui': 'jquery-ui/ui/widgets'
+      'jquery-ui': 'jquery-ui/ui/widgets',
+      'ng2-dnd': 'ng2-dnd'
     }
 
   },
