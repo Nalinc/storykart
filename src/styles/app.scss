@@ -290,6 +290,20 @@ header{
   					}
   				}
   			}
+  			.story-box{
+  				height: 500px;
+  				.story-board-container{
+  					margin-top:0;
+  				}
+  			}
+  			.create-new{
+  				text-align: center;
+  				.create-new-story{
+					text-decoration: underline;
+					color: #e83c5d;
+					cursor: pointer;
+  				}
+  			}
   		}
   	}
 }
