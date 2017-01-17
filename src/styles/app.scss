@@ -505,15 +505,37 @@ header{
 								}							
 							}
 							.jigsawContainer{
-								padding: 25px;
+								padding: 50px 25px 25px 25px;
 								height:400px;
 								overflow-y: auto;
 								width: 100%;
 							    border: 1px solid #a9a9a9;
+							    &:before{
+									content: "Frame(s)";
+									background-color: #e83c5d;
+									top: 25px;
+									left: 15px;
+									position: absolute;
+									padding: 5px;
+									font-size: 12px;
+									color: #fff;
+									@media all and (max-width: 992px) {
+										top: 60px;
+									}
+							    }
 								.jigsaw{
-							    	width: 900px;
+							    	width: 100%;
 							    	height: 100px;
 						    	    float: left;
+					    	        writing-mode: vertical-lr;
+					    	        margin-left:25px;
+					    	        &:before{
+					    	        	content: "" attr(id) "";
+										writing-mode: initial;
+										top: 40px;
+										position: relative;
+										left: -30px;
+					    	        }
 									&:first-child{
 											.parallel{
 											  .text{
@@ -581,12 +603,11 @@ header{
 												}
 											}
 										}
-
-
 									.parallel{
 										width: 200px;
 										height: 6em;
 										margin: 3px;
+										writing-mode: initial;
 										position: relative;
 										-webkit-border-radius: .5em;
 										-moz-border-radius: .5em;
@@ -767,10 +788,6 @@ header{
 												}
 											}							
 										}
-									}
-
-									@media all and (max-width: 992px) {
-										margin: 0px;
 									}
 								}
 								@media all and (max-width: 1199px) {
