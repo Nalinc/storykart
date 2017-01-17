@@ -23,7 +23,7 @@ export class ScriptBuilder {
 	availableActors:any;
 	changeActor: any;
 
-	constructor(public ref:ApplicationRef, private storyInstance: StoryService) {
+	constructor(public ref:ApplicationRef, public storyInstance: StoryService) {
 		this.storyScript= storyInstance.storyScript;
 
 		jQuery(document).on("click",".script-builder",(event) => {
@@ -90,20 +90,6 @@ export class ScriptBuilder {
 
 					jQuery(elem.item[0]).remove();
 					jQuery("#refreshView").trigger("click");
-
-/*					if(sourceIndex==destinationIndex) return;
-					if(storyInstance.storyScript[destinationIndex][actorName]){
-						text = storyInstance.storyScript[destinationIndex][actorName]+"\n";
-						var siblings = jQuery(elem.item[0]).siblings('[data-name='+actorName+']')
-						siblings[0].lastElementChild.lastElementChild.textContent= text + storyInstance.storyScript[sourceIndex][actorName]
-						jQuery(elem.item[0]).remove();
-					}
-					storyInstance.storyScript[destinationIndex][actorName] = text + storyInstance.storyScript[sourceIndex][actorName];
-					delete storyInstance.storyScript[sourceIndex][actorName];
-					if(Object.keys(storyInstance.storyScript[sourceIndex]).length == 0 ){
-						jQuery('.jigsawContainer .jigsaw:nth-child('+(sourceIndex+1)+')').remove()
-						storyInstance.storyScript.splice(sourceIndex,1);
-					}*/
 				}
 			});
 		}

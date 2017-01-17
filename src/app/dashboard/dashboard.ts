@@ -39,7 +39,6 @@ export class Dashboard extends Story implements AfterViewInit{
 	deleteDialogue: any;
 	addDialogue: any;
 	compileScript: any;
-	initScript: any;
 	errScript: any;
 	publishStory: any;
 	modalType: any;
@@ -49,9 +48,6 @@ export class Dashboard extends Story implements AfterViewInit{
 		super(storyService, route, router);
 		this.storyMode = "paused";
 		this.errScript = false;	
-		this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panel aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
-		//this.storyScript = this.initScript.split('\n');
-		//this.storyScript = this.initScript.split('\n');
 		this.storyScript= storyService.storyScript;
 		this.sprites = {
 			avatars: [
@@ -105,12 +101,12 @@ export class Dashboard extends Story implements AfterViewInit{
 		};
 
 		this.onReset = function(){
-			this.storyScript = "";
+			storyService.storyScript.splice(0,storyService.storyScript.length);
+			jQuery("#refreshView").trigger("click");
 			var _id = new Date().getTime();
-			jQuery('#script-area').val("")
 			jQuery('.story-board .actor').remove();
 			jQuery('.story-actors .actor').remove();
-			var avatars = ["boy_1","girl_1","man_1"]
+			var avatars = ["girl_1","man_1"]
 			for(var i in avatars){
 				var ele = jQuery("<img />",{
 					"src":'sprites/'+avatars[i]+'.svg',
@@ -120,6 +116,12 @@ export class Dashboard extends Story implements AfterViewInit{
 				})
 				jQuery('.story-actors').append(ele);
 			}
+			jQuery('.story-board').append(jQuery("<img />",{
+					"src":'sprites/boy_1.svg',
+					"name":'boy_1',
+					"class":"actor",
+					"id": _id - 3
+				}));
 			jQuery("#speech").html("").hide();
 		}
 
@@ -272,7 +274,6 @@ export class Dashboard extends Story implements AfterViewInit{
 		}
 	}
 	ngAfterViewInit() {
-		jQuery("textarea").attr('placeholder', this.initScript);
 		//jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left+125});
 	}
 }
