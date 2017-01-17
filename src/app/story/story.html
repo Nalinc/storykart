@@ -1,5 +1,9 @@
   <div id="main">
       <div id="content">
+        <div class="create-new">
+          <span>Like this story ?</span>
+          <span routerLink="/dashboard" class="create-new-story">Create your own</span>
+        </div>      
         <div class="story-box">
               <div class="story-board-container display-main col-xs-12" style="margin-top:-60px;text-align:center;"> 
                 <div class="">{{storyTitle || "Untitled Story"}}</div>
@@ -19,10 +23,5 @@
                 </div>
               </div>
         </div>
-        <div class="create-new">
-          <span>Like this story ?</span>
-          <span routerLink="/dashboard" class="create-new-story">Create your own</span>
-        </div>
-
      </div>
   </div>
