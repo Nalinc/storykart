@@ -1,8 +1,8 @@
 import { NgModule }      from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { routing } from './app.routes'
+import { Accordion, AccordionGroup } from './global/accordion';
 import {
   LocationStrategy,
   HashLocationStrategy
@@ -33,7 +33,9 @@ import { MakeDraggable } from './dashboard/makeDraggable.directive';
 		Footer, 
 		MakeDraggable,
 		MakeDroppable, 
-		KeysPipe],   // components and directives
+		Accordion,
+		AccordionGroup
+		],   // components and directives
 	bootstrap: [ App ],     // root component
 	providers: [StoryService, {provide: LocationStrategy, useClass: HashLocationStrategy}]   // services
 })

@@ -29,7 +29,18 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, app_routes_1.routing, http_1.HttpModule],
-        declarations: [app_1.App, home_1.Home, story_component_1.Story, dashboard_1.Dashboard, scriptbuilder_component_1.ScriptBuilder, header_1.Header, footer_1.Footer, makeDraggable_directive_1.MakeDraggable, makeDroppable_directive_1.MakeDroppable, keysTransform_pipe_1.KeysPipe],
+        declarations: [
+            app_1.App,
+            home_1.Home,
+            story_component_1.Story,
+            dashboard_1.Dashboard,
+            scriptbuilder_component_1.ScriptBuilder,
+            header_1.Header,
+            footer_1.Footer,
+            makeDraggable_directive_1.MakeDraggable,
+            makeDroppable_directive_1.MakeDroppable,
+            keysTransform_pipe_1.KeysPipe
+        ],
         bootstrap: [app_1.App],
         providers: [story_service_1.StoryService, { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }] // services
     })

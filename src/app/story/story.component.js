@@ -28,7 +28,7 @@ var Story = (function () {
             }
             ;
             if (this.storyMode == "paused" && mode != "stepNext" && mode != "stepPrev") {
-                jQuery(".talk-bubble");
+                jQuery(".talk-bubble").remove();
                 clearTimeout(this.timer);
                 return true;
             }
@@ -36,54 +36,62 @@ var Story = (function () {
                 this.storyReset();
                 return true;
             }
-            var estimatedTime = 2000;
-            var actorName = Object.keys(this.storyScript[this.counter])[0];
-            var positionClass, positionFix = jQuery('.story-board [name="' + actorName + '"]').position();
-            var dialogue = this.storyScript[this.counter][actorName];
-            console.log(actorName);
-            console.log(dialogue);
-            //var actor = jQuery('.story-board [name="'+actorName+'"]');
-            jQuery('.story-board [name="' + actorName + '"]').addClass("shake");
-            //console.log(jQuery('.story-board [name="'+actorName+'"]'))
-            if (dialogue.length > 30)
-                estimatedTime = 4000;
-            if (dialogue.length > 80)
-                estimatedTime = 5000;
-            // quadrant 1
-            if (positionFix.top < 200 && positionFix.left > 300) {
-                //positionFix.top = positionFix.top;
-                positionFix.left -= 200;
-                positionClass = "right-in";
+            var eleArray = [];
+            for (var _i = 0, _a = this.storyScript[this.counter]; _i < _a.length; _i++) {
+                var item = _a[_i];
+                var estimatedTime = 2000;
+                var actorName = item["actor"];
+                var positionClass, positionFix = jQuery('.story-board [name="' + actorName + '"]').position();
+                var dialogue = item["speech"];
+                console.log(actorName);
+                console.log(dialogue);
+                //var actor = jQuery('.story-board [name="'+actorName+'"]');
+                jQuery('.story-board [name="' + actorName + '"]').addClass("shake");
+                //console.log(jQuery('.story-board [name="'+actorName+'"]'))
+                if (dialogue.length > 30)
+                    estimatedTime = 4000;
+                if (dialogue.length > 80)
+                    estimatedTime = 5000;
+                // quadrant 1
+                if (positionFix.top < 200 && positionFix.left > 300) {
+                    //positionFix.top = positionFix.top;
+                    positionFix.left -= 200;
+                    positionClass = "right-in";
+                }
+                else if (positionFix.top < 200 && positionFix.left < 300) {
+                    //positionFix.top = positionFix.top;
+                    positionFix.left += 80;
+                    positionClass = "left-in";
+                }
+                else if (positionFix.top > 200 && positionFix.left < 300) {
+                    //positionFix.top -= 100;
+                    positionFix.left += 80;
+                    positionClass = "left-in";
+                }
+                else if (positionFix.top > 200 && positionFix.left > 300) {
+                    //positionFix.top = positionFix.top;
+                    positionFix.left -= 200;
+                    positionClass = "right-in";
+                }
+                //jQuery('.story-board [name="'+actorName+'"]').removeClass("shake");
+                /*<div class="talk-bubble tri-right border round left-in" id="speech"></div>*/
+                var ele = jQuery("<div class='talk-bubble tri-right border round left-in'></div>");
+                eleArray.push(ele);
+                jQuery("#story-board").append(ele);
+                ele.html(dialogue).css(positionFix)
+                    .removeClass("btm-left-in left-in right-in")
+                    .addClass(positionClass).show();
             }
-            else if (positionFix.top < 200 && positionFix.left < 300) {
-                //positionFix.top = positionFix.top;
-                positionFix.left += 80;
-                positionClass = "left-in";
-            }
-            else if (positionFix.top > 200 && positionFix.left < 300) {
-                //positionFix.top -= 100;
-                positionFix.left += 80;
-                positionClass = "left-in";
-            }
-            else if (positionFix.top > 200 && positionFix.left > 300) {
-                //positionFix.top = positionFix.top;
-                positionFix.left -= 200;
-                positionClass = "right-in";
-            }
-            //jQuery('.story-board [name="'+actorName+'"]').removeClass("shake");
-            /*<div class="talk-bubble tri-right border round left-in" id="speech"></div>*/
-            var ele = jQuery("<div class='talk-bubble tri-right border round left-in'></div>");
-            jQuery("#story-board").append(ele);
-            ele.html(dialogue).css(positionFix)
-                .removeClass("btm-left-in left-in right-in")
-                .addClass(positionClass).show();
             if (this.storyScript[this.counter]) {
                 if (mode != "stepNext" && mode != "stepPrev" && this.storyMode == 'play') {
                     var that = this;
                     this.timer = setTimeout(function () {
                         that.counter++;
-                        jQuery('.story-board [name="' + actorName + '"]').removeClass("shake");
-                        ele.remove();
+                        //jQuery('.story-board [name="'+actorName+'"]').removeClass("shake");
+                        jQuery('.story-board .actor').removeClass("shake");
+                        eleArray.forEach(function (ele) {
+                            ele.remove();
+                        });
                         that.storyPlay();
                     }, estimatedTime);
                 }
@@ -96,6 +104,8 @@ var Story = (function () {
         this.storyStepNext = function () {
             if (this.counter < this.storyScript.length) {
                 console.log("next");
+                jQuery(".talk-bubble").remove();
+                jQuery("#story-board .actor").removeClass('shake');
                 this.storyPlay("stepNext");
                 this.counter++;
             }
@@ -103,12 +113,16 @@ var Story = (function () {
         this.storyStepPrev = function () {
             if (this.counter > 0) {
                 console.log("previous");
+                jQuery(".talk-bubble").remove();
+                jQuery("#story-board .actor").removeClass('shake');
                 this.counter--;
                 this.storyPlay("stepPrev");
             }
         };
         this.storyReset = function () {
             this.counter = 0;
+            jQuery(".talk-bubble").remove();
+            jQuery("#story-board .actor").removeClass('shake');
             this.storyMode = "paused";
             clearTimeout(this.timer);
             jQuery("#speech").html("").hide();

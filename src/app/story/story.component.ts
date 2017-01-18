@@ -1,6 +1,7 @@
 import {Component, AfterViewInit} from '@angular/core';
 import { StoryService } from './story.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+/*import { Accordion, AccordionGroup } from '../global/accordion';*/
 declare var jQuery: any;
 
 @Component({
@@ -27,7 +28,7 @@ export class Story {
 	counter: any = 0;
 	storyScript: any;
 	storyActors: any;
-
+    
 	constructor(public storyService: StoryService, public route: ActivatedRoute,  public router: Router){
 		this.storyMode = "paused";
 		this.storyPlay = function(mode){
@@ -144,6 +145,18 @@ export class Story {
 		}
 
 	}
+
+	isGroupOpen = false;
+    groups: Array<any> = [
+        {
+            heading: 'Script',
+            content: this.storyService.storyScript
+        },
+        {
+            heading: 'Created On',
+            content: new Date()
+        }
+    ];
 
 	ngAfterViewInit() {
 	}

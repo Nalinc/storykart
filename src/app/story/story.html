@@ -5,7 +5,7 @@
           <span routerLink="/dashboard" class="create-new-story">Create your own</span>
         </div>      
         <div class="story-box">
-              <div class="story-board-container display-main col-xs-12" style="margin-top:-60px;text-align:center;"> 
+              <div class="story-board-container display-main" style="margin-top:-60px;text-align:center;"> 
                 <div class="">{{storyTitle || "Untitled Story"}}</div>
                 <div class="story-board-wrapper">
                   <div class="story-board" id="story-board" style="float: none;" [style.background-image]="'url(' + storyBackground + ')'">
@@ -21,6 +21,24 @@
                     <img src="images/btn_next.png" class="next-prev" (click)="storyStepNext()">
                   </div>
                 </div>
+              </div>
+              <div class="meta-container">
+                <div class="">Information</div>
+                <div class="meta-info">
+                  <accordion>
+                    <accordion-group heading="Author">
+                      Anonymous
+                    </accordion-group>
+                    <accordion-group [heading]="group.heading" *ngFor="let group of groups">
+                      {{group.content}}
+                    </accordion-group>
+                    <accordion-group heading="Credits">
+                      Background Image: xxx
+                      Story Actors: yyy
+                    </accordion-group>
+                  </accordion>                  
+                </div>
+
               </div>
         </div>
      </div>

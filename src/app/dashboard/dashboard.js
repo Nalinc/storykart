@@ -31,16 +31,7 @@ var Dashboard = (function (_super) {
         _this.counter = 0;
         _this.storyMode = "paused";
         _this.errScript = false;
-        _this.initScript = "boy_1: Hi, I am the first actor in your story\nboy_1: You can select other actors from panel aside..\nboy_1: and create your own script\nboy_1: Hover over the actor/object to know it's name";
-        //this.storyScript = this.initScript.split('\n');
-        //this.storyScript = this.initScript.split('\n');
-        _this.storyScript = [{
-                "boy_1": "Hello World_1",
-                "boy_2": "Hello World_2"
-            }, {
-                "boy_1": "Hello World_3"
-            }
-        ];
+        _this.storyScript = storyService.storyScript;
         _this.sprites = {
             avatars: [
                 { "name": "boy_1", "selected": "" },
@@ -89,12 +80,12 @@ var Dashboard = (function (_super) {
             jQuery(ev.target).append(ele);
         };
         _this.onReset = function () {
-            this.storyScript = "";
+            storyService.storyScript.splice(0, storyService.storyScript.length);
+            jQuery("#refreshView").trigger("click");
             var _id = new Date().getTime();
-            jQuery('#script-area').val("");
             jQuery('.story-board .actor').remove();
             jQuery('.story-actors .actor').remove();
-            var avatars = ["boy_1", "girl_1", "man_1"];
+            var avatars = ["girl_1", "man_1"];
             for (var i in avatars) {
                 var ele = jQuery("<img />", {
                     "src": 'sprites/' + avatars[i] + '.svg',
@@ -104,6 +95,12 @@ var Dashboard = (function (_super) {
                 });
                 jQuery('.story-actors').append(ele);
             }
+            jQuery('.story-board').append(jQuery("<img />", {
+                "src": 'sprites/boy_1.svg',
+                "name": 'boy_1',
+                "class": "actor",
+                "id": _id - 3
+            }));
             jQuery("#speech").html("").hide();
         };
         _this.showModal = function (type) {
@@ -159,7 +156,7 @@ var Dashboard = (function (_super) {
                 this.modalType = 'background';
                 this.bgs = ['classroom_1', 'classroom_2', 'desert_1', 'desert_2',
                     'jungle_1', 'jungle_2', 'night_1', 'night_2', 'road_1',
-                    'road_2', 'stage_1', 'stage_2'];
+                    'road_2', 'stage_1', 'stage_2', 'ml'];
             }
             jQuery("#myModal").css({ "display": "block" });
         };
@@ -212,6 +209,25 @@ var Dashboard = (function (_super) {
             }
             return this.storyScript;
         };
+        /*		this.updateDialogue = function(index, actor, dialogue){
+                    this.storyScript[index][actor] = dialogue;
+                }
+                this.deleteDialogue = function(index, actor){
+                    if(Object.keys(this.storyScript[index]).length>1)
+                        delete this.storyScript[index][actor];
+                    else
+                        this.storyScript.splice(index, 1);
+                }
+                this.addDialogue = function(mode){
+                    if(mode=="horizontal"){
+                        console.log(mode)
+                        this.storyScript[this.storyScript.length-1]["boy_1"]="Hi";
+                    }
+                    else if(mode=="vertical"){
+                        this.storyScript.push({"boy_1":"Hi"});
+                    }
+                    console.log(this.storyScript)
+                }*/
         _this.publishStory = function () {
             var _this = this;
             console.log(this.storyJSON);
@@ -230,7 +246,6 @@ var Dashboard = (function (_super) {
         return _this;
     }
     Dashboard.prototype.ngAfterViewInit = function () {
-        jQuery("textarea").attr('placeholder', this.initScript);
         //jQuery('.story-controller').css({'margin-left':jQuery('.story-board').position().left+125});
     };
     return Dashboard;
@@ -283,10 +298,6 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Object)
 ], Dashboard.prototype, "counter", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], Dashboard.prototype, "storyScript", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Object)

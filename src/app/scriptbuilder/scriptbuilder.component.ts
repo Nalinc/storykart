@@ -9,7 +9,6 @@ declare var jQuery: any;
     template: require('./scriptbuilder.html'),
   	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class ScriptBuilder {
 	removeMode:boolean = false;
 	addMode:boolean = false;
