@@ -5,7 +5,7 @@ require('jquery-ui/sortable');
 declare var jQuery: any;
 
 @Component({
-    selector: 'script-builder',
+    selector: 'scriptbuilder',
     template: require('./scriptbuilder.html'),
   	changeDetection: ChangeDetectionStrategy.OnPush,
 })

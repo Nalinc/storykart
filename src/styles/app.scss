@@ -184,8 +184,27 @@ header{
   	&.scrolled{
 		padding-top: 10em;
   	}
+	.story-page{
+		margin-top: -90px;
+		height: 100%;
+		#main{
+		    height: 100%;
+		    #content{
+	    	    height: 100%;
+	    	    .story-box{
+	    	    	height: 100%;
+	    	    	.story-board-container{
+						margin-top: 90px!important;
+						text-align: center;
+	    	    	}
+	    	    }
+		    }
+		}
+	}
   	#main{
+  		height: 100%;
   		#content{
+  			height: 100%;
   			section{
   				padding: 60px 0;
   				.container{
@@ -291,7 +310,7 @@ header{
   				}
   			}
   			.story-box{
-  				height: 500px;
+  				height: 100%;
   				.story-board-container{
   					margin-top:0;
   				}
@@ -312,6 +331,7 @@ header{
 }
 .dashboard-page{
 	margin-top: -5em;
+	height: 100%;
 	#main{
 		#content{
 			.row{
@@ -881,6 +901,7 @@ header{
 }
 .story-board-container{
 	text-align: left;
+	height: 100%;
 	.story-board-wrapper{
 		overflow-y: hidden;
 		overflow-x: auto;
