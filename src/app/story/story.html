@@ -23,18 +23,11 @@
                 </div>
               </div>
               <div class="meta-container">
-                <div class="">Information</div>
+                <div class="meta-info-title">Story Info</div>
                 <div class="meta-info">
                   <accordion>
-                    <accordion-group heading="Author">
-                      Anonymous
-                    </accordion-group>
                     <accordion-group [heading]="group.heading" *ngFor="let group of groups">
-                      {{group.content}}
-                    </accordion-group>
-                    <accordion-group heading="Credits">
-                      Background Image: xxx
-                      Story Actors: yyy
+                      <textarea readonly>{{group.content}}</textarea>
                     </accordion-group>
                   </accordion>                  
                 </div>

@@ -28,6 +28,10 @@ export class Story {
 	counter: any = 0;
 	storyScript: any;
 	storyActors: any;
+	createdOn: any;
+	storyCredits: any;
+	storyVisibility: any;
+	groups: any;
     
 	constructor(public storyService: StoryService, public route: ActivatedRoute,  public router: Router){
 		this.storyMode = "paused";
@@ -147,16 +151,6 @@ export class Story {
 	}
 
 	isGroupOpen = false;
-    groups: Array<any> = [
-        {
-            heading: 'Script',
-            content: this.storyService.storyScript
-        },
-        {
-            heading: 'Created On',
-            content: new Date()
-        }
-    ];
 
 	ngAfterViewInit() {
 	}
@@ -177,6 +171,9 @@ export class Story {
 				this.storyAuthorEmail = response['story'].email;
 				this.storyScript = response['story'].script;
 				this.storyActors = response['story'].actors;
+				this.createdOn = new Date(+response['story'].timestamp).toLocaleString();
+				this.storyCredits = response['story'].credits;
+				this.storyVisibility = response['story'].visibility;
 				this.storyBackground = response['story'].background;
 				for(var actor in this.storyActors){
 					var eleObj = jQuery( "<img />",{ 
@@ -189,7 +186,39 @@ export class Story {
 						"top":this.storyActors[actor].top});
 					jQuery('.story-board').append(eleObj);
 				}
-
+				var script = "";
+				for(var i in this.storyScript){
+					script += "--------------------- Frame: "+i+" ---------------------\n";
+					for(var j in this.storyScript[i]){
+						script += this.storyScript[i][j].actor;
+						script += ": ";
+						script += this.storyScript[i][j].speech;
+						script += "\n";
+					}
+				}
+				console.log(script)
+			    this.groups = [
+			        {
+			            heading: 'Author',
+			            content: this.storyAuthor
+			        },
+			        {
+			            heading: 'Created On',
+			            content: this.createdOn
+			        },
+			        {
+			            heading: 'Script',
+			            content: script
+			        },
+			        {
+			            heading: 'Visibility',
+			            content: this.storyVisibility
+			        },
+			        {
+			            heading: 'Credits',
+			            content: this.storyCredits
+			        }
+			    ];
 			}, //Bind to view
 			err => {
 				// Log errors if any
